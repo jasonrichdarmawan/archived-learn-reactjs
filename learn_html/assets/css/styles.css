@@ -75,6 +75,10 @@ h1, h2 {
     padding: 20px;
 }
 
+.container > h3 {
+    text-align: center;
+}
+
 button {
     width: 100%;
     border: none;
@@ -84,4 +88,5 @@ button {
 .panel {
     max-height: 0;
     overflow: hidden;
+    transition: 0.2s ease-out;
 }
