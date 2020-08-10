@@ -8,11 +8,11 @@ function routeToPage(page) {
             classPage.remove("hide-page");
             continue;
         }
-    }
 
-    // hide page
-    let classPage = document.getElementById(listPage[i]).classList;
-    classPage.add("hide-page")
+        // hide page
+        let classPage = document.getElementById(listPage[i]).classList;
+        classPage.add("hide-page")
+    }
 }
 
 routeToPage("home"); // main
