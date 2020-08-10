@@ -13,3 +13,12 @@
 
     console.log(idDiv.innerHTML);
     ```
+
+2. white paper for the curriculum vitae in HTML.
+
+    5 pages:
+    1. Home -> Portfolio
+    2. About -> Curriculum Vitae
+    3. Contact
+    4. Motivation Letter
+    5. IT Core Values
