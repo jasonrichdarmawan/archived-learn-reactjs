@@ -12,6 +12,18 @@ nav > div {
     margin: 10px;
     padding: 20px;
     font-size: 30px;
+    opacity: 0.3;
+}
+
+nav > div:hover {
+    background-color: grey;
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+nav > div:active {
+    background-color: grey;
+    opacity: 1;
 }
 
 .hide-page {
@@ -23,4 +35,28 @@ footer {
     padding: 20px;
     font-size: 30px;
     text-align: center;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flex-container > div {
+    width: 50%;
+}
+
+h3 {
+    background-color: grey;
+    margin: 10px;
+    padding: 20px;
+}
+
+article {
+    margin: 10px;
+    padding: 20px;
 }
