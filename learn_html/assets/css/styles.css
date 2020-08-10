@@ -87,3 +87,10 @@ button:hover {
     overflow: hidden;
     transition: 0.2s ease-out;
 }
+
+@media print {
+    nav {
+        max-height: 0;
+        visibility: hidden;
+    }
+}
