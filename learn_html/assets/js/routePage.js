@@ -1,18 +1,15 @@
-let listPage = ["home", "about"];
+let listPage = document.getElementsByClassName("hide-page");
 
 function routeToPage(page) {
     for (let i = 0; i < listPage.length; i++) {
-        if (listPage[i] == page) {
-            // show page
-            let classPage = document.getElementById(page).classList;
-            classPage.remove("hide-page");
-            continue;
+        // show page
+        if (listPage[i].id == page) {
+            listPage[i].style.display = "initial";
         }
-
+        
         // hide page
-        let classPage = document.getElementById(listPage[i]).classList;
-        classPage.add("hide-page")
+        else {
+            listPage[i].style.display = "none";
+        }
     }
 }
-
-routeToPage("home"); // main
