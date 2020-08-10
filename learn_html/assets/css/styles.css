@@ -1,0 +1,26 @@
+html, body {
+    margin: 0;
+}
+
+nav {
+    display: flex;
+    background-color: gray;
+    justify-content: center;
+}
+
+nav > div {
+    margin: 10px;
+    padding: 20px;
+    font-size: 30px;
+}
+
+.hide-page {
+    display: none;
+}
+
+footer {
+    margin: 10px;
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+}
