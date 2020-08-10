@@ -12,7 +12,7 @@ nav > div {
     margin: 10px;
     padding: 20px;
     font-size: 30px;
-    opacity: 0.3;
+    color: white;
 }
 
 nav > div:hover {
@@ -44,6 +44,8 @@ h1, h2 {
 .flex-container {
     display: flex;
     flex-wrap: wrap;
+    margin: 10px;
+    padding: 20px;
 }
 
 .flex-container > div {
@@ -59,4 +61,27 @@ h1, h2 {
 .flex-container > div > article {
     margin: 10px;
     padding: 20px;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.container {
+    margin: 10px;
+    padding: 20px;
+}
+
+button {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #ddd;
+}
+
+.panel {
+    max-height: 0;
+    overflow: hidden;
 }
