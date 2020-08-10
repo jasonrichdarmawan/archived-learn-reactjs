@@ -13,3 +13,5 @@ function routeToPage(page) {
         }
     }
 }
+
+routeToPage('home'); // main
