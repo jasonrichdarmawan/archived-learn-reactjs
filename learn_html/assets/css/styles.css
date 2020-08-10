@@ -85,6 +85,10 @@ button {
     border-bottom: 1px solid #ddd;
 }
 
+button:hover {
+    cursor: pointer;
+}
+
 .panel {
     max-height: 0;
     overflow: hidden;
