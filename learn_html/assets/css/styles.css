@@ -92,6 +92,11 @@ button:hover {
     margin: 10px;
 }
 
+iframe {
+    width: 100vw;
+    height: 50vh;
+}
+
 @media print {
     nav {
         max-height: 0;
