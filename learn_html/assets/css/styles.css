@@ -4,6 +4,7 @@ html, body {
 
 nav {
     display: flex;
+    flex-wrap: wrap;
     background-color: gray;
     justify-content: center;
 }
@@ -100,6 +101,14 @@ button:hover {
 
 @media screen and (max-width: 1100px) {
     .flex-container > div {
+        width: 100%;
+    }
+    nav {
+        justify-content: normal;
+    }
+    nav > div {
+        margin: 10px;
+        padding: 0px;
         width: 100%;
     }
 }
