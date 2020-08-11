@@ -8,15 +8,22 @@
     <script src="assets/js/routePage.js" defer></script>
     <script src="assets/js/maxHeight.js" defer></script>
     <script src="assets/js/sendToWhatsApp.js" defer></script>
+    <script src="assets/js/hamburgerMenu.js" defer></script>
     <title>Curriculum Vitae</title>
 </head>
 <body>
     <nav>
-        <div onclick="routeToPage('home')">Home</div>
-        <div onclick="routeToPage('about')">About</div>
-        <div onclick="routeToPage('contact')">Contact</div>
-        <div onclick="routeToPage('motivation-letter')">Motivation Letter</div>
-        <div onclick="routeToPage('it-core-values')">IT Core Values</div>
+        <!-- hidden by default in mobile -->
+        <div class="mobile-hide" onclick="routeToPage('home')">Home</div>
+        <div class="mobile-hide" onclick="routeToPage('about')">About</div>
+        <div class="mobile-hide" onclick="routeToPage('contact')">Contact</div>
+        <div class="mobile-hide" onclick="routeToPage('motivation-letter')">Motivation Letter</div>
+        <div class="mobile-hide" onclick="routeToPage('it-core-values')">IT Core Values</div>
+        <nav class="navbar navbar-dark">
+            <button class="navbar-toggler" type="button" onclick="dropdown()">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
     </nav>
 
         <!-- home -->
