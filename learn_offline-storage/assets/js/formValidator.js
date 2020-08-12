@@ -13,7 +13,7 @@
           form.classList.add('was-validated');
           
           if (form.checkValidity() === true) {
-            submit();
+            submit(); // import { submit } from 'assets/js/localStorage.js';
           }
         }, false);
       });
