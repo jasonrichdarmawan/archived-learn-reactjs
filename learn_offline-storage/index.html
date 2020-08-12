@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="assets/js/offlineStorage.js" defer></script>
+    <script src="assets/js/routeToPage.js" defer></script>
+</head>
+<body>
+
+    <!-- nav -->
+    <nav>
+        <!-- hidden by default in mobile -->
+        <div onclick="routeToPage('submit')">Submit</div>
+        <div onclick="routeToPage('view')">View</div>
+    </nav>
+
+    <br>
+
+    <!-- submit -->
+    <div id="submit" class="hide-page">
+        <div class="container">
+            <form>
+                <div class="form-group">
+                    <label for="inputFirstName">First Name</label>
+                    <input type="text" class="form-control" id="inputFirstName" placeholder="Your name">
+                </div>
+                <div class="btn btn-primary" onclick="submit()">Register</div>
+            </form>
+        </div>
+    </div>
+
+    <!-- view -->
+    <div id="view" class="hide-page">
+        <div class="container">
+            <h1>Guest List</h1>
+            <ul class="list-group" id="viewList"></ul>
+        </div>
+    </div>
+</body>
+</html>
