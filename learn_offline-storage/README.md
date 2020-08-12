@@ -10,7 +10,7 @@ Front desk's offline form for guests to fill information.
 
 - [ ] Staff panel to view the guest's National Identification Number.
 
-- [ ] Store the data in objects.
+- [x] Store the data in objects.
 
     ```
     let data = [
