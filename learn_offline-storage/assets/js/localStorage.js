@@ -1,5 +1,10 @@
-let names = JSON.parse(localStorage.names);
-let idNumbers = JSON.parse(localStorage.idNumbers);
+if (localStorage.names === undefined || localStorage.idNumbers === undefined) {
+    localStorage.names = "[]";
+    localStorage.idNumbers = "[]";
+} else {
+    names = JSON.parse(localStorage.names);
+    idNumbers = JSON.parse(localStorage.idNumbers);
+}
 
 function submit() {
     let inputFirstName = document.getElementById('inputFirstName').value;
