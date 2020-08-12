@@ -1,34 +1,35 @@
-if (localStorage.names === undefined || localStorage.idNumbers === undefined) {
-    localStorage.names = "[]";
-    localStorage.idNumbers = "[]";
-} else {
-    names = JSON.parse(localStorage.names);
-    idNumbers = JSON.parse(localStorage.idNumbers);
+if (localStorage.lists === undefined) {
+    localStorage.lists = "[]";
 }
 
 function submit() {
     let inputFirstName = document.getElementById('inputFirstName').value;
     let inputIDNumber = document.getElementById('inputIDNumber').value;
+    let inputIDPIC = document.getElementById('inputIDPIC').value;
+    let inputIntention = document.getElementById('inputIntention').value;
 
-    // logic to prevent submit if one of the variable is empty.
-    if (!inputFirstName == "" && !inputIDNumber == "") {
-        push(inputFirstName, inputIDNumber);
-    }
+    push(inputFirstName, inputIDNumber, inputIDPIC, inputIntention);
 }
 
-function push(inputFirstName, inputIDNumber) {
-    if (!names.includes(inputFirstName) && !idNumbers.includes(inputIDNumber)) {
-        names.push(inputFirstName);
-        idNumbers.push(inputIDNumber);
+function push(inputFirstName, inputIDNumber, inputIDPIC, inputIntention) {
+    let lists = JSON.parse(localStorage.lists);
 
-        // store to local storage
-        if (localStorage.names == "" || localStorage.idNumbers == "") {
-            localStorage.names = "[]";
-            localStorage.idNumbers = "[]";
-        } else {
-            localStorage.names = JSON.stringify(names);
-            localStorage.idNumbers = JSON.stringify(idNumbers);
-        }
+    let idNumbers = [];
+    for (let i = 0; i < lists.length; i++) {
+        idNumbers.push(lists[i].idNumber);
+    }
+
+    if (!idNumbers.includes(inputIDNumber)) {
+        let tempObjects = {};
+        tempObjects.idNumber = inputIDNumber;
+        tempObjects.firstName = inputFirstName;
+        tempObjects.idPIC = inputIDPIC;
+        tempObjects.intention = inputIntention;
+
+        lists.push(tempObjects);
+
+        // store the lists to local storage
+        localStorage.lists = JSON.stringify(lists);
     }
 }
 
@@ -36,7 +37,8 @@ function view() {
     // reset
     document.getElementById("viewList").innerHTML = '';
 
-    for (let i = 0; i < JSON.parse(localStorage.names).length; i++) {
-        document.getElementById("viewList").innerHTML += `<li class="list-group-item">${JSON.parse(localStorage.names)[i]}</li>`
+    for (let i = 0; i < JSON.parse(localStorage.lists).length; i++) {
+        console.log(JSON.parse(localStorage.lists)[i].firstName);
+        document.getElementById("viewList").innerHTML += `<li class="list-group-item">${JSON.parse(localStorage.lists)[i].firstName}</li>`
     }
 }
