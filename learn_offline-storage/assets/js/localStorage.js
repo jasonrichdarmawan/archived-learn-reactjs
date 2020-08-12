@@ -4,7 +4,11 @@ let idNumbers = JSON.parse(localStorage.idNumbers);
 function submit() {
     let inputFirstName = document.getElementById('inputFirstName').value;
     let inputIDNumber = document.getElementById('inputIDNumber').value;
-    push(inputFirstName, inputIDNumber);
+
+    // logic to prevent submit if one of the variable is empty.
+    if (!inputFirstName == "" && !inputIDNumber == "") {
+        push(inputFirstName, inputIDNumber);
+    }
 }
 
 function push(inputFirstName, inputIDNumber) {
