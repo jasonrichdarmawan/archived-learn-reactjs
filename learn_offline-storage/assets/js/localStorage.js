@@ -8,11 +8,6 @@ function submit() {
 }
 
 function push(inputFirstName, inputIDNumber) {
-    // let lists = document.getElementsByClassName("list-group-item");
-    // let data = [];
-    // for (let i = 0; i < lists.length; i++) {
-    //     data.push(lists[i].innerHTML);
-    // }
     if (!names.includes(inputFirstName) && !idNumbers.includes(inputIDNumber)) {
         names.push(inputFirstName);
         idNumbers.push(inputIDNumber);
@@ -25,7 +20,6 @@ function push(inputFirstName, inputIDNumber) {
             localStorage.names = JSON.stringify(names);
             localStorage.idNumbers = JSON.stringify(idNumbers);
         }
-        // document.getElementById("viewList").innerHTML += `<li class="list-group-item">${inputFirstName}</li>`
     }
 }
 
@@ -34,7 +28,6 @@ function view() {
     document.getElementById("viewList").innerHTML = '';
 
     for (let i = 0; i < JSON.parse(localStorage.names).length; i++) {
-        console.log(i);
         document.getElementById("viewList").innerHTML += `<li class="list-group-item">${JSON.parse(localStorage.names)[i]}</li>`
     }
 }
