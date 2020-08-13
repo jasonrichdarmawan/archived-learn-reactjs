@@ -9,12 +9,12 @@ nav > div {
     padding: 20px;
 }
 
-nav > div:hover {
+nav ul li:hover {
     opacity: 0.6;
     cursor: pointer;
 }
 
-nav > div:active {
+nav ul li:active {
     opacity: 1;
 }
 
