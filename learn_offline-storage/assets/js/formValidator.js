@@ -16,7 +16,7 @@
           if (form.checkValidity() === true) {
             submit(); // import { submit } from 'assets/js/localStorage.js';
           }
-        }, false);
+        });
 
         // change event listener
         document.getElementById('inputIDNumber').addEventListener('change', function() {
@@ -25,7 +25,7 @@
           } else if (submit('isValid') === false) {
             document.getElementById('inputIDNumber').setCustomValidity("ID Number is not unique");
           }
-        })
+        });
       });
-    }, false);
+    });
 })();
