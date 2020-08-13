@@ -3,15 +3,6 @@ if (localStorage.lists === undefined) {
 }
 
 function submit() {
-    let inputFirstName = document.getElementById('inputFirstName').value;
-    let inputIDNumber = document.getElementById('inputIDNumber').value;
-    let inputIDPIC = document.getElementById('inputIDPIC').value;
-    let inputIntention = document.getElementById('inputIntention').value;
-
-    push(inputFirstName, inputIDNumber, inputIDPIC, inputIntention);
-}
-
-function push(inputFirstName, inputIDNumber, inputIDPIC, inputIntention) {
     let lists = JSON.parse(localStorage.lists);
 
     // logic: idNumbers is unique.
@@ -20,13 +11,15 @@ function push(inputFirstName, inputIDNumber, inputIDPIC, inputIntention) {
         idNumbers.push(lists[i].idNumber);
     }
 
+    let inputIDNumber = document.getElementById('inputIDNumber').value;
+
     if (!idNumbers.includes(inputIDNumber)) {
         // push the objects to the lists.
         let tempObjects = {};
         tempObjects.idNumber = inputIDNumber;
-        tempObjects.firstName = inputFirstName;
-        tempObjects.idPIC = inputIDPIC;
-        tempObjects.intention = inputIntention;
+        tempObjects.firstName = document.getElementById('inputFirstName').value;
+        tempObjects.idPIC = document.getElementById('inputIDPIC').value;
+        tempObjects.intention = document.getElementById('inputIntention').value;
 
         lists.push(tempObjects);
 
