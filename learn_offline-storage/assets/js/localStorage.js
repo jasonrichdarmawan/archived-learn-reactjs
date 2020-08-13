@@ -2,7 +2,7 @@ if (localStorage.lists === undefined) {
     localStorage.lists = "[]";
 }
 
-function submit() {
+function submit(request) {
     let lists = JSON.parse(localStorage.lists);
 
     // logic: idNumbers is unique.
@@ -12,19 +12,24 @@ function submit() {
     }
 
     let inputIDNumber = document.getElementById('inputIDNumber').value;
+    if (request === 'isValid') {
+        if (!idNumbers.includes(inputIDNumber)) {
+            return true;
+        } else return false;
+    } else {
+        if (!idNumbers.includes(inputIDNumber)) {
+            // push the objects to the lists.
+            let tempObjects = {};
+            tempObjects.idNumber = inputIDNumber;
+            tempObjects.firstName = document.getElementById('inputFirstName').value;
+            tempObjects.idPIC = document.getElementById('inputIDPIC').value;
+            tempObjects.intention = document.getElementById('inputIntention').value;
 
-    if (!idNumbers.includes(inputIDNumber)) {
-        // push the objects to the lists.
-        let tempObjects = {};
-        tempObjects.idNumber = inputIDNumber;
-        tempObjects.firstName = document.getElementById('inputFirstName').value;
-        tempObjects.idPIC = document.getElementById('inputIDPIC').value;
-        tempObjects.intention = document.getElementById('inputIntention').value;
+            lists.push(tempObjects);
 
-        lists.push(tempObjects);
-
-        // store the lists to local storage
-        localStorage.lists = JSON.stringify(lists);
+            // store the lists to local storage
+            localStorage.lists = JSON.stringify(lists);
+        }
     }
 }
 
