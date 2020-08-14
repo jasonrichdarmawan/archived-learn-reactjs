@@ -38,20 +38,6 @@ function view() {
     document.getElementById("viewList").innerHTML = '';
 
     for (let i = 0; i < JSON.parse(localStorage.lists).length; i++) {
-        // // convert idPIC to namePIC
-        // let namePIC;
-        // switch(JSON.parse(localStorage.lists)[i].idPIC) {
-        //     case "1":
-        //         namePIC = "Jack Ma";
-        //         break;
-        //     case "2":
-        //         namePIC = "Jeff Bezos";
-        //         break;
-        //     case "3":
-        //         namePIC = "Elon Musk";
-        //         break;
-        // }
-
         // innerHTML
         document.getElementById("viewList").innerHTML += `  
             <th scope="row">${i+1}</th>
