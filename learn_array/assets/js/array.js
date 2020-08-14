@@ -4,7 +4,8 @@ function filter(request) {
     let result = tempArray.filter((number) => {
         // prime number
         if (request === "prime number") {
-            for (let i = 2; i < number; i++) {
+            // trial division method
+            for (let i = 2; i < Math.sqrt(number); i++) {
                 if (number % i === 0) return false;
             }
             return true;
