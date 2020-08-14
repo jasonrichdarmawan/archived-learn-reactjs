@@ -22,7 +22,7 @@ function submit(request) {
             let tempObjects = {};
             tempObjects.idNumber = inputIDNumber;
             tempObjects.firstName = document.getElementById('inputFirstName').value;
-            tempObjects.idPIC = document.getElementById('inputIDPIC').value;
+            tempObjects.picName = document.getElementById('inputPICName').value;
             tempObjects.intention = document.getElementById('inputIntention').value;
 
             lists.push(tempObjects);
@@ -38,26 +38,26 @@ function view() {
     document.getElementById("viewList").innerHTML = '';
 
     for (let i = 0; i < JSON.parse(localStorage.lists).length; i++) {
-        // convert idPIC to namePIC
-        let namePIC;
-        switch(JSON.parse(localStorage.lists)[i].idPIC) {
-            case "1":
-                namePIC = "Jack Ma";
-                break;
-            case "2":
-                namePIC = "Jeff Bezos";
-                break;
-            case "3":
-                namePIC = "Elon Musk";
-                break;
-        }
+        // // convert idPIC to namePIC
+        // let namePIC;
+        // switch(JSON.parse(localStorage.lists)[i].idPIC) {
+        //     case "1":
+        //         namePIC = "Jack Ma";
+        //         break;
+        //     case "2":
+        //         namePIC = "Jeff Bezos";
+        //         break;
+        //     case "3":
+        //         namePIC = "Elon Musk";
+        //         break;
+        // }
 
         // innerHTML
         document.getElementById("viewList").innerHTML += `  
             <th scope="row">${i+1}</th>
                 <td>${JSON.parse(localStorage.lists)[i].idNumber}</td>
                 <td>${JSON.parse(localStorage.lists)[i].firstName}</td>
-                <td>${namePIC}</td>
+                <td>${JSON.parse(localStorage.lists)[i].picName}</td>
             <td>${JSON.parse(localStorage.lists)[i].intention}</td>
         `;
     }
