@@ -12,8 +12,9 @@
             view("departmentList")
             ```
         3. Search widget
+            Scope: search from name
             ```
-            // type: "employeeList", "departmentList"
+            // type: "employeeList" return employee_primary, "departmentList" return department_primary
             search(type, searchKey, searchValue);
 
             function search(searchKey, searchValue) {
