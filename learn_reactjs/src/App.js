@@ -3,7 +3,7 @@ import logo from './logo.svg';
 
 function App() {
   return (
-    <div className="min-vh-100 d-flex align-items-center jumbotron">
+    <div className="min-vh-100 d-flex align-items-center">
       <div className="container w-25 text-center">
         <form>
           <img className="mb-3" src={logo} alt=""/>
