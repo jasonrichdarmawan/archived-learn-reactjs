@@ -19,9 +19,9 @@ class ListsPage extends React.Component {
         }
         function showAction(request) {
             if (request === "true") {
-                document.getElementById('delete').style.display = "inline-block";
+                document.getElementById('delete').classList.remove('d-none');
             } else if (request === "false") {
-                document.getElementById('delete').style.display = "none";
+                document.getElementById('delete').classList.add('d-none');
             }
 
             if (request === "check") {
@@ -47,9 +47,20 @@ class ListsPage extends React.Component {
         }
         return (
             <div className="container table-responsive mt-3">
-                <h1 className="mb-3">Lists</h1>
-                <button className="btn btn-primary btn-sm mb-3 mr-3">Create</button>
-                <button className="btn btn-danger btn-sm mb-3 collapse" id="delete" onClick={actionDelete}>Delete</button>
+                <div className="row">
+                    <div className="col-sm">
+                        <h3>Lists</h3>
+                        <button className="btn btn-primary btn-sm mb-3 mr-3">Create</button>
+                        <button className="btn btn-danger btn-sm mb-3 d-none" id="delete" onClick={actionDelete}>Delete</button>
+                    </div>
+                    <div className="col-sm">
+                        <input className="form-control" type="search" placeholder="Search" aria-label="Search"/>
+                        <select className="form-control form-control-sm mb-3 w-50" id="exampleFormControlSelect1">
+                            <option>Employees</option>
+                            <option>Departments</option>
+                        </select>
+                    </div>
+                </div>
                 <table className="table table-hover">
                     <thead>
                         <tr>
