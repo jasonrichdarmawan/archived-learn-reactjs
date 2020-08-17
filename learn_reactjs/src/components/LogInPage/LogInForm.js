@@ -10,18 +10,18 @@ class LogInForm extends React.Component {
     
     return (
       <div className="min-vh-100 d-flex align-items-center">
-        <div className="container w-25 text-center">
+        <div className="container w-auto text-center">
           <form>
             <img className="mb-3" src={Logo} alt=""/>
             <div className="form-group">
-              <input type="email" className="form-control" id="inputEmail" placeholder="Email address"></input>
-              <input type="password" className="form-control" id="inputPassword" placeholder="Password"></input>
+              <input type="email" className="form-control form-control-sm" id="inputEmail" placeholder="Email address"></input>
+              <input type="password" className="form-control form-control-sm" id="inputPassword" placeholder="Password"></input>
             </div>
             <div className="form-check mb-3">
               <input type="checkbox" className="form-check-input" id="inputRemember"></input>
               <label className="form-check-label" htmlFor="inputRemember">Remember</label>
             </div>
-            <button type="submit" className="btn btn-primary btn-block" onClick={generateToken}>Log In</button>
+            <button type="submit" className="btn btn-primary btn-block btn-sm" onClick={generateToken}>Log In</button>
           </form>
         </div>
       </div>
