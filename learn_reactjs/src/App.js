@@ -25,6 +25,9 @@ function App() {
       <Router>
         <NavBar />
         <Switch>
+          <Route path="/login">
+            <Redirect to="/" />
+          </Route>
           <Route exact path="/" component={Home}/>
           <Route path="/lists" component={Lists}/>
         </Switch>
