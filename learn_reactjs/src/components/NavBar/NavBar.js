@@ -15,7 +15,7 @@ class NavBar extends React.Component {
         }
         function revokeToken() {
             localStorage.removeItem("Authorization");
-            window.location.reload();
+            window.location.href = "/"
         }
         return (
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -30,9 +30,8 @@ class NavBar extends React.Component {
                             <li className="nav-item">Lists</li>
                         </Link>
                     </ul>
+                    <button className="btn btn-outline-danger my-3" type="submit" onClick={revokeToken}>Log Out</button>
                 </div>
-
-                <button className="btn btn-outline-danger" type="submit" onClick={revokeToken}>Log Out</button>
             </nav>
         );
     }

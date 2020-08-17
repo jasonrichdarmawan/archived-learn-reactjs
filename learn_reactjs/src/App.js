@@ -9,6 +9,7 @@ import {
 import LogInPage from './components/LogInPage/LogInPage';
 import NavBar from './components/NavBar/NavBar';
 import HomePage from './components/HomePage/HomePage';
+import ListsPage from './components/ListsPage/ListsPage';
 
 function App() {
   // TODO: research safe way to store Authorization token.
@@ -30,15 +31,11 @@ function App() {
             <Redirect to="/" />
           </Route>
           <Route exact path="/" component={HomePage}/>
-          <Route path="/lists" component={Lists}/>
+          <Route path="/lists" component={ListsPage}/>
         </Switch>
       </Router>
     )
   }
 }
-
-const Lists = () => (
-  <div>Lists</div>
-)
 
 export default App;
