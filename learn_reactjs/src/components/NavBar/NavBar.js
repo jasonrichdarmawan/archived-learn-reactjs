@@ -32,7 +32,7 @@ class NavBar extends React.Component {
                     </ul>
                 </div>
 
-                <button className="btn btn-outline-success my-2 my-sm-0" type="submit" onClick={revokeToken}>Log Out</button>
+                <button className="btn btn-outline-danger" type="submit" onClick={revokeToken}>Log Out</button>
             </nav>
         );
     }
