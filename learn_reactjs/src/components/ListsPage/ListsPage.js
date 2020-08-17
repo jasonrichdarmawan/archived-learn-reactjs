@@ -37,11 +37,19 @@ class ListsPage extends React.Component {
                 }
             }
         }
+        function actionDelete() {
+            let data = document.querySelectorAll('[id^="checkbox"]');
+            for (let i = 0; i < data.length; i++) {
+                if (data[i].checked === true) {
+                    document.getElementById(`id${data[i].value}`).innerHTML = '';
+                }
+            }
+        }
         return (
             <div className="container table-responsive mt-3">
                 <h1 className="mb-3">Lists</h1>
                 <button className="btn btn-primary btn-sm mb-3 mr-3">Create</button>
-                <button className="btn btn-danger btn-sm mb-3 collapse" id="delete">Delete</button>
+                <button className="btn btn-danger btn-sm mb-3 collapse" id="delete" onClick={actionDelete}>Delete</button>
                 <table className="table table-hover">
                     <thead>
                         <tr>
@@ -55,28 +63,25 @@ class ListsPage extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr id="id1">
                             <th>
-                                <input type="checkbox" id="checkbox1" onClick={() => {showAction('check')}}/>
-                                <label htmlFor="checkbox1"></label>
+                                <input type="checkbox" id="checkbox1" value="1" onClick={() => {showAction('check')}}/>
                             </th>
                             <th scope="row">1</th>
                             <td>Jeff Bezos Long Name</td>
                             <td>jeff_bezos_long_email@gmail.com</td>
                         </tr>
-                        <tr>
+                        <tr id="id2">
                             <th>
-                                <input type="checkbox" id="checkbox2" onClick={() => {showAction('check')}}/>
-                                <label htmlFor="checkbox2"></label>
+                                <input type="checkbox" id="checkbox2" value="2" onClick={() => {showAction('check')}}/>
                             </th>
                             <th scope="row">2</th>
                             <td>Jeff Bezos Long Name</td>
                             <td>jeff_bezos_long_email@gmail.com</td>
                         </tr>
-                        <tr>
+                        <tr id="id3">
                             <th>
-                                <input type="checkbox" id="checkbox3" onClick={() => {showAction('check')}}/>
-                                <label htmlFor="checkbox3"></label>
+                                <input type="checkbox" id="checkbox3" value="3" onClick={() => {showAction('check')}}/>
                             </th>
                             <th scope="row">3</th>
                             <td>Jeff Bezos Long Name</td>
