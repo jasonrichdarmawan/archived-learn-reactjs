@@ -10,6 +10,7 @@ import LogInPage from './components/LogInPage/LogInPage';
 import NavBar from './components/NavBar/NavBar';
 import HomePage from './components/HomePage/HomePage';
 import ListsPage from './components/ListsPage/ListsPage';
+import CreatePage from './components/CreatePage/CreatePage';
 
 function App() {
   // TODO: research safe way to store Authorization token.
@@ -19,7 +20,9 @@ function App() {
         <Route exact path="/">
           <Redirect to="/login"/>
         </Route>
-        <Route path="/login" component={LogInPage}/>
+        <Route
+          path="/login"
+          component={LogInPage}/>
       </Router>
     );
   } else {
@@ -30,12 +33,18 @@ function App() {
           <Route path="/login">
             <Redirect to="/" />
           </Route>
-          <Route exact path="/" component={HomePage}/>
+          <Route 
+            exact path="/"
+            component={HomePage}
+          />
+
           {/* TODO: refactor the route logic */}
           <Route
-            exact path="/lists" 
+            exact path="/lists"
             component={() => <ListsPage request="employees"/>}
-          />
+          >
+            <Redirect to="/lists/employees"/>
+          </Route>
           <Route
             exact path="/lists/employees" 
             component={() => <ListsPage request="employees"/>}
@@ -44,6 +53,22 @@ function App() {
             exact path="/lists/departments" 
             component={() => <ListsPage request="departments"/>}
           />
+
+          <Route
+            exact path="/create"
+            component={() => <CreatePage request="employees"/>}
+          >
+            <Redirect to="/create/employee"/>
+          </Route>
+          <Route
+            exact path="/create/employee"
+            component={() => <CreatePage request="employees"/>}
+          />
+          <Route
+            exact path="/create/department"
+            component={() => <CreatePage request="departments"/>}
+          />
+
         </Switch>
       </Router>
     )

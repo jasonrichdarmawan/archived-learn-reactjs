@@ -41,52 +41,59 @@ class ListsPage extends React.Component {
         //     {
         //         id: "2",
         //         name: "Board of Directors",
+        //         email: "bod@gmail.com"
         //     },
         //     {},
         //     {
         //         id: "4",
         //         name: "C-Level Executives",
+        //         email: "c-level@gmail.com"
         //     },
         //     {},
         //     {
         //         id: "6",
         //         name: "Operation",
+        //         email: "operation@gmail.com"
         //     },
         //     {},
         //     {
         //         id: "8",
         //         name: "Marketing",
+        //         email: "marketing@gmail.com"
         //     },
         // ];
         // localStorage.department_primary = JSON.stringify(department_primary);
     }
 
-    // question: Why binding `onClick={this.selectAll}` does not work? while arrow function `onClick={() => {this.selectAll()}} works?
-    renderTableHead(request) {
+    renderOption(request) {
         if (request === "employees") {
             return (
-                <tr>
-                    <th>
-                        <input type="checkbox" id="selectAll" onClick={() => {this.selectAll()}}/>
-                        <label htmlFor="selectAll"></label>
-                    </th>
-                    <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                </tr>
+                <Link to="departments">
+                    <button className="btn btn-primary btn-sm mb-2 mr-2">Departments</button>
+                </Link>
             );
         } else if (request === "departments") {
             return (
-                <tr>
-                    <th>
-                        <input type="checkbox" id="selectAll" onClick={() => {this.selectAll()}}/>
-                        <label htmlFor="selectAll"></label>
-                    </th>
-                    <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                </tr>
+                <Link to="employees">
+                    <button className="btn btn-primary btn-sm mb-2 mr-2">Employees</button>
+                </Link>
             );
         }
+    }
+
+    // question: Why binding `onClick={this.selectAll}` does not work? while arrow function `onClick={() => {this.selectAll()}} works?
+    renderTableHead(request) {
+        return (
+            <tr>
+                <th>
+                    <input type="checkbox" id="selectAll" onClick={() => {this.selectAll()}}/>
+                    <label htmlFor="selectAll"></label>
+                </th>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+            </tr>
+        );
     }
 
     renderTableBody(request) {
@@ -186,19 +193,17 @@ class ListsPage extends React.Component {
             <div className="container table-responsive mt-3">
                 <div className="row">
                     <div className="col-sm">
-                        <h3>Lists</h3>
-                        <button className="btn btn-primary btn-sm mb-2 mr-2">Create</button>
+                        <h3>{"Lists " + request.charAt(0).toUpperCase() + request.slice(1)}</h3>
+                        <Link to={"/create/" + request.slice(0,request.length - 1)}>
+                            <button className="btn btn-primary btn-sm mb-2 mr-2">Create</button>
+                        </Link>
                         <button className="btn btn-danger btn-sm mb-2 d-none" id="delete" onClick={() => {this.actionDelete("" + request)}}>Delete</button>
                     </div>
                     <div className="col-sm">
+                        {/* TODO: search function */}
                         <input className="form-control form-control-sm mb-2" type="search" placeholder="Search" aria-label="Search"/>
                         {/* TODO: refactor the code and use dropdown checkbox */}
-                        <Link to="employees">
-                            <button className="btn btn-primary btn-sm mb-2 mr-2">Employees</button>
-                        </Link>
-                        <Link to="departments">
-                            <button className="btn btn-primary btn-sm mb-2 mr-2">Departments</button>
-                        </Link>
+                        {this.renderOption("" + request)}
                     </div>
                 </div>
                 <table className="table table-hover" id="listsTable">

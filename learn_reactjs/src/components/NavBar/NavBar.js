@@ -26,7 +26,7 @@ class NavBar extends React.Component {
                 </button>
                 <div className="collapse navbar-collapse">
                     <ul className="navbar-nav mr-auto">
-                        <Link to="/lists/employees" className="text-decoration-none">
+                        <Link to="/lists" className="text-decoration-none">
                             <li className="nav-item nav-link">Lists</li>
                         </Link>
                         <Link to="/create" className="text-decoration-none">
