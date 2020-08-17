@@ -30,7 +30,7 @@ class NavBar extends React.Component {
                             <li className="nav-item">Lists</li>
                         </Link>
                     </ul>
-                    <button className="btn btn-outline-danger my-3" type="submit" onClick={revokeToken}>Log Out</button>
+                    <button className="btn btn-outline-danger btn-sm my-3" type="submit" onClick={revokeToken}>Log Out</button>
                 </div>
             </nav>
         );
