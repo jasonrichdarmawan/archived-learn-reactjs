@@ -25,12 +25,15 @@ class NavBar extends React.Component {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse">
-                    <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-                        <Link to="/lists/employees">
-                            <li className="nav-item">Lists</li>
+                    <ul className="navbar-nav mr-auto">
+                        <Link to="/lists/employees" className="text-decoration-none">
+                            <li className="nav-item nav-link">Lists</li>
+                        </Link>
+                        <Link to="/create" className="text-decoration-none">
+                            <li className="nav-item nav-link">Create</li>
                         </Link>
                     </ul>
-                    <button className="btn btn-outline-danger btn-sm my-3" type="submit" onClick={revokeToken}>Log Out</button>
+                    <button className="btn btn-outline-danger btn-sm my-2" type="submit" onClick={revokeToken}>Log Out</button>
                 </div>
             </nav>
         );
