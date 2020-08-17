@@ -6,7 +6,7 @@ import {
   Redirect
 } from 'react-router-dom';
 
-import LogInPage from './components/LoginPage/LoginPage';
+import LogInPage from './components/LogInPage/LogInPage';
 import NavBar from './components/NavBar/NavBar';
 
 function App() {
