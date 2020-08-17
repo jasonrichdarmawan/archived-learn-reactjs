@@ -1,8 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class ListsPage extends React.Component {
-    view() {
+    runOnce() {
         if (localStorage.employee_primary === undefined) localStorage.employee_primary = JSON.stringify([]);
+        if (localStorage.department_primary === undefined) localStorage.department_primary = JSON.stringify([]);
 
         // debug only: dummy data
         // let employee_primary = [
@@ -33,25 +35,69 @@ class ListsPage extends React.Component {
         //     },
         // ];
         // localStorage.employee_primary = JSON.stringify(employee_primary);
+        // let department_primary = [
+        //     {},
+        //     {},
+        //     {
+        //         id: "2",
+        //         name: "Board of Directors",
+        //     },
+        //     {},
+        //     {
+        //         id: "4",
+        //         name: "C-Level Executives",
+        //     },
+        //     {},
+        //     {
+        //         id: "6",
+        //         name: "Operation",
+        //     },
+        //     {},
+        //     {
+        //         id: "8",
+        //         name: "Marketing",
+        //     },
+        // ];
+        // localStorage.department_primary = JSON.stringify(department_primary);
     }
 
     // question: Why binding `onClick={this.selectAll}` does not work? while arrow function `onClick={() => {this.selectAll()}} works?
-    renderTableHead() {
-        return (
-            <tr>
-                <th>
-                    <input type="checkbox" id="selectAll" onClick={() => {this.selectAll()}}/>
-                    <label htmlFor="selectAll"></label>
-                </th>
-                <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-            </tr>
-        );
+    renderTableHead(request) {
+        if (request === "employees") {
+            return (
+                <tr>
+                    <th>
+                        <input type="checkbox" id="selectAll" onClick={() => {this.selectAll()}}/>
+                        <label htmlFor="selectAll"></label>
+                    </th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                </tr>
+            );
+        } else if (request === "departments") {
+            return (
+                <tr>
+                    <th>
+                        <input type="checkbox" id="selectAll" onClick={() => {this.selectAll()}}/>
+                        <label htmlFor="selectAll"></label>
+                    </th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                </tr>
+            );
+        }
     }
 
-    renderTableBody() {
-        let data = JSON.parse(localStorage.employee_primary);
+    renderTableBody(request) {
+        let data;
+
+        if (request === "employees") {
+            data = JSON.parse(localStorage.employee_primary);
+        } else if (request === "departments") {
+            data = JSON.parse(localStorage.department_primary);
+        }
+
         return data.filter((data) => {
             if (data.id === undefined) return false;
             else return true;
@@ -106,9 +152,16 @@ class ListsPage extends React.Component {
         }
     }
 
-    actionDelete() {
+    // TODO: refactor the code to be more dynamic.
+    actionDelete(request) {
         let list = document.querySelectorAll('[id="list"]');
-        let data = JSON.parse(localStorage.employee_primary);
+        let data;
+
+        if (request === "employees") {
+            data = JSON.parse(localStorage.employee_primary);
+        } else if (request === "departments") {
+            data = JSON.parse(localStorage.department_primary);
+        }
 
         for (let i = 0; i < list.length; i++) {
             if (list[i].checked === true) {
@@ -119,57 +172,41 @@ class ListsPage extends React.Component {
         }
 
         // store the updated data to localStorage
-        localStorage.employee_primary = JSON.stringify(data);
+        if (request === "employees") {
+            localStorage.employee_primary = JSON.stringify(data);
+        } else if (request === "departments") {
+            localStorage.department_primary = JSON.stringify(data);
+        }
     }
 
     render() {
-        this.view();
+        this.runOnce();
+        let request = this.props.request;
         return (
             <div className="container table-responsive mt-3">
                 <div className="row">
                     <div className="col-sm">
                         <h3>Lists</h3>
-                        <button className="btn btn-primary btn-sm mb-3 mr-3">Create</button>
-                        <button className="btn btn-danger btn-sm mb-3 d-none" id="delete" onClick={() => {this.actionDelete()}}>Delete</button>
+                        <button className="btn btn-primary btn-sm mb-2 mr-2">Create</button>
+                        <button className="btn btn-danger btn-sm mb-2 d-none" id="delete" onClick={() => {this.actionDelete("" + request)}}>Delete</button>
                     </div>
                     <div className="col-sm">
-                        <input className="form-control" type="search" placeholder="Search" aria-label="Search"/>
-                        <select className="form-control form-control-sm mb-3 w-50" id="exampleFormControlSelect1">
-                            <option>Employees</option>
-                            <option>Departments</option>
-                        </select>
+                        <input className="form-control form-control-sm mb-2" type="search" placeholder="Search" aria-label="Search"/>
+                        {/* TODO: refactor the code and use dropdown checkbox */}
+                        <Link to="employees">
+                            <button className="btn btn-primary btn-sm mb-2 mr-2">Employees</button>
+                        </Link>
+                        <Link to="departments">
+                            <button className="btn btn-primary btn-sm mb-2 mr-2">Departments</button>
+                        </Link>
                     </div>
                 </div>
                 <table className="table table-hover" id="listsTable">
-                    <thead>
-                        {this.renderTableHead()}
+                    <thead id="listsHead">
+                        {this.renderTableHead("" + request)}
                     </thead>
-                    <tbody id="lists">
-                        {this.renderTableBody()}
-                        {/* <tr id="id1">
-                            <th>
-                                <input type="checkbox" id="checkbox1" value="1" onClick={() => {showAction('check')}}/>
-                            </th>
-                            <th scope="row">1</th>
-                            <td>Jeff Bezos Long Name</td>
-                            <td>jeff_bezos_long_email@gmail.com</td>
-                        </tr>
-                        <tr id="id2">
-                            <th>
-                                <input type="checkbox" id="checkbox2" value="2" onClick={() => {showAction('check')}}/>
-                            </th>
-                            <th scope="row">2</th>
-                            <td>Jeff Bezos Long Name</td>
-                            <td>jeff_bezos_long_email@gmail.com</td>
-                        </tr>
-                        <tr id="id3">
-                            <th>
-                                <input type="checkbox" id="checkbox3" value="3" onClick={() => {showAction('check')}}/>
-                            </th>
-                            <th scope="row">3</th>
-                            <td>Jeff Bezos Long Name</td>
-                            <td>jeff_bezos_long_email@gmail.com</td>
-                        </tr> */}
+                    <tbody id="listsBody">
+                        {this.renderTableBody("" + request)}
                     </tbody>
                 </table>
             </div>

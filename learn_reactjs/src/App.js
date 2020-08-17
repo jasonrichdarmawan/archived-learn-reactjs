@@ -31,7 +31,19 @@ function App() {
             <Redirect to="/" />
           </Route>
           <Route exact path="/" component={HomePage}/>
-          <Route path="/lists" component={ListsPage}/>
+          {/* TODO: refactor the route logic */}
+          <Route
+            exact path="/lists" 
+            component={() => <ListsPage request="employees"/>}
+          />
+          <Route
+            exact path="/lists/employees" 
+            component={() => <ListsPage request="employees"/>}
+          />
+          <Route
+            exact path="/lists/departments" 
+            component={() => <ListsPage request="departments"/>}
+          />
         </Switch>
       </Router>
     )
