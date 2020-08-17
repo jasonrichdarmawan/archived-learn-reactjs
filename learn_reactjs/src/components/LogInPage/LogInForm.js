@@ -1,7 +1,7 @@
 import React from 'react';
-import logo from '../../logo.svg';
+import Logo from '../../logo.svg';
 
-class LoginForm extends React.Component {
+class LogInForm extends React.Component {
   render() {
     // TODO: research safe way to generate Authorization token.
     function generateToken() {
@@ -12,7 +12,7 @@ class LoginForm extends React.Component {
       <div className="min-vh-100 d-flex align-items-center">
         <div className="container w-25 text-center">
           <form>
-            <img className="mb-3" src={logo} alt=""/>
+            <img className="mb-3" src={Logo} alt=""/>
             <div className="form-group">
               <input type="email" className="form-control" id="inputEmail" placeholder="Email address"></input>
               <input type="password" className="form-control" id="inputPassword" placeholder="Password"></input>
@@ -21,7 +21,7 @@ class LoginForm extends React.Component {
               <input type="checkbox" className="form-check-input" id="inputRemember"></input>
               <label className="form-check-label" htmlFor="inputRemember">Remember</label>
             </div>
-            <button type="submit" className="btn btn-primary btn-block" onClick={generateToken}>Sign In</button>
+            <button type="submit" className="btn btn-primary btn-block" onClick={generateToken}>Log In</button>
           </form>
         </div>
       </div>
@@ -29,4 +29,4 @@ class LoginForm extends React.Component {
   }
 }
 
-export default LoginForm;
+export default LogInForm;

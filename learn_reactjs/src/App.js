@@ -3,21 +3,42 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Redirect
 } from 'react-router-dom';
 
-import LoginPage from './components/LoginPage/LoginPage';
+import LogInPage from './components/LoginPage/LoginPage';
+import NavBar from './components/NavBar/NavBar';
 
 function App() {
   // TODO: research safe way to store Authorization token.
   if (localStorage.Authorization === undefined) {
     return (
-      <LoginPage />
+      <Router>
+        <Route exact path="/">
+          <Redirect to="/login"/>
+        </Route>
+        <Route path="/login" component={LogInPage}/>
+      </Router>
     );
   } else {
     return (
-      <div>HomePage</div>
+      <Router>
+        <NavBar />
+        <Switch>
+          <Route exact path="/" component={Home}/>
+          <Route path="/lists" component={Lists}/>
+        </Switch>
+      </Router>
     )
   }
 }
+
+const Home = () => (
+  <div>Home</div>
+);
+
+const Lists = () => (
+  <div>Lists</div>
+)
 
 export default App;
