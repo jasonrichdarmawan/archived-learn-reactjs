@@ -8,6 +8,7 @@ import {
 
 import LogInPage from './components/LogInPage/LogInPage';
 import NavBar from './components/NavBar/NavBar';
+import HomePage from './components/HomePage/HomePage';
 
 function App() {
   // TODO: research safe way to store Authorization token.
@@ -28,17 +29,13 @@ function App() {
           <Route path="/login">
             <Redirect to="/" />
           </Route>
-          <Route exact path="/" component={Home}/>
+          <Route exact path="/" component={HomePage}/>
           <Route path="/lists" component={Lists}/>
         </Switch>
       </Router>
     )
   }
 }
-
-const Home = () => (
-  <div>Home</div>
-);
 
 const Lists = () => (
   <div>Lists</div>
