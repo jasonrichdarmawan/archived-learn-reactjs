@@ -11,6 +11,7 @@ import NavBar from './components/NavBar/NavBar';
 import HomePage from './components/HomePage/HomePage';
 import ListsPage from './components/ListsPage/ListsPage';
 import CreatePage from './components/CreatePage/CreatePage';
+import ViewPage from './components/ViewPage/ViewPage';
 
 function App() {
   // TODO: research safe way to store Authorization token.
@@ -67,6 +68,11 @@ function App() {
           <Route
             exact path="/create/department"
             component={() => <CreatePage request="departments"/>}
+          />
+
+          <Route
+            path="/view/:request/:id"
+            component={(props) => <ViewPage {...props}/>}
           />
 
         </Switch>

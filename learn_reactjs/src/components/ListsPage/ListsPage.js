@@ -198,12 +198,16 @@ class ListsPage extends React.Component {
         }).map(data => {
             return (
                 <tr id={"id" + data.id} key={"id" + data.id}>
-                    <th>
-                        <input type="checkbox" id="list" value={data.id} onClick={() => {this.showAction("check")}}/>
-                    </th>
-                    <th>{data.id}</th>
-                    <td>{data.name}</td>
-                    <td>{data.email}</td>
+                        <th>
+                            <input type="checkbox" id="list" value={data.id} onClick={() => {this.showAction("check")}}/>
+                        </th>
+                        <th>
+                            <Link to={`/view/${request.slice(0, request.length - 1)}/${data.id}`}>
+                                {data.id}
+                            </Link>
+                        </th>
+                        <td>{data.name}</td>
+                        <td>{data.email}</td>
                 </tr>
             )
         })
