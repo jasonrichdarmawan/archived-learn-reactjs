@@ -169,7 +169,7 @@ class ListsPage extends React.Component {
     }
 
     // question: Why binding `onClick={this.selectAll}` does not work? while arrow function `onClick={() => {this.selectAll()}} works?
-    renderTableHead(request) {
+    renderTableHead() {
         return (
             <tr>
                 <th>
@@ -295,7 +295,7 @@ class ListsPage extends React.Component {
                 </div>
                 <table className="table table-hover" id="listsTable">
                     <thead id="listsHead">
-                        {this.renderTableHead("" + request)}
+                        {this.renderTableHead()}
                     </thead>
                     <tbody id="listsBody">
                         {this.renderTableBody("" + request)}
