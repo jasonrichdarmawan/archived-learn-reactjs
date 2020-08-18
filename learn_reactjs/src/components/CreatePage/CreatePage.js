@@ -57,7 +57,7 @@ class CreatePage extends React.Component {
         }
     }
 
-    renderForm(request) {
+    renderPrimary(request) {
         let data_primary;
         let data_info;
         if (request === "employees") {
@@ -83,59 +83,13 @@ class CreatePage extends React.Component {
                         <input type="email" className="form-control form-control-sm" id="email" placeholder="Email" onChange={(event) => {this.handleChange(event)}} value={this.state.email} required/>
                     </div>
                 </div>
-                {this.renderExtraForm("" + request)}
+                {this.renderInfo("" + request)}
                 <button type="submit" className="btn btn-primary btn-sm">Create</button>
             </form>
         );
     }
 
-    selectAll() {
-        let data = document.querySelectorAll('[id="list"]');
-        // bug: onClick={selectAll} executes after render, resulting .checked return true instead of false.
-        if (document.getElementById('selectAll').checked === true) {
-            for (let i = 0; i < data.length; i++) {
-                data[i].checked = true;
-            }
-        } else {
-            for (let i = 0; i < data.length; i++) {
-                data[i].checked = false;
-            }
-        }
-    }
-
-    renderTableHead() {
-        return (
-            <tr>
-                <th>
-                    <input type="checkbox" id="selectAll" onClick={() => {this.selectAll()}}/>
-                    <label htmlFor="selectAll"></label>
-                </th>
-                <th scope="col">ID</th>
-                <th scope="col">Name</th>
-            </tr>
-        );
-    }
-
-    renderTableBody() {
-        let data = JSON.parse(localStorage.employee_primary);
-
-        return data.filter((data) => {
-            if (data.id === undefined) return false;
-            else return true;
-        }).map(data => {
-            return (
-                <tr id={"id" + data.id} key={"id" + data.id}>
-                    <th>
-                        <input type="checkbox" id="list" value={data.id}/>
-                    </th>
-                    <th>{data.id}</th>
-                    <td>{data.name}</td>
-                </tr>
-            )
-        });
-    }
-
-    renderExtraForm(request) {
+    renderInfo(request) {
         if (request === "employees") {
             return (
                 // question: is there alternative to return multiple div?
@@ -201,6 +155,52 @@ class CreatePage extends React.Component {
                 </div>
             );
         }
+    }
+
+    selectAll() {
+        let data = document.querySelectorAll('[id="list"]');
+        // bug: onClick={selectAll} executes after render, resulting .checked return true instead of false.
+        if (document.getElementById('selectAll').checked === true) {
+            for (let i = 0; i < data.length; i++) {
+                data[i].checked = true;
+            }
+        } else {
+            for (let i = 0; i < data.length; i++) {
+                data[i].checked = false;
+            }
+        }
+    }
+
+    renderTableHead() {
+        return (
+            <tr>
+                <th>
+                    <input type="checkbox" id="selectAll" onClick={() => {this.selectAll()}}/>
+                    <label htmlFor="selectAll"></label>
+                </th>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+            </tr>
+        );
+    }
+
+    renderTableBody() {
+        let data = JSON.parse(localStorage.employee_primary);
+
+        return data.filter((data) => {
+            if (data.id === undefined) return false;
+            else return true;
+        }).map(data => {
+            return (
+                <tr id={"id" + data.id} key={"id" + data.id}>
+                    <th>
+                        <input type="checkbox" id="list" value={data.id}/>
+                    </th>
+                    <th>{data.id}</th>
+                    <td>{data.name}</td>
+                </tr>
+            )
+        });
     }
 
     handleChange(event) {
@@ -276,7 +276,7 @@ class CreatePage extends React.Component {
         return (
             <div className="container mt-3">
                 {this.renderOption("" + request)}
-                {this.renderForm("" + request)}
+                {this.renderPrimary("" + request)}
             </div>
         );
     }
