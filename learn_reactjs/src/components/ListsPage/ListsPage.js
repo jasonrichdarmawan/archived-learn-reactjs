@@ -2,9 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 class ListsPage extends React.Component {
+    // question: is there a way to export runOnce() to different class, different file?
     runOnce() {
         if (localStorage.employee_primary === undefined) localStorage.employee_primary = JSON.stringify([]);
+        if (localStorage.employee_info === undefined) localStorage.employee_info = JSON.stringify([]);
         if (localStorage.department_primary === undefined) localStorage.department_primary = JSON.stringify([]);
+        if (localStorage.department_info === undefined) localStorage.department_info = JSON.stringify([]);
 
         // debug only: dummy data
         // let employee_primary = [
@@ -35,6 +38,66 @@ class ListsPage extends React.Component {
         //     },
         // ];
         // localStorage.employee_primary = JSON.stringify(employee_primary);
+        // let employee_info = [
+        //     {},
+        //     {},
+        //     {
+        //         primary_id: "2",
+        //         nationalIDNumber: "2222",
+        //         idValidityDate: "2020-20-20",
+        //         taxpayerIDNumber: "2222",
+        //         taxPeriod: "2020-20-20",
+        //         birthDate: "2020-20-20",
+        //         nationality: "ID",
+        //         gender: "Male",
+        //         religion: "Islam",
+        //         maritalStatus: "Not married",
+        //         education: "Postgraduate"
+        //     },
+        //     {},
+        //     {
+        //         primary_id: "4",
+        //         nationalIDNumber: "5555",
+        //         idValidityDate: "2020-20-20",
+        //         taxpayerIDNumber: "5555",
+        //         taxPeriod: "2020-20-20",
+        //         birthDate: "2020-20-20",
+        //         nationality: "ID",
+        //         gender: "Male",
+        //         religion: "Islam",
+        //         maritalStatus: "Not married",
+        //         education: "Postgraduate"
+        //     },
+        //     {},
+        //     {
+        //         primary_id: "6",
+        //         nationalIDNumber: "6666",
+        //         idValidityDate: "2020-20-20",
+        //         taxpayerIDNumber: "6666",
+        //         taxPeriod: "2020-20-20",
+        //         birthDate: "2020-20-20",
+        //         nationality: "ID",
+        //         gender: "Male",
+        //         religion: "Islam",
+        //         maritalStatus: "Not married",
+        //         education: "Postgraduate"
+        //     },
+        //     {},
+        //     {
+        //         primary_id: "8",
+        //         nationalIDNumber: "8888",
+        //         idValidityDate: "2020-20-20",
+        //         taxpayerIDNumber: "8888",
+        //         taxPeriod: "2020-20-20",
+        //         birthDate: "2020-20-20",
+        //         nationality: "ID",
+        //         gender: "Male",
+        //         religion: "Islam",
+        //         maritalStatus: "Not married",
+        //         education: "Postgraduate"
+        //     },
+        // ];
+        // localStorage.employee_info = JSON.stringify(employee_info);
         // let department_primary = [
         //     {},
         //     {},
@@ -63,6 +126,30 @@ class ListsPage extends React.Component {
         //     },
         // ];
         // localStorage.department_primary = JSON.stringify(department_primary);
+        // let department_info = [
+        //     {},
+        //     {},
+        //     {
+        //         primary_id: "2",
+        //         employeeList: "[2]"
+        //     },
+        //     {},
+        //     {
+        //         primary_id: "4",
+        //         employeeList: "[4]"
+        //     },
+        //     {},
+        //     {
+        //         primary_id: "6",
+        //         employeeList: "[6]"
+        //     },
+        //     {},
+        //     {
+        //         primary_id: "8",
+        //         employeeList: "[8]"
+        //     }
+        // ];
+        // localStorage.department_info = JSON.stringify(department_info);
     }
 
     renderOption(request) {
