@@ -49,10 +49,10 @@ function dummyData() {
       {
           primary_id: "2",
           nationalIDNumber: "2222",
-          idValidityDate: "2020-20-20",
+          idValidityDate: "2020-12-20",
           taxpayerIDNumber: "2222",
-          taxPeriod: "2020-20-20",
-          birthDate: "2020-20-20",
+          taxPeriod: "2020-12-20",
+          birthDate: "2020-12-20",
           nationality: "ID",
           gender: "Male",
           religion: "Islam",
@@ -63,10 +63,10 @@ function dummyData() {
       {
           primary_id: "4",
           nationalIDNumber: "5555",
-          idValidityDate: "2020-20-20",
+          idValidityDate: "2020-12-20",
           taxpayerIDNumber: "5555",
-          taxPeriod: "2020-20-20",
-          birthDate: "2020-20-20",
+          taxPeriod: "2020-12-20",
+          birthDate: "2020-12-20",
           nationality: "ID",
           gender: "Male",
           religion: "Islam",
@@ -77,10 +77,10 @@ function dummyData() {
       {
           primary_id: "6",
           nationalIDNumber: "6666",
-          idValidityDate: "2020-20-20",
+          idValidityDate: "2020-12-20",
           taxpayerIDNumber: "6666",
-          taxPeriod: "2020-20-20",
-          birthDate: "2020-20-20",
+          taxPeriod: "2020-12-20",
+          birthDate: "2020-12-20",
           nationality: "ID",
           gender: "Male",
           religion: "Islam",
@@ -91,10 +91,10 @@ function dummyData() {
       {
           primary_id: "8",
           nationalIDNumber: "8888",
-          idValidityDate: "2020-20-20",
+          idValidityDate: "2020-12-20",
           taxpayerIDNumber: "8888",
-          taxPeriod: "2020-20-20",
-          birthDate: "2020-20-20",
+          taxPeriod: "2020-12-20",
+          birthDate: "2020-12-20",
           nationality: "ID",
           gender: "Male",
           religion: "Islam",
@@ -158,7 +158,7 @@ function dummyData() {
 }
 
 function App() {
-  dummyData();
+  // dummyData();
   
   // TODO: research safe way to store Authorization token.
   if (localStorage.Authorization === undefined) {
