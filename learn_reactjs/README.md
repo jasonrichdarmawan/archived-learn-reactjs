@@ -3,7 +3,7 @@
 - [x] Login
 - [x] List of Employees
 - [x] List of Departments
-- [ ] Search Widget
+- [x] Search Widget
     Scope: search from name
     ```
     // type: "employeeList" return employee_primary, "departmentList" return department_primary

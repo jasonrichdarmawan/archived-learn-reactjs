@@ -59,12 +59,12 @@ class ListsPage extends React.Component {
                         <th>
                             <input type="checkbox" id="list" value={data.id} onClick={() => {this.showAction("check")}}/>
                         </th>
-                        <th>
+                        <th name="id">
                             <Link to={`/view/${request.slice(0, request.length - 1)}/${data.id}`}>
                                 {data.id}
                             </Link>
                         </th>
-                        <td>{data.name}</td>
+                        <td name="name">{data.name}</td>
                         <td>{data.email}</td>
                 </tr>
             )
@@ -135,6 +135,20 @@ class ListsPage extends React.Component {
         }
     }
 
+    search(event) {
+        for (let i = 0; i < document.getElementsByName('id').length; i++) {
+            let name = document.getElementsByName('name')[i].firstChild.data;
+            let id = document.getElementsByName('id')[i].firstChild.firstChild.data;
+
+            if (!name.toLowerCase().includes(event.target.value.toLowerCase())) {
+                document.getElementById(`id${id}`).style.display = "none";
+            } else {
+                document.getElementById(`id${id}`).style.display = "";
+            }
+        }
+
+    }
+
     render() {
         this.runOnce();
         let request = this.props.request;
@@ -149,8 +163,8 @@ class ListsPage extends React.Component {
                         <button className="btn btn-danger btn-sm mb-2 d-none" id="delete" onClick={() => {this.actionDelete("" + request)}}>Delete</button>
                     </div>
                     <div className="col-sm">
-                        {/* TODO: search function */}
-                        <input className="form-control form-control-sm mb-2" type="search" placeholder="Search" aria-label="Search"/>
+                        {/* TODO: search function -> read real database instead of innerHTML */}
+                        <input className="form-control form-control-sm mb-2" type="search" placeholder="Search" onChange={(event) => {this.search(event)}}/>
                         {/* TODO: refactor the code and use dropdown checkbox */}
                         {this.renderOption("" + request)}
                     </div>
