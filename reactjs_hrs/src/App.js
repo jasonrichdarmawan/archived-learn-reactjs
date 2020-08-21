@@ -1,24 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect
+} from 'react-router-dom';
+import LogIn from './components/LogIn';
 
 function App() {
+  let isLoggedIn = localStorage.Authorization != null;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Route exact path="/">
+        {isLoggedIn ? <div>{localStorage.Authorization}</div> : <Redirect to="/login" />}
+      </Route>
+      <Route path="/login">
+        {isLoggedIn ? <Redirect to="/" /> : <LogIn />}
+      </Route>
+    </Router>
   );
 }
 
