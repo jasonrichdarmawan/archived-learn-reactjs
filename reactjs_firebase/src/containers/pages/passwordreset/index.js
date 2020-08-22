@@ -2,14 +2,12 @@ import React, { useState } from "react";
 import { Container, Alert, Image, Form, Button } from "react-bootstrap";
 import logo from "../../../logo.svg";
 import { FBAuth } from "../../../config/firebase";
-import { Link } from "react-router-dom";
 
-export function LogIn() {
+export function PasswordReset() {
   const [inputs, setInputs] = useState({
     email: "",
-    password: "",
   });
-  const { email, password } = inputs;
+  const { email } = inputs;
   const handleChange = (event) => {
     const { id, value } = event.target;
     setInputs((inputs) => ({ ...inputs, [id]: value }));
@@ -24,7 +22,7 @@ export function LogIn() {
     setLoading(true);
     const form = event.currentTarget;
     if (form.checkValidity() === true) {
-      FBAuth.signInWithEmailAndPassword(email, password)
+      FBAuth.sendPasswordResetEmail(email)
         .then(() => {
           setLoading(false);
           setRes(true);
@@ -62,32 +60,13 @@ export function LogIn() {
               Please provide a valid email.
             </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group controlId="password">
-            {/* question: is it safe? */}
-            <Form.Control
-              required
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={handleChange}
-            />
-            <Form.Control.Feedback type="invalid">
-              Please provide a valid password.
-            </Form.Control.Feedback>
-          </Form.Group>
-          <p>
-            Are you new to HRS? <Link to="/register">Register here</Link>
-          </p>
-          <p>
-            <Link to="/passwordreset">Forgot Password?</Link>
-          </p>
           <Button
             type="submit"
             block
             disabled={loading}
             variant={res == null ? "primary" : res ? "success" : "warning"}
           >
-            {res ? "Success" : "Log In"}
+            {res ? "Success" : "Submit"}
           </Button>
         </Form>
       </Container>

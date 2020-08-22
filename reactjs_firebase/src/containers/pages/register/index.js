@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Container, Alert, Image, Form, Button } from "react-bootstrap";
 import logo from "../../../logo.svg";
-import firebase from "../../../config/firebase";
+import { FBAuth } from "../../../config/firebase";
 
 export function Register() {
   const [inputs, setInputs] = useState({
@@ -17,19 +17,24 @@ export function Register() {
   const [validated, setValidated] = useState(false);
   const [res, setRes] = useState();
   const [errorMessage, setErrorMessage] = useState();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = (event) => {
+    setLoading(true);
     const form = event.currentTarget;
     if (form.checkValidity() === true) {
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then((_) => setRes(true))
+      FBAuth.createUserWithEmailAndPassword(email, password)
+        .then(() => {
+          setLoading(false);
+          setRes(true);
+        })
         .catch((error) => {
+          setLoading(false);
           setRes(false);
           setErrorMessage(error.message);
         });
     }
+    else setLoading(false);
 
     setValidated(true);
     event.preventDefault();
@@ -72,7 +77,7 @@ export function Register() {
           <Button
             type="submit"
             block
-            disabled={res}
+            disabled={loading}
             variant={res == null ? "primary" : res ? "success" : "warning"}
           >
             {res ? "Success" : "Register"}
