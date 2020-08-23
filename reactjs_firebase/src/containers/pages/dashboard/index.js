@@ -10,14 +10,11 @@ export function Dashboard() {
     // {(user) => (
     <div className="d-flex flex-fill align-items-center">
       <Container className="text-center">
-        <p>
-          Hello,{" "}
-          {user === "first" ? (
-            <Spinner animation="grow" role="status" size="sm"></Spinner>
-          ) : (
-            user.email
-          )}
-        </p>
+        {user === "first" ? (
+          <Spinner animation="grow" role="status" size="sm"></Spinner>
+        ) : (
+          <p>Hello, {user.email}</p>
+        )}
       </Container>
     </div>
     // )}
