@@ -6,6 +6,7 @@ import {
   Register,
   PasswordReset,
   Dashboard,
+  List,
 } from "../../containers/pages";
 
 export const Routes = () => {
@@ -14,10 +15,12 @@ export const Routes = () => {
     return (
       <Switch>
         <Route path="/dashboard" component={Dashboard} />
+        <Route path="/list" component={List} />
         <Redirect to="/dashboard" />
       </Switch>
     );
-  } else {
+  } else if (user === "first") return null;
+  else {
     return (
       <Switch>
         <Route path="/login" component={LogIn} />

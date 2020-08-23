@@ -6,13 +6,13 @@ import { AuthDataContext } from "./providers/authdata";
 import firebase from "./providers/firebase";
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState('first');
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) setUser(user);
       else setUser(null);
     });
-  });
+  }, []);
   return (
     <Router>
       <AuthDataContext.Provider value={user}>
