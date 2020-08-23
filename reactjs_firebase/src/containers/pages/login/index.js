@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Container, Alert, Image, Form, Button } from "react-bootstrap";
 import logo from "../../../logo.svg";
-import { FBAuth } from "../../../config/firebase";
+import firebase from "../../../providers/firebase";
 import { Link } from "react-router-dom";
 
 export function LogIn() {
@@ -24,7 +24,9 @@ export function LogIn() {
     setLoading(true);
     const form = event.currentTarget;
     if (form.checkValidity() === true) {
-      FBAuth.signInWithEmailAndPassword(email, password)
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
         .then(() => {
           setLoading(false);
           setRes(true);
@@ -34,8 +36,7 @@ export function LogIn() {
           setRes(false);
           setErrorMessage(error.message);
         });
-    }
-    else setLoading(false);
+    } else setLoading(false);
 
     setValidated(true);
     event.preventDefault();

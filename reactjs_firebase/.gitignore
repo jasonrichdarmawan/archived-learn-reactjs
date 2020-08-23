@@ -8,8 +8,8 @@
 # testing
 /coverage
 
-# apiKey
-/src/config/firebase
+# development
+.env
 
 # production
 /build

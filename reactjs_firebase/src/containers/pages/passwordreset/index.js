@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Container, Alert, Image, Form, Button } from "react-bootstrap";
 import logo from "../../../logo.svg";
-import { FBAuth } from "../../../config/firebase";
+import firebase from "../../../providers/firebase";
 
 export function PasswordReset() {
   const [inputs, setInputs] = useState({
@@ -22,7 +22,9 @@ export function PasswordReset() {
     setLoading(true);
     const form = event.currentTarget;
     if (form.checkValidity() === true) {
-      FBAuth.sendPasswordResetEmail(email)
+      firebase
+        .auth()
+        .sendPasswordResetEmail(email)
         .then(() => {
           setLoading(false);
           setRes(true);
@@ -32,8 +34,7 @@ export function PasswordReset() {
           setRes(false);
           setErrorMessage(error.message);
         });
-    }
-    else setLoading(false);
+    } else setLoading(false);
 
     setValidated(true);
     event.preventDefault();
