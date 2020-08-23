@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import Container from "react-bootstrap/Container";
+import { Container, Spinner } from "react-bootstrap";
 import { AuthDataContext } from "../../../providers/authdata";
 
 export function Dashboard() {
@@ -7,13 +7,20 @@ export function Dashboard() {
   const user = useContext(AuthDataContext);
   return (
     // <AuthDataContext.Consumer>
-      // {(user) => (
-        <div className="d-flex flex-fill align-items-center">
-          <Container className="text-center">
-            <p>Hello, {user.email}</p>
-          </Container>
-        </div>
-      // )}
+    // {(user) => (
+    <div className="d-flex flex-fill align-items-center">
+      <Container className="text-center">
+        <p>
+          Hello,{" "}
+          {user === "first" ? (
+            <Spinner animation="grow" role="status" size="sm"></Spinner>
+          ) : (
+            user.email
+          )}
+        </p>
+      </Container>
+    </div>
+    // )}
     // </AuthDataContext.Consumer>
   );
 }
