@@ -12,6 +12,13 @@
   ```
 - [ ] Data Schema
   ```
+  users = [
+    {
+      uid: '',
+      type: '', // 0: admin, 1: operator
+      token: []
+    }
+  ];
   active = [
     { 
       token: '',
