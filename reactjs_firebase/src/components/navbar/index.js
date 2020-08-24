@@ -7,22 +7,24 @@ import firebase from "../../providers/firebase";
 export const NavBar = () => {
   const user = useContext(AuthDataContext);
   const logOut = () => {
-    firebase.auth().signOut()
-  }
-  if (user) {
+    firebase.auth().signOut();
+  };
+  if (user !== null && user !== "first") {
     return (
       <Navbar bg="light" expand="lg">
-        <Navbar.Brand>HRS</Navbar.Brand>
+        <Link to="/dashboard" className="navbar-brand">HRS</Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Link to="/list" className="nav-link">List</Link>
+            <Link to="/list" className="nav-link">
+              List
+            </Link>
           </Nav>
-          <Button variant="danger" size="sm" onClick={logOut}>Log Out</Button>
+          <Button variant="danger" size="sm" onClick={logOut}>
+            Log Out
+          </Button>
         </Navbar.Collapse>
       </Navbar>
     );
-  } else {
-    return null;
-  }
+  } else return null;
 };

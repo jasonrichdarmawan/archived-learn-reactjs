@@ -11,7 +11,7 @@ import {
 
 export const Routes = () => {
   const user = useContext(AuthDataContext);
-  if (user) {
+  if (user !== null) {
     return (
       <Switch>
         <Route path="/dashboard" component={Dashboard} />
@@ -20,7 +20,7 @@ export const Routes = () => {
       </Switch>
     );
   } else if (user === "first") return null;
-  else {
+  else if (user == null) {
     return (
       <Switch>
         <Route path="/login" component={LogIn} />
