@@ -9,7 +9,7 @@ export const NavBar = () => {
   const logOut = () => {
     firebase.auth().signOut();
   };
-  if (user !== null && user !== "first") {
+  if (user !== null && user !== "await") {
     return (
       <Navbar bg="light" expand="lg">
         <Link to="/dashboard" className="navbar-brand">HRS</Link>

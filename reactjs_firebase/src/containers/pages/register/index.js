@@ -8,7 +8,7 @@ export function Register() {
     email: "",
     password: "",
   });
-  const { email, password } = inputs;
+  const { email, password, displayName, phoneNumber } = inputs;
   const handleChange = (event) => {
     const { id, value } = event.target;
     setInputs((inputs) => ({ ...inputs, [id]: value }));
@@ -19,6 +19,20 @@ export function Register() {
   const [errorMessage, setErrorMessage] = useState();
   const [loading, setLoading] = useState(false);
 
+  //   let db = firebase.firestore()
+
+  // db.collection("cities").doc("LA").set({
+  //   name: "Los Angeles",
+  //   state: "CA",
+  //   country: "USA"
+  // })
+  // .then(function() {
+  //   console.log("Document successfully written!");
+  // })
+  // .catch(function(error) {
+  //   console.error("Error writing document: ", error);
+  // });
+
   const handleSubmit = (event) => {
     setLoading(true);
     const form = event.currentTarget;
@@ -26,7 +40,32 @@ export function Register() {
       firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
-        .then(() => {
+        .then((res) => {
+          res.user
+            .updateProfile({
+              displayName: displayName,
+              phoneNumber: phoneNumber,
+            })
+            .then()
+            .catch((error) => {
+              setLoading(false);
+              setRes(false);
+              setErrorMessage(error.message);
+            });
+
+          let db = firebase.firestore();
+          db.collection("users")
+            .doc(res.user.uid)
+            .set({
+              type: "1",
+            })
+            .then()
+            .catch((error) => {
+              setLoading(false);
+              setRes(false);
+              setErrorMessage(error.message);
+            });
+
           setLoading(false);
           setRes(true);
         })
@@ -55,7 +94,6 @@ export function Register() {
               required
               type="email"
               placeholder="Enter email"
-              value={email}
               onChange={handleChange}
             />
             <Form.Control.Feedback type="invalid">
@@ -68,11 +106,32 @@ export function Register() {
               required
               type="password"
               placeholder="Password"
-              value={password}
               onChange={handleChange}
             />
             <Form.Control.Feedback type="invalid">
               Please provide a valid password.
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group controlId="displayName">
+            <Form.Control
+              required
+              type="text"
+              placeholder="Enter Your Name"
+              onChange={handleChange}
+            />
+            <Form.Control.Feedback type="invalid">
+              Please provide a valid name.
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group controlId="phoneNumber">
+            <Form.Control
+              required
+              type="number"
+              placeholder="Enter Your Phone Number"
+              onChange={handleChange}
+            />
+            <Form.Control.Feedback type="invalid">
+              Please provide a valid phone number.
             </Form.Control.Feedback>
           </Form.Group>
           <Button

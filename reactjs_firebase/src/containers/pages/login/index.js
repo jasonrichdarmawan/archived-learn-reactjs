@@ -56,7 +56,6 @@ export function LogIn() {
               required
               type="email"
               placeholder="Enter email"
-              value={email}
               onChange={handleChange}
             />
             <Form.Control.Feedback type="invalid">
@@ -69,7 +68,6 @@ export function LogIn() {
               required
               type="password"
               placeholder="Password"
-              value={password}
               onChange={handleChange}
             />
             <Form.Control.Feedback type="invalid">

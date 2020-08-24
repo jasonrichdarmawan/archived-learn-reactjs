@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Container, Spinner, Alert } from "react-bootstrap";
+import { Container, Alert } from "react-bootstrap";
 import { AuthDataContext } from "../../../providers/authdata";
-import firebase from "../../../providers/firebase";
+// import firebase from "../../../providers/firebase";
 import { Loading } from "../../../components/loading";
 
 export function List() {

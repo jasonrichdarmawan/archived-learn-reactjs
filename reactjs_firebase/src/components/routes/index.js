@@ -19,8 +19,8 @@ export const Routes = () => {
         <Redirect to="/dashboard" />
       </Switch>
     );
-  } else if (user === "await") return null;
-  else if (user == null) {
+  } 
+  else if (user === null) {
     return (
       <Switch>
         <Route path="/login" component={LogIn} />

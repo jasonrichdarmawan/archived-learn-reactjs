@@ -14,7 +14,7 @@ export function Dashboard() {
       // {(user) => (
       <div className="d-flex flex-fill align-items-center">
         <Container className="text-center">
-          <p>Hello, {user.email}</p>
+          <p>Hello, {user.displayName}</p>
         </Container>
       </div>
       // )}
