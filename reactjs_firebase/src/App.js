@@ -6,7 +6,7 @@ import { AuthDataContext } from "./providers/authdata";
 import firebase from "./providers/firebase";
 
 function App() {
-  const [user, setUser] = useState('first');
+  const [user, setUser] = useState('await');
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) setUser(user);

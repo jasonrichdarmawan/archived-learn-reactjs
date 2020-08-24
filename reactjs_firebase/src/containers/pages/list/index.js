@@ -1,19 +1,43 @@
-import React, { useContext } from "react";
-import { Container, Spinner } from "react-bootstrap";
+import React, { useContext, useEffect, useState } from "react";
+import { Container, Spinner, Alert } from "react-bootstrap";
 import { AuthDataContext } from "../../../providers/authdata";
+import firebase from "../../../providers/firebase";
+import { Loading } from "../../../components/loading";
 
 export function List() {
-  // TODO async employees data instead of user.
   const user = useContext(AuthDataContext);
-  return (
-    <div className="d-flex flex-fill">
-      <Container className="m-3">
-        {user === "first" ? (
-          <Spinner animation="grow" role="status" size="sm"></Spinner>
-        ) : (
-          <p>Table</p>
-        )}
-      </Container>
-    </div>
-  );
+  const [isLoading, setIsLoading] = useState();
+  const [data, setData] = useState("s");
+
+  const [error, setError] = useState("s");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setData();
+      } catch (error) {
+        setError(error);
+      }
+      setIsLoading(false);
+    };
+  }, []);
+
+  if (user === "await") {
+    return <Loading />;
+  } else {
+    return (
+      <div className="d-flex flex-fill">
+        <Container>
+          {error ? (
+            <Alert className="mt-3" variant="warning">
+              {error}
+            </Alert>
+          ) : (
+            ""
+          )}
+          {data ? <div className="mt-3">TODO</div> : ""}
+        </Container>
+      </div>
+    );
+  }
 }

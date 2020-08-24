@@ -1,23 +1,24 @@
 import React, { useContext } from "react";
-import { Container, Spinner } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { AuthDataContext } from "../../../providers/authdata";
+import { Loading } from "../../../components/loading";
 
 export function Dashboard() {
   // question: what is the difference between useContext(Context) vs Context.Consumer which require function component ?
   const user = useContext(AuthDataContext);
-  return (
-    // <AuthDataContext.Consumer>
-    // {(user) => (
-    <div className="d-flex flex-fill align-items-center">
-      <Container className="text-center">
-        {user === "first" ? (
-          <Spinner animation="grow" role="status" size="sm"></Spinner>
-        ) : (
+  if (user === "await") {
+    return <Loading />;
+  } else {
+    return (
+      // <AuthDataContext.Consumer>
+      // {(user) => (
+      <div className="d-flex flex-fill align-items-center">
+        <Container className="text-center">
           <p>Hello, {user.email}</p>
-        )}
-      </Container>
-    </div>
-    // )}
-    // </AuthDataContext.Consumer>
-  );
+        </Container>
+      </div>
+      // )}
+      // </AuthDataContext.Consumer>
+    );
+  }
 }

@@ -19,7 +19,7 @@ export const Routes = () => {
         <Redirect to="/dashboard" />
       </Switch>
     );
-  } else if (user === "first") return null;
+  } else if (user === "await") return null;
   else if (user == null) {
     return (
       <Switch>
