@@ -28,23 +28,26 @@ export function List(props) {
       firebase
         .firestore()
         .collection("tickets")
+        .where("handler", "==", auth.uid)
         .get()
         .then((snapshot) => {
-          setData(
-            snapshot.docs.map((doc) => {
-              const id = doc.id;
-              const data = doc.data();
-
-              const iat = data.iat ? data.iat.seconds : null;
-              const exp = data.exp ? data.exp.seconds : null;
-
-              return { id, ...data, iat, exp };
-            })
-          );
+          if (!snapshot.empty) {
+            setData(
+              snapshot.docs.map((doc) => {
+                const id = doc.id;
+                const data = doc.data();
+  
+                const iat = data.iat ? data.iat.seconds : null;
+                const exp = data.exp ? data.exp.seconds : null;
+  
+                return { id, ...data, iat, exp };
+              })
+            );
+          } else if (snapshot.empty) setData();
         })
         .catch((error) => setError(error.message));
     }
-  }, [props.match.params.request]);
+  }, [props.match.params.request, auth.uid]);
 
   if (props.match.params.request === "operator" && user.type === "1")
     return <Redirect to="/list" />;
@@ -86,6 +89,25 @@ export function List(props) {
     event.stopPropagation();
   };
 
+  const createToken = () => {
+    firebase
+      .firestore()
+      .collection("tickets")
+      .add({
+        status: "0",
+        iat: firebase.firestore.Timestamp.now(),
+      })
+      .then((doc) => {
+        const id = doc.id;
+
+        const iat = Date.now() / 1000;
+
+        setView({ id, iat });
+        setData();
+      })
+      .catch((error) => setError(error.message));
+  };
+
   const dateFormatter = (unix) => {
     if (!unix) return null;
     return new Date(unix * 1000).toString().split(" ").slice(0, 5).join(" ");
@@ -113,9 +135,6 @@ export function List(props) {
       ? "Rp" + priceFormatter(type, view.iat)
       : null;
 
-  console.log(user);
-  console.log(auth);
-
   const pay = () => {
     firebase.firestore().collection("tickets").doc(view.id).update({
       status: "1",
@@ -137,7 +156,7 @@ export function List(props) {
               {error}
             </Alert>
           ) : (
-            ""
+            null
           )}
           {data ? <div className="mt-3">TODO</div> : ""}
         </Container>
@@ -154,6 +173,9 @@ export function List(props) {
           ) : (
             ""
           )}
+          <Button className="mt-3" size="sm" onClick={createToken}>
+            Print New Ticket
+          </Button>
           <Form
             className="mt-3"
             noValidate
@@ -161,7 +183,7 @@ export function List(props) {
             onSubmit={handleSubmit}
           >
             <Form.Group controlId="token">
-              <Form.Label>Ticket Number</Form.Label>
+              <Form.Label>Scan Ticket Number</Form.Label>
               <Form.Control
                 required
                 type="text"
@@ -179,18 +201,22 @@ export function List(props) {
                 <tr>
                   <th>#</th>
                   <th>Issued At</th>
-                  <th>Exit Time</th>
+                  {view.status === "1" ? <th>Exit Time</th> : null}
                   <th>Registration</th>
                   <th>Vehicle Type</th>
                   <th>Bill</th>
-                  {view.status === "1" ? "" : <th>Action</th>}
+                  {view.status === "1" ? null : <th>Action</th>}
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>{view.id}</td>
                   <td>{dateFormatter(view.iat)}</td>
-                  <td>{dateFormatter(view.exp)}</td>
+                  {view.status === "1" ? (
+                    <td>{dateFormatter(view.exp)}</td>
+                  ) : (
+                    null
+                  )}
                   {view.status === "1" ? (
                     <td>{view.registration}</td>
                   ) : (
@@ -226,7 +252,7 @@ export function List(props) {
                   )}
                   {view.status === "1" ? <td>{view.bill}</td> : <td>{bill}</td>}
                   {view.status === "1" ? (
-                    ""
+                    null
                   ) : bill && registration ? (
                     <td>
                       <Button size="sm" onClick={pay}>
@@ -244,33 +270,36 @@ export function List(props) {
               </tbody>
             </Table>
           ) : (
-            ""
+            null
           )}
           {data ? (
-            <Table className="mt-3" responsive>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Issued At</th>
-                  <th>Exit Time</th>
-                  <th>Vehicle Type</th>
-                  <th>Bill</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.map((doc) => (
-                  <tr key={doc.id}>
-                    <td>{doc.id}</td>
-                    <td>{dateFormatter(doc.iat)}</td>
-                    <td>{dateFormatter(doc.exp)}</td>
-                    <td>{doc.type}</td>
-                    <td>{doc.bill}</td>
+            <div className="mt-3">
+              <p>Ticket handled by you</p>
+              <Table responsive>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Issued At</th>
+                    <th>Exit Time</th>
+                    <th>Vehicle Type</th>
+                    <th>Bill</th>
                   </tr>
-                ))}
-              </tbody>
-            </Table>
+                </thead>
+                <tbody>
+                  {data.map((doc) => (
+                    <tr key={doc.id}>
+                      <td>{doc.id}</td>
+                      <td>{dateFormatter(doc.iat)}</td>
+                      <td>{dateFormatter(doc.exp)}</td>
+                      <td>{doc.type}</td>
+                      <td>{doc.bill}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </div>
           ) : (
-            ""
+            null
           )}
         </Container>
       </div>

@@ -35,7 +35,7 @@
 - [ ] Dashboard Admin
   - [ ] List Operator
   - [ ] Revenue Report with Chart, Filter: Operator
-- [ ] Dashboard Operator
-  - [ ] Generate Ticket
-  - [ ] Scan Ticket
-  - [ ] Generate Payment Receipt
+- [x] Dashboard Operator
+  - [x] Generate Ticket
+  - [x] Scan Ticket
+  - [x] Generate Payment Receipt
