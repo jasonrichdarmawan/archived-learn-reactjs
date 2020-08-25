@@ -3,26 +3,10 @@ import { Container, Alert, Table, Form, Button } from "react-bootstrap";
 import { AuthDataContext } from "../../../providers/authdata";
 import firebase from "../../../providers/firebase";
 import { Loading } from "../../../components/loading";
+import { dateFormatter, priceFormatter } from "./formatter";
 
 export function List(props) {
   const auth = useContext(AuthDataContext);
-
-  const [error, setError] = useState();
-  const [data, setData] = useState();
-
-  const [dataOperator, setDataOperator] = useState();
-  const [dataTicket, setDataTicket] = useState();
-
-  const [inputs, setInputs] = useState({
-    token: "",
-    type: "",
-    registration: "",
-  });
-  const { token, type, registration } = inputs;
-
-  const [validated, setValidated] = useState();
-
-  const [view, setView] = useState();
 
   useEffect(() => {
     if (props.match.params.request === "ticket") {
@@ -47,6 +31,9 @@ export function List(props) {
           } else if (snapshot.empty) setData();
         })
         .catch((error) => setError(error.message));
+
+        setInputs((inputs) => ({ ...inputs, type: "" }));
+        setView();
     } else if (props.match.params.request === "operator") {
       firebase
         .firestore()
@@ -91,9 +78,99 @@ export function List(props) {
         })
         .catch((error) => setError(error.message));
 
-        setData();
+      setData();
     }
   }, [props.match.params.request, auth.uid]);
+
+  const [inputs, setInputs] = useState({
+    token: "",
+    type: "",
+    registration: "",
+  });
+  const { token, type, registration } = inputs;
+  const [validated, setValidated] = useState();
+
+  const [error, setError] = useState();
+  const [data, setData] = useState();
+  const [dataOperator, setDataOperator] = useState();
+  const [dataTicket, setDataTicket] = useState();
+  const [view, setView] = useState();
+
+  const ErrorAlert = () => (
+    <Alert className="mt-3" variant="warning">
+      {error}
+    </Alert>
+  );
+
+  const OperatorTable = () => (
+    <div className="mt-3">
+      <p>Operator List</p>
+      <Table responsive>
+        <thead>
+          <tr>
+            <th>#</th>
+          </tr>
+        </thead>
+        <tbody>
+          {dataOperator.map((doc) => (
+            <tr key={doc.id}>
+              <td>{doc.id}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </div>
+  );
+
+  const ActiveTicketTable = () => (
+    <div className="mt-3">
+      <p>Active Ticket List</p>
+      <Table responsive>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Issued At</th>
+          </tr>
+        </thead>
+        <tbody>
+          {dataTicket.map((doc) => (
+            <tr key={doc.id}>
+              <td>{doc.id}</td>
+              <td>{dateFormatter(doc.iat)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </div>
+  );
+
+  const TicketHandledByUserTable = () => (
+    <div className="mt-3">
+      <p>Ticket handled by the user</p>
+      <Table responsive>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Issued At</th>
+            <th>Exit Time</th>
+            <th>Vehicle Type</th>
+            <th>Bill</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((doc) => (
+            <tr key={doc.id}>
+              <td>{doc.id}</td>
+              <td>{dateFormatter(doc.iat)}</td>
+              <td>{dateFormatter(doc.exp)}</td>
+              <td>{doc.type}</td>
+              <td>{doc.bill}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </div>
+  );
 
   const handleChange = (event) => {
     const { id, value } = event.target;
@@ -183,24 +260,6 @@ export function List(props) {
       .catch((error) => setError(error.message));
   };
 
-  const dateFormatter = (unix) => {
-    if (!unix) return null;
-    return new Date(unix * 1000).toString().split(" ").slice(0, 5).join(" ");
-  };
-
-  const priceFormatter = (type, iat) => {
-    if (type === "Car") {
-      const durationInMinutes = Math.ceil((Date.now() / 1000 - iat) / 60);
-      if (durationInMinutes >= 1) return 5000 + 3000 * (durationInMinutes - 1);
-      else return 5000;
-    }
-    if (type === "Motorcycle") {
-      const durationInMinutes = Math.ceil((Date.now() / 1000 - iat) / 60);
-      if (durationInMinutes >= 1) return 3000 + 1000 * (durationInMinutes - 1);
-      else return 3000;
-    }
-  };
-
   const bill =
     type === ""
       ? null
@@ -236,11 +295,7 @@ export function List(props) {
     return (
       <div className="d-flex flex-fill">
         <Container>
-          {error ? (
-            <Alert className="mt-3" variant="warning">
-              {error}
-            </Alert>
-          ) : null}
+          {error ? <ErrorAlert /> : null}
           <Form
             className="mt-3"
             noValidate
@@ -261,73 +316,9 @@ export function List(props) {
             </Form.Group>
           </Form>
           {/* question: how to safely store firebase admin credentials? is it okay to store name, email, etc of a user in firestore? */}
-          {dataOperator ? (
-            <div className="mt-3">
-              <p>Operator List</p>
-              <Table responsive>
-                <thead>
-                  <tr>
-                    <th>#</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {dataOperator.map((doc) => (
-                    <tr key={doc.id}>
-                      <td>{doc.id}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
-            </div>
-          ) : null}
-          {dataTicket ? (
-            <div className="mt-3">
-              <p>Active Ticket List</p>
-              <Table responsive>
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Issued At</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {dataTicket.map((doc) => (
-                    <tr key={doc.id}>
-                      <td>{doc.id}</td>
-                      <td>{dateFormatter(doc.iat)}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
-            </div>
-          ) : null}
-          {data ? (
-            <div className="mt-3">
-              <p>Ticket handled by the user</p>
-              <Table responsive>
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Issued At</th>
-                    <th>Exit Time</th>
-                    <th>Vehicle Type</th>
-                    <th>Bill</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {data.map((doc) => (
-                    <tr key={doc.id}>
-                      <td>{doc.id}</td>
-                      <td>{dateFormatter(doc.iat)}</td>
-                      <td>{dateFormatter(doc.exp)}</td>
-                      <td>{doc.type}</td>
-                      <td>{doc.bill}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
-            </div>
-          ) : null}
+          {dataOperator ? <OperatorTable /> : null}
+          {dataTicket ? <ActiveTicketTable /> : null}
+          {data ? <TicketHandledByUserTable /> : null}
         </Container>
       </div>
     );
@@ -335,13 +326,7 @@ export function List(props) {
     return (
       <div className="d-flex flex-fill">
         <Container>
-          {error ? (
-            <Alert className="mt-3" variant="warning">
-              {error}
-            </Alert>
-          ) : (
-            ""
-          )}
+          {error ? <ErrorAlert /> : null}
           <Button className="mt-3" size="sm" onClick={createToken}>
             Print New Ticket
           </Button>
@@ -364,6 +349,7 @@ export function List(props) {
               </Form.Control.Feedback>
             </Form.Group>
           </Form>
+          {/* question: why separating the JSX element caused everytime you input a value the JSX element got remounted? */}
           {view ? (
             <Table className="mt-3" responsive>
               <thead>
@@ -394,6 +380,7 @@ export function List(props) {
                           type="text"
                           size="sm"
                           placeholder="Registration Plate"
+                          value={registration}
                           onChange={handleChange}
                         ></Form.Control>
                       </Form.Group>
@@ -408,6 +395,7 @@ export function List(props) {
                           required
                           as="select"
                           size="sm"
+                          value={type}
                           onChange={handleChange}
                         >
                           <option value="">Select</option>
@@ -435,33 +423,7 @@ export function List(props) {
               </tbody>
             </Table>
           ) : null}
-          {data ? (
-            <div className="mt-3">
-              <p>Ticket handled by you</p>
-              <Table responsive>
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Issued At</th>
-                    <th>Exit Time</th>
-                    <th>Vehicle Type</th>
-                    <th>Bill</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {data.map((doc) => (
-                    <tr key={doc.id}>
-                      <td>{doc.id}</td>
-                      <td>{dateFormatter(doc.iat)}</td>
-                      <td>{dateFormatter(doc.exp)}</td>
-                      <td>{doc.type}</td>
-                      <td>{doc.bill}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
-            </div>
-          ) : null}
+          {data ? <TicketHandledByUserTable /> : null}
         </Container>
       </div>
     );
