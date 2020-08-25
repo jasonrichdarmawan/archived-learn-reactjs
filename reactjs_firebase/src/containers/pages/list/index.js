@@ -44,6 +44,25 @@ export function List(props) {
           } else if (snapshot.empty) setData();
         })
         .catch((error) => setError(error.message));
+    } else if (props.match.params.request === "operator") {
+      firebase
+        .firestore()
+        .collection("users")
+        .where("type", "==", "1")
+        .get()
+        .then((snapshot) => {
+          if (!snapshot.empty) {
+            setData(
+              snapshot.docs.map((doc) => {
+                const id = doc.id;
+
+                return { id };
+              })
+            );
+          } else if (snapshot.empty) {
+          }
+        })
+        .catch((error) => setError(error.message));
     }
   }, [props.match.params.request, auth.uid]);
 
@@ -55,28 +74,56 @@ export function List(props) {
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === true) {
-      firebase
-        .firestore()
-        .collection("tickets")
-        .doc(token)
-        .get()
-        .then((doc) => {
-          if (doc.exists) {
-            const id = doc.id;
-            const data = doc.data();
+      if (props.match.params.request === "ticket") {
+        firebase
+          .firestore()
+          .collection("tickets")
+          .doc(token)
+          .get()
+          .then((doc) => {
+            if (doc.exists) {
+              const id = doc.id;
+              const data = doc.data();
 
-            const iat = data.iat ? data.iat.seconds : null;
-            const exp = data.exp ? data.exp.seconds : null;
+              const iat = data.iat ? data.iat.seconds : null;
+              const exp = data.exp ? data.exp.seconds : null;
 
-            setView({ id, ...data, iat, exp });
-            setData();
-          } else {
-            setInputs((inputs) => ({ ...inputs, type: "" }));
-            setView();
-            setError("Please provide a valid ticker number");
-          }
-        })
-        .catch((error) => setError(error.message));
+              setView({ id, ...data, iat, exp });
+              setData();
+            } else {
+              setInputs((inputs) => ({ ...inputs, type: "" }));
+              setView();
+              setError("Please provide a valid ticker number");
+            }
+          })
+          .catch((error) => setError(error.message));
+      } else if (props.match.params.request === "operator") {
+        firebase
+          .firestore()
+          .collection("tickets")
+          .where("handler", "==", token)
+          .get()
+          .then((snapshot) => {
+            if (!snapshot.empty) {
+              setData(
+                snapshot.docs.map((doc) => {
+                  const id = doc.id;
+                  const data = doc.data();
+
+                  const iat = data.iat ? data.iat.seconds : null;
+                  const exp = data.exp ? data.exp.seconds : null;
+
+                  return { id, ...data, iat, exp };
+                })
+              );
+            } else if (snapshot.empty) {
+              setData();
+              setError(
+                "Either the User UID is not valid or the user has never handled a ticket."
+              );
+            }
+          });
+      }
     }
 
     setValidated(true);
@@ -140,14 +187,14 @@ export function List(props) {
       handler: auth.uid,
     });
 
-    setView({ 
+    setView({
       id: view.id,
       status: "1",
       iat: view.iat,
       exp: Date.now() / 1000,
       type: type,
       registration: registration,
-      bill: bill
+      bill: bill,
     });
   };
 
@@ -161,7 +208,52 @@ export function List(props) {
               {error}
             </Alert>
           ) : null}
-          {data ? <div className="mt-3">TODO</div> : ""}
+          <Form
+            className="mt-3"
+            noValidate
+            validated={validated}
+            onSubmit={handleSubmit}
+          >
+            <Form.Group controlId="token">
+              <Form.Label>Search Operator</Form.Label>
+              <Form.Control
+                required
+                type="text"
+                placeholder="Enter User UID"
+                onChange={handleChange}
+              />
+              <Form.Control.Feedback type="invalid">
+                Please provide a valid user UID.
+              </Form.Control.Feedback>
+            </Form.Group>
+          </Form>
+          {data ? (
+            <div className="mt-3">
+              <p>Ticket handled by the user</p>
+              <Table responsive>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Issued At</th>
+                    <th>Exit Time</th>
+                    <th>Vehicle Type</th>
+                    <th>Bill</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data.map((doc) => (
+                    <tr key={doc.id}>
+                      <td>{doc.id}</td>
+                      <td>{dateFormatter(doc.iat)}</td>
+                      <td>{dateFormatter(doc.exp)}</td>
+                      <td>{doc.type}</td>
+                      <td>{doc.bill}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </div>
+          ) : null}
         </Container>
       </div>
     );
