@@ -19,20 +19,6 @@ export function Register() {
   const [errorMessage, setErrorMessage] = useState();
   const [loading, setLoading] = useState(false);
 
-  //   let db = firebase.firestore()
-
-  // db.collection("cities").doc("LA").set({
-  //   name: "Los Angeles",
-  //   state: "CA",
-  //   country: "USA"
-  // })
-  // .then(function() {
-  //   console.log("Document successfully written!");
-  // })
-  // .catch(function(error) {
-  //   console.error("Error writing document: ", error);
-  // });
-
   const handleSubmit = (event) => {
     setLoading(true);
     const form = event.currentTarget;

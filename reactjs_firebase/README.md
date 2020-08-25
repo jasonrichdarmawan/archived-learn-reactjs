@@ -19,24 +19,19 @@
       token: []
     }
   ];
-  active = [
+  tickets = [
     { 
       token: '',
-      type: '',
-      iat: ''
-    }
-  ]
-  billed = [
-    {
-      token: '',
-      type: '',
+      status: '', // 0: unpaid, 1: paid
       iat: '',
       exp: '',
-      revenue: ''
+      type: '', 0 // 0: motorcycle, 1: car
+      registration: ''
+      bill: ''
     }
   ]
   ```
-- [ ] Login System
+- [x] Login System
 - [ ] Dashboard Admin
   - [ ] List Operator
   - [ ] Revenue Report with Chart, Filter: Operator
