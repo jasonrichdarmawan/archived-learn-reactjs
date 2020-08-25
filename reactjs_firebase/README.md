@@ -33,8 +33,10 @@
   ```
 - [x] Login System
 - [ ] Dashboard Admin
-  - [ ] List Operator
-  - [ ] Revenue Report with Chart, Filter: Operator
+  - [x] List Operator
+  - [ ] Revenue Report
+    - [x] Filter: Operator
+    - [ ] Revenue Report with Chart
 - [x] Dashboard Operator
   - [x] Generate Ticket
   - [x] Scan Ticket
