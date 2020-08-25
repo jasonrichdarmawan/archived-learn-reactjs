@@ -16,7 +16,6 @@
     {
       uid: '',
       type: '', // 0: admin, 1: operator
-      token: []
     }
   ];
   tickets = [
@@ -26,8 +25,9 @@
       iat: '',
       exp: '',
       type: '', 0 // 0: motorcycle, 1: car
-      registration: ''
-      bill: ''
+      registration: '',
+      bill: '',
+      handler: '' // operator auth.uid
     }
   ]
   ```

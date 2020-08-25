@@ -113,6 +113,9 @@ export function List(props) {
       ? "Rp" + priceFormatter(type, view.iat)
       : null;
 
+  console.log(user);
+  console.log(auth);
+
   const pay = () => {
     firebase.firestore().collection("tickets").doc(view.id).update({
       status: "1",
@@ -120,6 +123,7 @@ export function List(props) {
       type: type,
       registration: registration,
       bill: bill,
+      handler: auth.uid,
     });
   };
 
