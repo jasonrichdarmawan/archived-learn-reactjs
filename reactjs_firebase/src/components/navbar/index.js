@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Navbar, Nav, Button } from "react-bootstrap";
 import { AuthDataContext, UserDataContext } from "../../providers/authdata";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import firebase from "../../providers/firebase";
 import { Loading } from "../loading";
 
@@ -12,7 +12,7 @@ export const NavBar = () => {
     firebase.auth().signOut();
   };
   // this is intentional. to speed up dev in case of new feature based on user.type
-  if (user === "await") return <Loading />;
+  if (auth !== null && user === "await" || auth === "await") return <Loading />;
   else if (auth !== null) {
     return (
       <Navbar bg="light" expand="lg">
@@ -37,5 +37,5 @@ export const NavBar = () => {
         </Navbar.Collapse>
       </Navbar>
     );
-  }
+  } else if (auth === null || user === "await") return null;
 };
