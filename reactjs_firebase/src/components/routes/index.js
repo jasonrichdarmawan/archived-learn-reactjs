@@ -15,43 +15,33 @@ export const Routes = () => {
   const user = useContext(UserDataContext);
   if (user === "await") return <Loading />;
   // this is intentional. to speed up dev in case of new feature based on user.type
-  else if (auth !== null && user.type === "0") {
-    return (
-      <Switch>
-        <Route path="/dashboard" component={Dashboard} />
-        <Route exact path="/list">
-          <Redirect to="/list/operator" />
-        </Route>
-        <Route
-          exact
-          path="/list/:request"
-          render={(props) => <List {...props} />}
-        />
-        <Redirect to="/dashboard" />
-      </Switch>
-    );
-  } else if (auth !== null && user.type === "1") {
-    return (
-      <Switch>
-        <Route path="/dashboard" component={Dashboard} />
-        <Route exact path="/list">
-          <Redirect to="/list/ticket" />
-        </Route>
-        <Route
-          exact
-          path="/list/:request"
-          render={(props) => <List {...props} />}
-        />
-        <Redirect to="/dashboard" />
-      </Switch>
-    );
-  } else if (auth === null) {
+  else if (auth === null) {
     return (
       <Switch>
         <Route path="/login" component={LogIn} />
         <Route path="/register" component={Register} />
         <Route path="/passwordreset" component={PasswordReset} />
         <Redirect to="/login" />
+      </Switch>
+    );
+  } else if (auth !== null) {
+    return (
+      <Switch>
+        <Route path="/dashboard" component={Dashboard} />
+        <Route exact path="/list">
+          <Redirect to="/list/ticket" />
+        </Route>
+        {user.type === "1" ? (
+          <Route path="/list/operator">
+            <Redirect to="/list" />
+          </Route>
+        ) : null}
+        <Route
+          exact
+          path="/list/:request"
+          render={(props) => <List {...props} />}
+        />
+        <Redirect to="/dashboard" />
       </Switch>
     );
   }

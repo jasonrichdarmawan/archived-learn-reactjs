@@ -17,7 +17,7 @@ export const NavBar = () => {
     return (
       <Navbar bg="light" expand="lg">
         <Link to="/dashboard" className="navbar-brand">
-          HRS
+          PMS
         </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

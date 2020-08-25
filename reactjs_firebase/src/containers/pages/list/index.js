@@ -1,16 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Container, Alert, Table, Form, Button } from "react-bootstrap";
-import { AuthDataContext, UserDataContext } from "../../../providers/authdata";
+import { AuthDataContext } from "../../../providers/authdata";
 import firebase from "../../../providers/firebase";
 import { Loading } from "../../../components/loading";
-import { Redirect } from "react-router-dom";
 
 export function List(props) {
   const auth = useContext(AuthDataContext);
-  const user = useContext(UserDataContext);
 
   const [error, setError] = useState();
-  const [data, setData] = useState([]);
+  const [data, setData] = useState();
 
   const [inputs, setInputs] = useState({
     token: "",
@@ -36,10 +34,10 @@ export function List(props) {
               snapshot.docs.map((doc) => {
                 const id = doc.id;
                 const data = doc.data();
-  
+
                 const iat = data.iat ? data.iat.seconds : null;
                 const exp = data.exp ? data.exp.seconds : null;
-  
+
                 return { id, ...data, iat, exp };
               })
             );
@@ -48,9 +46,6 @@ export function List(props) {
         .catch((error) => setError(error.message));
     }
   }, [props.match.params.request, auth.uid]);
-
-  if (props.match.params.request === "operator" && user.type === "1")
-    return <Redirect to="/list" />;
 
   const handleChange = (event) => {
     const { id, value } = event.target;
@@ -144,6 +139,16 @@ export function List(props) {
       bill: bill,
       handler: auth.uid,
     });
+
+    setView({ 
+      id: view.id,
+      status: "1",
+      iat: view.iat,
+      exp: Date.now() / 1000,
+      type: type,
+      registration: registration,
+      bill: bill
+    });
   };
 
   if (auth === "await") return <Loading />;
@@ -155,9 +160,7 @@ export function List(props) {
             <Alert className="mt-3" variant="warning">
               {error}
             </Alert>
-          ) : (
-            null
-          )}
+          ) : null}
           {data ? <div className="mt-3">TODO</div> : ""}
         </Container>
       </div>
@@ -214,9 +217,7 @@ export function List(props) {
                   <td>{dateFormatter(view.iat)}</td>
                   {view.status === "1" ? (
                     <td>{dateFormatter(view.exp)}</td>
-                  ) : (
-                    null
-                  )}
+                  ) : null}
                   {view.status === "1" ? (
                     <td>{view.registration}</td>
                   ) : (
@@ -251,9 +252,7 @@ export function List(props) {
                     </td>
                   )}
                   {view.status === "1" ? <td>{view.bill}</td> : <td>{bill}</td>}
-                  {view.status === "1" ? (
-                    null
-                  ) : bill && registration ? (
+                  {view.status === "1" ? null : bill && registration ? (
                     <td>
                       <Button size="sm" onClick={pay}>
                         Pay
@@ -269,9 +268,7 @@ export function List(props) {
                 </tr>
               </tbody>
             </Table>
-          ) : (
-            null
-          )}
+          ) : null}
           {data ? (
             <div className="mt-3">
               <p>Ticket handled by you</p>
@@ -298,9 +295,7 @@ export function List(props) {
                 </tbody>
               </Table>
             </div>
-          ) : (
-            null
-          )}
+          ) : null}
         </Container>
       </div>
     );
