@@ -13,7 +13,7 @@ import { Loading } from "../loading";
 export const Routes = () => {
   const auth = useContext(AuthDataContext);
   const user = useContext(UserDataContext);
-  if (auth !== null && user === "await" || auth === "await") return <Loading />;
+  if ((auth !== null && user === "await") || auth === "await") return <Loading />;
   // this is intentional. to speed up dev in case of new feature based on user.type
   // question: How to implement straightforward PrivateRoute?
   else if (auth === null) {
