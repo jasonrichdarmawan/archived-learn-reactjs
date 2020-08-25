@@ -90,6 +90,8 @@ export function List(props) {
           }
         })
         .catch((error) => setError(error.message));
+
+        setData();
     }
   }, [props.match.params.request, auth.uid]);
 
