@@ -14,6 +14,7 @@ function App() {
       else setAuth(null);
     });
 
+    // quesstion: how to unsubscribe?
     if (auth !== null && auth !== "await") {
       let db = firebase.firestore();
       db.collection("users")
@@ -23,8 +24,12 @@ function App() {
 
           // let source = doc.metadata.hasPendingWrites ? "Local" : "Server";
           // console.log(source, " data: ", doc.data());
+        }, (error) => {
+          setUser("await");
+          console.log(error.code, error.message)
         });
     }
+
   }, [auth]);
   return (
     <Router>
