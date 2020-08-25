@@ -10,6 +10,9 @@ export function List(props) {
   const [error, setError] = useState();
   const [data, setData] = useState();
 
+  const [dataOperator, setDataOperator] = useState();
+  const [dataTicket, setDataTicket] = useState();
+
   const [inputs, setInputs] = useState({
     token: "",
     type: "",
@@ -33,8 +36,8 @@ export function List(props) {
             setData(
               snapshot.docs.map((doc) => {
                 const id = doc.id;
-                const data = doc.data();
 
+                const data = doc.data();
                 const iat = data.iat ? data.iat.seconds : null;
                 const exp = data.exp ? data.exp.seconds : null;
 
@@ -52,7 +55,7 @@ export function List(props) {
         .get()
         .then((snapshot) => {
           if (!snapshot.empty) {
-            setData(
+            setDataOperator(
               snapshot.docs.map((doc) => {
                 const id = doc.id;
 
@@ -60,6 +63,30 @@ export function List(props) {
               })
             );
           } else if (snapshot.empty) {
+            setDataOperator();
+          }
+        })
+        .catch((error) => setError(error.message));
+
+      firebase
+        .firestore()
+        .collection("tickets")
+        .where("status", "==", "0")
+        .get()
+        .then((snapshot) => {
+          if (!snapshot.empty) {
+            setDataTicket(
+              snapshot.docs.map((doc) => {
+                const id = doc.id;
+
+                const data = doc.data();
+                const iat = data.iat ? data.iat.seconds : null;
+
+                return { id, iat };
+              })
+            );
+          } else if (snapshot.empty) {
+            setDataTicket();
           }
         })
         .catch((error) => setError(error.message));
@@ -116,6 +143,10 @@ export function List(props) {
                   return { id, ...data, iat, exp };
                 })
               );
+
+              setView();
+              setDataOperator();
+              setDataTicket();
             } else if (snapshot.empty) {
               setData();
               setError(
@@ -227,6 +258,47 @@ export function List(props) {
               </Form.Control.Feedback>
             </Form.Group>
           </Form>
+          {/* question: how to safely store firebase admin credentials? is it okay to store name, email, etc of a user in firestore? */}
+          {dataOperator ? (
+            <div className="mt-3">
+              <p>Operator List</p>
+              <Table responsive>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {dataOperator.map((doc) => (
+                    <tr key={doc.id}>
+                      <td>{doc.id}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </div>
+          ) : null}
+          {dataTicket ? (
+            <div className="mt-3">
+              <p>Active Ticket List</p>
+              <Table responsive>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Issued At</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {dataTicket.map((doc) => (
+                    <tr key={doc.id}>
+                      <td>{doc.id}</td>
+                      <td>{dateFormatter(doc.iat)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </div>
+          ) : null}
           {data ? (
             <div className="mt-3">
               <p>Ticket handled by the user</p>
