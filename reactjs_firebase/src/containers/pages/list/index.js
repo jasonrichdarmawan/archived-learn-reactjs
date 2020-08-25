@@ -96,6 +96,7 @@ export function List(props) {
   const [dataTicket, setDataTicket] = useState();
   const [view, setView] = useState();
 
+  // question: is separating the JSX element like these a good idea?
   const ErrorAlert = () => (
     <Alert className="mt-3" variant="warning">
       {error}
