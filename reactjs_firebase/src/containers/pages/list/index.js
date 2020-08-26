@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Container, Alert, Table, Form, Button } from "react-bootstrap";
-import { AuthDataContext } from "../../../providers/authdata";
+import { AuthDataContext, UserDataContext } from "../../../providers/authdata";
 import firebase from "../../../providers/firebase";
 import { Loading } from "../../../components/loading";
 import { dateFormatter, priceFormatter } from "./formatter";
 
 export function List(props) {
   const auth = useContext(AuthDataContext);
+  const user = useContext(UserDataContext);
 
   useEffect(() => {
     if (auth.uid != null && props.match.params.request === "ticket") {
@@ -328,7 +329,7 @@ export function List(props) {
         </Container>
       </div>
     );
-  else if (props.match.params.request === "ticket")
+  else if (props.match.params.request === "ticket" && user !== "await")
     return (
       <div className="d-flex flex-fill">
         <Container>
@@ -336,25 +337,27 @@ export function List(props) {
           <Button className="mt-3" size="sm" onClick={createToken}>
             Print New Ticket
           </Button>
-          <Form
-            className="mt-3"
-            noValidate
-            validated={validated}
-            onSubmit={handleSubmit}
-          >
-            <Form.Group controlId="token">
-              <Form.Label>Scan Ticket Number</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                placeholder="Enter Ticket Number"
-                onChange={handleChange}
-              />
-              <Form.Control.Feedback type="invalid">
-                Please provide a valid ticket number
-              </Form.Control.Feedback>
-            </Form.Group>
-          </Form>
+          {parseInt(user.type) < 2 ? (
+            <Form
+              className="mt-3"
+              noValidate
+              validated={validated}
+              onSubmit={handleSubmit}
+            >
+              <Form.Group controlId="token">
+                <Form.Label>Scan Ticket Number</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  placeholder="Enter Ticket Number"
+                  onChange={handleChange}
+                />
+                <Form.Control.Feedback type="invalid">
+                  Please provide a valid ticket number
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Form>
+          ) : null}
           {/* question: why separating the JSX element caused everytime you input a value the JSX element got remounted? */}
           {view ? (
             <Table className="mt-3" responsive>
@@ -363,10 +366,14 @@ export function List(props) {
                   <th>#</th>
                   <th>Issued At</th>
                   {view.status === "1" ? <th>Exit Time</th> : null}
-                  <th>Registration</th>
-                  <th>Vehicle Type</th>
-                  <th>Bill</th>
-                  {view.status === "1" ? null : <th>Action</th>}
+                  {parseInt(user.type) < 2 ? <th>Registration</th> : null}
+                  {parseInt(user.type) < 2 ? <th>Vehicle Type</th> : null}
+                  {parseInt(user.type) < 2 ? <th>Bill</th> : null}
+                  {parseInt(user.type) < 2 ? (
+                    view.status === "1" ? null : (
+                      <th>Action</th>
+                    )
+                  ) : null}
                 </tr>
               </thead>
               <tbody>
@@ -376,66 +383,78 @@ export function List(props) {
                   {view.status === "1" ? (
                     <td>{dateFormatter(view.exp)}</td>
                   ) : null}
-                  {view.status === "1" ? (
-                    <td>{view.registration}</td>
-                  ) : (
-                    <td>
-                      <Form.Group controlId="registration">
-                        <Form.Control
-                          required
-                          type="text"
-                          size="sm"
-                          placeholder="Registration Plate"
-                          value={registration}
-                          onChange={handleChange}
-                        ></Form.Control>
-                      </Form.Group>
-                    </td>
-                  )}
-                  {view.status === "1" ? (
-                    <td>{view.type}</td>
-                  ) : (
-                    <td>
-                      <Form.Group controlId="type">
-                        <Form.Control
-                          required
-                          as="select"
-                          size="sm"
-                          value={type}
-                          onChange={handleChange}
-                        >
-                          <option value="">Select</option>
-                          <option>Car</option>
-                          <option>Motorcycle</option>
-                        </Form.Control>
-                      </Form.Group>
-                    </td>
-                  )}
-                  {view.status === "1" ? (
-                    <td>{"Rp" + view.bill}</td>
-                  ) : bill !== null ? (
-                    <td>{"Rp" + bill}</td>
-                  ) : (
-                    <td></td>
-                  )}
-                  {view.status === "1" ? null : bill && registration ? (
-                    <td>
-                      <Button size="sm" onClick={pay}>
-                        Pay
-                      </Button>
-                    </td>
-                  ) : (
-                    <td>
-                      <Button disabled={true} size="sm">
-                        Pay
-                      </Button>
-                    </td>
-                  )}
+                  {parseInt(user.type) < 2 ? (
+                    view.status === "1" ? (
+                      <td>{view.registration}</td>
+                    ) : (
+                      <td>
+                        <Form.Group controlId="registration">
+                          <Form.Control
+                            required
+                            type="text"
+                            size="sm"
+                            placeholder="Registration Plate"
+                            value={registration}
+                            onChange={handleChange}
+                          ></Form.Control>
+                        </Form.Group>
+                      </td>
+                    )
+                  ) : null}
+                  {parseInt(user.type) < 2 ? (
+                    view.status === "1" ? (
+                      <td>{view.type}</td>
+                    ) : (
+                      <td>
+                        <Form.Group controlId="type">
+                          <Form.Control
+                            required
+                            as="select"
+                            size="sm"
+                            value={type}
+                            onChange={handleChange}
+                          >
+                            <option value="">Select</option>
+                            <option>Car</option>
+                            <option>Motorcycle</option>
+                          </Form.Control>
+                        </Form.Group>
+                      </td>
+                    )
+                  ) : null}
+                  {parseInt(user.type) < 2 ? (
+                    view.status === "1" ? (
+                      <td>{"Rp" + view.bill}</td>
+                    ) : bill !== null ? (
+                      <td>{"Rp" + bill}</td>
+                    ) : (
+                      <td></td>
+                    )
+                  ) : null}
+                  {parseInt(user.type) < 2 ? (
+                    view.status === "1" ? null : bill && registration ? (
+                      <td>
+                        <Button size="sm" onClick={pay}>
+                          Pay
+                        </Button>
+                      </td>
+                    ) : (
+                      <td>
+                        <Button disabled={true} size="sm">
+                          Pay
+                        </Button>
+                      </td>
+                    )
+                  ) : null}
                 </tr>
               </tbody>
             </Table>
           ) : null}
-          {data ? <TicketHandledByUserTable /> : null}
+          {parseInt(user.type) < 2 ? (
+            data ? (
+              <TicketHandledByUserTable />
+            ) : null
+          ) : null}
         </Container>
       </div>
     );

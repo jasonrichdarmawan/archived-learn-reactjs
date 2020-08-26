@@ -48,7 +48,7 @@ REACT_APP_FB_APP_ID=
   users = [
     {
       uid: '',
-      type: '', // 0: admin, 1: operator
+      type: '', // 0: admin, 1: operator, 2: frontdesk
     }
   ];
   tickets = [
@@ -65,11 +65,11 @@ REACT_APP_FB_APP_ID=
   ]
   ```
 - [x] Login System
-- [ ] Dashboard Admin
+- [x] Dashboard Admin
   - [x] List Operator
-  - [ ] Revenue Report
+  - [x] Revenue Report
     - [x] Filter: Operator
-    - [ ] Revenue Report with Chart
+    - [x] Revenue Report with Chart
 
       Aggregate
       ```
@@ -105,3 +105,6 @@ REACT_APP_FB_APP_ID=
   - [x] Generate Ticket
   - [x] Scan Ticket
   - [x] Generate Payment Receipt
+
+- [x] Dashboard Frontdesk
+  - [x] Generate Ticket
