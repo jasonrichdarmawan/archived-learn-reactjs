@@ -13,7 +13,7 @@ export const NavBar = () => {
   };
   // this is intentional. to speed up dev in case of new feature based on user.type
   if ((auth !== null && user === "await") || auth === "await") return <Loading />;
-  else if (auth !== null) {
+  else if (auth !== null & user !== "await") {
     return (
       <Navbar bg="light" expand="lg">
         <Link to="/dashboard" className="navbar-brand">

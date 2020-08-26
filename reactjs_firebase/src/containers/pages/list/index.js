@@ -53,9 +53,7 @@ export function List(props) {
                 return { id };
               })
             );
-          } else if (snapshot.empty) {
-            setDataOperator();
-          }
+          } else if (snapshot.empty) setDataOperator();
         })
         .catch((error) => setError(error.message));
 

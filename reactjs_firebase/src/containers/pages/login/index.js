@@ -75,7 +75,7 @@ export function LogIn() {
             </Form.Control.Feedback>
           </Form.Group>
           <p>
-            Are you new to HRS? <Link to="/register">Register here</Link>
+            Are you new? <Link to="/register">Register here</Link>
           </p>
           <p>
             <Link to="/passwordreset">Forgot Password?</Link>
