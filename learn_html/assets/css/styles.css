@@ -30,30 +30,30 @@ nav > div:active {
     display: none;
 }
 
-h2, h3 {
+h4, h5 {
     text-align: center;
 }
 
 .flex-container {
     display: flex;
     flex-wrap: wrap;
-    margin: 10px;
-    padding: 20px;
+    margin: 5px;
+    padding: 10px;
 }
 
 .flex-container > div {
     width: 50%;
 }
 
-.flex-container > div > h3 {
+.flex-container > div > h5 {
     background-color: grey;
-    margin: 10px;
-    padding: 20px;
+    margin: 5px;
+    padding: 10px;
 }
 
 .flex-container > div > article {
-    margin: 10px;
-    padding: 20px;
+    margin: 5px;
+    padding: 10px;
 }
 
 .center {
@@ -64,8 +64,8 @@ h2, h3 {
 }
 
 .pageContainer {
-    margin: 10px 0;
-    padding: 20px 0;
+    margin: 5px 0;
+    padding: 10px 0;
 }
 
 button {
@@ -112,7 +112,7 @@ iframe {
         justify-content: normal;
     }
     nav > div {
-        margin: 10px 20px;
+        margin: 5px 10px;
         padding: 0px;
         width: 100%;
     }
@@ -125,6 +125,10 @@ iframe {
     }
     .col-sm-6 {
         margin-bottom: 10px;
+    }
+
+    .pageContainer > h4 {
+        margin: 5px;
     }
 }
 
