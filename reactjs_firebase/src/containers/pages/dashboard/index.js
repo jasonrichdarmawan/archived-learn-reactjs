@@ -26,7 +26,7 @@ export function Dashboard() {
               return doc.data();
             });
 
-            // console.log(data);
+            // console.log('data', data);
 
             const dataDateEqualized = data.map((data) => {
               const date = new Date(
@@ -34,25 +34,45 @@ export function Dashboard() {
               );
               const bill = data.bill;
 
-              return { "exp": date, bill };
+              return { exp: date, bill };
             });
 
-            // console.log(dataDateEqualized);
+            // console.log("dataDateEqualized", dataDateEqualized);
 
             const dataReduced = Object.values(
-              dataDateEqualized.reduce((acc, { bill, ...r }) => {
-                const key = Object.entries(r).join("-");
-                acc[key] = acc[key] || { ...r, bill: 0 };
+              dataDateEqualized.reduce((acc, { bill, ...cur }) => {
+                const key = Object.entries(cur).join();
+                acc[key] = (acc[key] || { bill: 0, ...cur });
                 return (acc[key].bill += bill, acc);
               }, {})
             );
 
-            // console.log(dataReduced);
+            // explaining how dataReduced works.
+            // acc / accumulator intially does not hold value.
+            // Therefore, on the first iteration acc[key] = acc[key] returns undefined so we fill it with a value { bill: 0, ...cur }.
+            // accumulator value is remembered across iteration.
+            // For comparison, in for loop statement, accumulator is similar to `let i = 0; for (i = 0; condition, execution);`
+            // console.log(
+            //   dataDateEqualized.reduce((acc, { bill, ...cur }) => {
+            //     console.log("acc ", acc, " bill ", bill, " cur ", cur);
+            //     const key = Object.entries(cur).join();
+
+            //     console.log("acc ", acc, " key ", key, " before ", acc[key]);
+            //     acc[key] = acc[key] || { bill: 0, ...cur };
+
+            //     console.log("acc ", acc, " after ", acc[key], " bill ", bill);
+            //     return (acc[key].bill += bill); // this is intentional
+            //   }, {})
+            // );
+
+            // console.log("dataReduced ", dataReduced);
 
             // console.log(dataReduced.map(data => data.exp.toString().split(" ").slice(1, 4).join(" ")))
 
             setData({
-              labels: dataReduced.map(data => data.exp.toString().split(" ").slice(1, 4).join(" ")),
+              labels: dataReduced.map((data) =>
+                data.exp.toString().split(" ").slice(1, 4).join(" ")
+              ),
               datasets: [
                 {
                   label: "Revenue Report",
@@ -73,11 +93,10 @@ export function Dashboard() {
                   pointHoverBorderWidth: 2,
                   pointRadius: 1,
                   pointHitRadius: 10,
-                  data: dataReduced.map(data => data.bill),
-                }
-              ]
-            })
-
+                  data: dataReduced.map((data) => data.bill),
+                },
+              ],
+            });
           } else if (snapshot.empty) setData();
         })
         .catch((error) => setError(error.message));
