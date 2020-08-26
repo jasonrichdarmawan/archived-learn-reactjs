@@ -15,8 +15,6 @@ export function Dashboard() {
 
   useEffect(() => {
     if (auth.uid !== null && user.type === "0") {
-      const today = new Date(new Date().setHours(0, 0, 0, 0));
-
       firebase
         .firestore()
         .collection("tickets")
@@ -36,7 +34,7 @@ export function Dashboard() {
               );
               const bill = data.bill;
 
-              return { ["exp"]: date, bill };
+              return { "exp": date, bill };
             });
 
             // console.log(dataDateEqualized);
@@ -45,7 +43,7 @@ export function Dashboard() {
               dataDateEqualized.reduce((acc, { bill, ...r }) => {
                 const key = Object.entries(r).join("-");
                 acc[key] = acc[key] || { ...r, bill: 0 };
-                return (acc[key].bill += bill), acc;
+                return (acc[key].bill += bill, acc);
               }, {})
             );
 
@@ -84,7 +82,7 @@ export function Dashboard() {
         })
         .catch((error) => setError(error.message));
     }
-  }, [user]);
+  }, [user, auth.uid]);
 
   const ErrorAlert = () => (
     <Alert className="mt-3" variant="warning">
