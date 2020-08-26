@@ -9,11 +9,15 @@ export function List(props) {
   const auth = useContext(AuthDataContext);
 
   useEffect(() => {
-    if (props.match.params.request === "ticket") {
+    if (auth.uid != null && props.match.params.request === "ticket") {
+      const today = new Date(new Date().setHours(0, 0, 0, 0));
+
       firebase
         .firestore()
         .collection("tickets")
         .where("handler", "==", auth.uid)
+        .where("exp", ">=", today)
+        .orderBy("exp", "desc")
         .get()
         .then((snapshot) => {
           if (!snapshot.empty) {
@@ -32,8 +36,8 @@ export function List(props) {
         })
         .catch((error) => setError(error.message));
 
-        setInputs((inputs) => ({ ...inputs, type: "" }));
-        setView();
+      setInputs((inputs) => ({ ...inputs, type: "" }));
+      setView();
     } else if (props.match.params.request === "operator") {
       firebase
         .firestore()
@@ -59,6 +63,7 @@ export function List(props) {
         .firestore()
         .collection("tickets")
         .where("status", "==", "0")
+        .orderBy("exp", "desc")
         .get()
         .then((snapshot) => {
           if (!snapshot.empty) {
@@ -80,6 +85,8 @@ export function List(props) {
 
       setData();
     }
+
+    setError();
   }, [props.match.params.request, auth.uid]);
 
   const [inputs, setInputs] = useState({
@@ -265,9 +272,9 @@ export function List(props) {
     type === ""
       ? null
       : type === "Car"
-      ? "Rp" + priceFormatter(type, view.iat)
+      ? priceFormatter(type, view.iat)
       : type === "Motorcycle"
-      ? "Rp" + priceFormatter(type, view.iat)
+      ? priceFormatter(type, view.iat)
       : null;
 
   const pay = () => {
@@ -406,7 +413,13 @@ export function List(props) {
                       </Form.Group>
                     </td>
                   )}
-                  {view.status === "1" ? <td>{view.bill}</td> : <td>{bill}</td>}
+                  {view.status === "1" ? (
+                    <td>{"Rp" + view.bill}</td>
+                  ) : bill !== null ? (
+                    <td>{"Rp" + bill}</td>
+                  ) : (
+                    <td></td>
+                  )}
                   {view.status === "1" ? null : bill && registration ? (
                     <td>
                       <Button size="sm" onClick={pay}>
