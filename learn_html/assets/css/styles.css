@@ -74,7 +74,7 @@ button {
     border-bottom: 1px solid #ddd;
 }
 
-button > h3 {
+button > p {
     margin: 10px;
 }
 
