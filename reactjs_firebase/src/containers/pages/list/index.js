@@ -171,7 +171,7 @@ export function List(props) {
               <td>{dateFormatter(doc.iat)}</td>
               <td>{dateFormatter(doc.exp)}</td>
               <td>{doc.type}</td>
-              <td>{doc.bill}</td>
+              <td>{"Rp" + doc.bill}</td>
             </tr>
           ))}
         </tbody>
@@ -203,6 +203,7 @@ export function List(props) {
 
               setView({ id, ...data, iat, exp });
               setData();
+              setError();
             } else {
               setInputs((inputs) => ({ ...inputs, type: "" }));
               setView();
@@ -215,6 +216,7 @@ export function List(props) {
           .firestore()
           .collection("tickets")
           .where("handler", "==", token)
+          .orderBy("exp", "desc")
           .get()
           .then((snapshot) => {
             if (!snapshot.empty) {
@@ -233,13 +235,17 @@ export function List(props) {
               setView();
               setDataOperator();
               setDataTicket();
+              setError();
             } else if (snapshot.empty) {
               setData();
               setError(
                 "Either the User UID is not valid or the user has never handled a ticket."
               );
             }
-          });
+          })
+          .catch((error) => {
+            setError(error.message);
+          })
       }
     }
 
