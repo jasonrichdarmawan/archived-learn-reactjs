@@ -63,7 +63,7 @@ export function List(props) {
         .firestore()
         .collection("tickets")
         .where("status", "==", "0")
-        .orderBy("exp", "desc")
+        .orderBy("iat", "desc")
         .get()
         .then((snapshot) => {
           if (!snapshot.empty) {
