@@ -84,7 +84,7 @@ const contentJSX = (data) => {
                   </ListGroup>
                 ) : null}
                 {cur.iframe ? (
-                  <iframe src={"" + cur.iframe} className="w-100 vh-100" />
+                  <iframe title={cur.title} src={"" + cur.iframe} className="w-100 vh-100" />
                 ) : null}
                 {cur.content ? (
                   <ListGroup>

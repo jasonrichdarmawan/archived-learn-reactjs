@@ -1,7 +1,7 @@
 import React from "react";
 import { TopNavbarMiddleContent } from "../../components/templates";
 import { displayRouteMenu, routes } from "../../routes";
-import { Container, Row, Col, ListGroup } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 
 const data = [
   {

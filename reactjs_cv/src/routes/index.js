@@ -1,6 +1,6 @@
 import React from "react";
-import { Route, Switch, Redirect, Link } from "react-router-dom";
-import { Home, About } from "../pages";
+import { Route, Switch, Link } from "react-router-dom";
+import { Home, About, Contact } from "../pages";
 
 export const routes = [
   { path: "/", key: "Home", exact: true, component: Home },
@@ -9,7 +9,7 @@ export const routes = [
     path: "/contact",
     key: "Contact",
     exact: true,
-    component: () => "TODO: Contact",
+    component: Contact,
   },
   {
     path: "/motivation",
