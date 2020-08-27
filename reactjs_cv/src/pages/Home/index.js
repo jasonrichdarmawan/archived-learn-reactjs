@@ -56,7 +56,7 @@ const data = [
   },
 ];
 
-const contentJSX = () => {
+const contentJSX = (data) => {
   return (
     <Accordion defaultActiveKey="0">
       <React.Fragment>
@@ -109,7 +109,7 @@ export const Home = () => {
   return (
     <TopNavbarMiddleContent
       routesJSX={displayRouteMenu(routes)}
-      contentJSX={contentJSX()}
+      contentJSX={contentJSX(data)}
     />
   );
 };
