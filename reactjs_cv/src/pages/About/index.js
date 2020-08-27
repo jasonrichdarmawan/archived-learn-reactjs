@@ -136,7 +136,7 @@ const contentJSX = (data) => {
       <p className="text-center">S1 Business Management</p>
       <div className="d-flex flex-wrap">
         {data.map((cur) => (
-          <div className="w-50">
+          <div className="w-50" key={cur.title}>
             <h5 className="text-center">{cur.title}</h5>
             <br />
             {typeof cur.content === "string" ? (
@@ -148,7 +148,7 @@ const contentJSX = (data) => {
                 ) : null}
                 {cur.content.italic ? <i>{cur.content.italic}</i> : null}
                 {cur.content.map((cur) => (
-                  <React.Fragment>
+                  <React.Fragment key={cur.strong}>
                     {cur.strong ? (
                       <React.Fragment>
                         <strong>{cur.strong}</strong>
@@ -160,7 +160,7 @@ const contentJSX = (data) => {
                     {cur.email ? <p>{"Email: " + cur.email}</p> : null}
                     <ul>
                       {Array.isArray(cur.ul)
-                        ? cur.ul.map((cur) => <li>{cur.text}</li>)
+                        ? cur.ul.map((cur) => <li key={cur.text}>{cur.text}</li>)
                         : null}
                     </ul>
                   </React.Fragment>

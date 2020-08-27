@@ -61,7 +61,7 @@ const contentJSX = (data) => {
     <Accordion defaultActiveKey="0">
       <React.Fragment>
         {data.map((cur, i) => (
-          <Card key={cur.title}>
+          <Card key={"" + cur.title.text}>
             <Card.Header>
               <Accordion.Toggle as={Card.Header} eventKey={"" + i}>
                 {typeof cur.title === "object" ? (
@@ -89,7 +89,7 @@ const contentJSX = (data) => {
                 {cur.content ? (
                   <ListGroup>
                     {cur.content.map((cur) => (
-                      <ListGroup.Item>
+                      <ListGroup.Item key={cur.bold}>
                         <b>{cur.bold}</b> {cur.text}{" "}
                         <a href={"" + cur.ahref}>{cur.ahrefText}</a>
                       </ListGroup.Item>
