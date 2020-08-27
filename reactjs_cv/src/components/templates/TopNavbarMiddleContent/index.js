@@ -5,7 +5,7 @@ export const TopNavbarMiddleContent = (props) => {
   return (
     <React.Fragment>
       <NavigationBar routesJSX={props.routesJSX} />
-      <MiddleContent />
+      <MiddleContent contentJSX={props.contentJSX} />
     </React.Fragment>
   );
 }

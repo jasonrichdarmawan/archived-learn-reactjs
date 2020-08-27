@@ -1,5 +1,8 @@
 import React from "react";
+import { Container } from "react-bootstrap";
 
 export const MiddleContent = (props) => (
-  <div>Hi</div>
+  <Container className="mt-3">
+    {props.contentJSX}
+  </Container>
 );
