@@ -1,1 +1,2 @@
-export { Home } from "./Home";
+export { NavigationBar } from "./organisms";
+export { TopNavbarMiddleContent } from "./templates";
