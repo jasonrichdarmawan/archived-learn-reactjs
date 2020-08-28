@@ -52,6 +52,13 @@ const data = [
           "https://github.com/kidfrom/bc_g2_learn_reactjs/tree/reactjs-firebase/reactjs_firebase",
         ahrefText: "(Source Code)",
       },
+      {
+        bold: "Day 123:",
+        text: "ReactJS with Planned Routes and Atomic Design",
+        ahref:
+          "https://github.com/kidfrom/bc_g2_learn_reactjs/tree/reactjs_cv/reactjs_cv",
+        ahrefText: "(Source Code)",
+      },
     ],
   },
 ];
@@ -84,7 +91,11 @@ const contentJSX = (data) => {
                   </ListGroup>
                 ) : null}
                 {cur.iframe ? (
-                  <iframe title={cur.title} src={"" + cur.iframe} className="w-100 vh-100" />
+                  <iframe
+                    title={cur.title}
+                    src={"" + cur.iframe}
+                    className="w-100 vh-100"
+                  />
                 ) : null}
                 {cur.content ? (
                   <ListGroup>
