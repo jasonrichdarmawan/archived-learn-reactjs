@@ -1,5 +1,5 @@
 import React from "react";
-import { TopNavbarMiddleContent } from "../../components/templates";
+import { TopNavbarMiddleContent } from "../../components";
 import { displayRouteMenu, routes } from "../../routes";
 import { Accordion, Card, ListGroup } from "react-bootstrap";
 

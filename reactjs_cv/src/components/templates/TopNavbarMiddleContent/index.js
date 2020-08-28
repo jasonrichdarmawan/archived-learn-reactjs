@@ -1,5 +1,5 @@
 import React from "react";
-import { NavigationBar, MiddleContent } from "../../organisms";
+import { NavigationBar, MiddleContent } from "../../";
 
 export const TopNavbarMiddleContent = (props) => {
   return (
