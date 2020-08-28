@@ -1,4 +1,7 @@
 ### SDR
+
+Notice: The SDR does not reflect actual logic used. The SDR is written in a Notepad and has not been tested. However, if the checkbox is checked, it means it has been successfully implemented either with exact logic or slightly different logic.
+
 - [ ] Data Schema
   - [ ] Collection: users
     ```
