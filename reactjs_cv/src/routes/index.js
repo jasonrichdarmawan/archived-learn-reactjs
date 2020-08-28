@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch, Link } from "react-router-dom";
-import { Home, About, Contact } from "../pages";
+import { Home, About, Contact, Motivation } from "../pages";
 
 export const routes = [
   { path: "/", key: "Home", exact: true, component: Home },
@@ -15,7 +15,7 @@ export const routes = [
     path: "/motivation",
     key: "Motivation Letter",
     exact: true,
-    component: () => "TODO: Motivation Letter",
+    component: Motivation,
   },
   {
     path: "/corevalues",
