@@ -43,7 +43,7 @@ export const routes = [
     key: "ROOT",
     exact: true,
     component: () => {
-      if (isAuthorized === true) return <Redirect to={"/app"} />;
+      if (isAuthorized() === true) return <Redirect to={"/app"} />;
       else return <Redirect to={"/login"} />;
     },
   },
@@ -52,7 +52,7 @@ export const routes = [
     key: "LOGIN",
     exact: true,
     component: () => {
-      if (isAuthorized === true) return <Redirect to={"/app"} />;
+      if (isAuthorized() === true) return <Redirect to={"/app"} />;
       else return <Login />;
     },
   },
@@ -60,7 +60,7 @@ export const routes = [
     path: "/app",
     key: "APP",
     component: (props) => {
-      if (isAuthorized === false) return <Redirect to={"/"} />;
+      if (isAuthorized() === false) return <Redirect to={"/"} />;
       else return <RenderRoutes {...props} />;
     },
     routes: [
