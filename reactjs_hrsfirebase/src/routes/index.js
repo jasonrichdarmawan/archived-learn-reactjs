@@ -3,7 +3,7 @@ import { Route, Switch, Link, Redirect } from "react-router-dom";
 
 // TODO
 const isAuthorized = () => {
-  return true;
+  return false;
 };
 const Login = () => {
   return "Login";
@@ -43,7 +43,7 @@ export const routes = [
     key: "ROOT",
     exact: true,
     component: () => {
-      if (isAuthorized) return <Redirect to={"/app"} />;
+      if (isAuthorized === true) return <Redirect to={"/app"} />;
       else return <Redirect to={"/login"} />;
     },
   },
@@ -52,15 +52,15 @@ export const routes = [
     key: "LOGIN",
     exact: true,
     component: () => {
-      if (isAuthorized) return <Redirect to={"/app"} />;
-      else return Login;
+      if (isAuthorized === true) return <Redirect to={"/app"} />;
+      else return <Login />;
     },
   },
   {
     path: "/app",
     key: "APP",
     component: (props) => {
-      if (!isAuthorized) return <Redirect to={"/"} />;
+      if (isAuthorized === false) return <Redirect to={"/"} />;
       else return <RenderRoutes {...props} />;
     },
     routes: [
