@@ -1,15 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
+    <HashRouter basename='/'>
       <App />
-    </Router>
+    </HashRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );
