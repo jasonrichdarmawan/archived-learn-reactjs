@@ -12,7 +12,7 @@ const data = [
   },
   {
     title: {
-      b: "Day 108:",
+      b: "Day 86:",
       text: "Calculator in JS (Live Preview)",
     },
     iframe: "https://kidfrom.github.io/calculator_js/index.html",
