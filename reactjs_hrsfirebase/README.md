@@ -140,6 +140,6 @@
 - [ ] Template
   - [ ] MinVH100Content(contentJSX)
   - [x] TopNavbarMiddleContent(routesJSX, contentJSX)
-- [ ] Organisms:
-  - [ ] NavigationBar(routesJSX)
-  - [ ] Content(contentJSX)
+- [x] Organisms:
+  - [x] NavigationBar(routesJSX)
+  - [x] Content(contentJSX)
