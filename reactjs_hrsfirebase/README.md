@@ -37,22 +37,22 @@
       members: array,
     }
     ```
-- [ ] Routes
-  - [ ] path: "/", key: "ROOT", exact: true,
+- [x] Routes
+  - [x] path: "/", key: "ROOT", exact: true,
     ```
     component: () => {
       if (isAuthorized) return <Redirect to={"/app"}
       else return <Redirect to={"/login"}
     },
     ```
-  - [ ] path: "/login", key 'LOGIN', exact: true,
+  - [x] path: "/login", key 'LOGIN', exact: true,
     ```
     component: () => {
       if (isAuthorized) return <Redirect to={"/app"}
       else return Login
     },
     ```
-  - [ ] path: "/app", key: 'APP'
+  - [x] path: "/app", key: 'APP'
     ```
     component: props => {
       if (!isAuthorized) return <Redirect to={"/"} />

@@ -1,27 +1,142 @@
 import React from "react";
-import { Route, Switch, Link } from "react-router-dom";
-import { Home, About, Contact, Motivation, CoreValues } from "../pages";
+import { Route, Switch, Link, Redirect } from "react-router-dom";
+
+// TODO
+const isAuthorized = () => {
+  return true;
+};
+const Login = () => {
+  return "Login";
+};
+const user = {
+  type: 0,
+};
+const Dashboard = () => {
+  if (user.type === 0) return "Dashboard HRD";
+  else if (user.type > 0) return "Dashboard Employee";
+};
+const AddPage = (props) => {
+  if (props.match.params.request === "employee") {
+    if (props.match.params.id) return "Add Page Employee id";
+    else if (!props.match.params.id) return "Add Page Employee";
+  } else if (props.match.params.request === "department") {
+    if (props.match.params.id) return "Add Page Department id";
+    else if (!props.match.params.id) return "Add Page Department";
+  } else return <Route component={() => <h1>Not Found!</h1>} />;
+};
+const ListPage = (props) => {
+  if (props.match.params.request === "employee") {
+    if (props.match.params.id) return "List Page Employee id";
+    else if (!props.match.params.id) return "List Page Employee";
+  } else if (props.match.params.request === "department") {
+    if (props.match.params.id) return "List Page Department id";
+    else if (!props.match.params.id) return "List Page Department";
+  } else return <Route component={() => <h1>Not Found!</h1>} />;
+};
+const PlacementPage = () => {
+  return "Placement Page";
+};
 
 export const routes = [
-  { path: "/", key: "Home", exact: true, component: Home },
-  { path: "/about", key: "About", exact: true, component: About },
   {
-    path: "/contact",
-    key: "Contact",
+    path: "/",
+    key: "ROOT",
     exact: true,
-    component: Contact,
+    component: () => {
+      if (isAuthorized) return <Redirect to={"/app"} />;
+      else return <Redirect to={"/login"} />;
+    },
   },
   {
-    path: "/motivation",
-    key: "Motivation Letter",
+    path: "/login",
+    key: "LOGIN",
     exact: true,
-    component: Motivation,
+    component: () => {
+      if (isAuthorized) return <Redirect to={"/app"} />;
+      else return Login;
+    },
   },
   {
-    path: "/corevalues",
-    key: "IT Core Values",
-    exact: true,
-    component: CoreValues,
+    path: "/app",
+    key: "APP",
+    component: (props) => {
+      if (!isAuthorized) return <Redirect to={"/"} />;
+      else return <RenderRoutes {...props} />;
+    },
+    routes: [
+      {
+        path: "/app",
+        key: "APP_ROOT",
+        exact: true,
+        component: Dashboard,
+      },
+      {
+        path: "/app/add",
+        key: "APP_ADD",
+        component: (props) => {
+          if (user.type === 0) return <RenderRoutes {...props} />;
+          else if (user.type > 0) return <Redirect to={"/"} />;
+        },
+        routes: [
+          {
+            path: "/app/add",
+            key: "APP_ADD_ROOT",
+            exact: true,
+            component: () => {
+              return <Redirect to={"/app/add/employee"} />;
+            },
+          },
+          {
+            path: "/app/add/:request",
+            key: "APP_ADD_REQUEST",
+            exact: true,
+            component: AddPage,
+          },
+          {
+            path: "/app/add/:request/:id",
+            key: "APP_ADD_REQUEST",
+            exact: true,
+            component: AddPage,
+          },
+        ],
+      },
+      {
+        path: "/app/list",
+        key: "APP_LIST",
+        component: (props) => {
+          if (user.type === 0) return <RenderRoutes {...props} />;
+          else if (user.type > 0) return <Redirect to={"/"} />;
+        },
+        routes: [
+          {
+            path: "/app/list",
+            key: "APP_LIST_ROOT",
+            exact: true,
+            component: () => {
+              return <Redirect to={"/app/list/employee"} />;
+            },
+          },
+          {
+            path: "/app/list/:request",
+            key: "APP_LIST_REQUEST",
+            exact: true,
+            component: ListPage,
+          },
+          {
+            path: "/app/list/:request/:id",
+            key: "APP_LIST_REQUEST_ID",
+            exact: true,
+            component: ListPage,
+          },
+        ],
+      },
+      {
+        path: "/app/placement",
+        key: "APP_PLACEMENT",
+        exact: true,
+        component: PlacementPage,
+      },
+    ],
   },
 ];
 
