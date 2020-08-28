@@ -54,7 +54,15 @@ const data = [
       },
       {
         bold: "Day 123:",
-        text: "ReactJS with Planned Routes and Atomic Design",
+        text: "Designing Protected Routes",
+        ahref:
+          "https://github.com/kidfrom/bc_g2_learn_reactjs/tree/reactjs_sdr/reactjs_sdr",
+        ahrefText: "(Source Code)",
+      },
+      {
+        bold: "Day 123:",
+        text:
+          "Curriculum Vitae in ReactJS with Planned Routes and Atomic Design",
         ahref:
           "https://github.com/kidfrom/bc_g2_learn_reactjs/tree/reactjs_cv/reactjs_cv",
         ahrefText: "(Source Code)",
