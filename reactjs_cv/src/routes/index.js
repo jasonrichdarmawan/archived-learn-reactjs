@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch, Link } from "react-router-dom";
-import { Home, About, Contact, Motivation } from "../pages";
+import { Home, About, Contact, Motivation, CoreValues } from "../pages";
 
 export const routes = [
   { path: "/", key: "Home", exact: true, component: Home },
@@ -21,7 +21,7 @@ export const routes = [
     path: "/corevalues",
     key: "IT Core Values",
     exact: true,
-    component: () => "TODO: IT Core Value",
+    component: CoreValues,
   },
 ];
 
