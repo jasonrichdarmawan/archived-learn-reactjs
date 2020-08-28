@@ -17,19 +17,19 @@ const contentJSX = () => {
           to almost every aspect of poverty allevation program in China. From
           the economic policy to education policy.
         </p>
-        <p class="mb-0">
+        <p className="mb-0">
           Through technology, I believe I can maximize my impact while also
           creating wealth.
         </p>
-        <footer class="blockquote-footer">
+        <footer className="blockquote-footer">
           Jason <cite title="Source Title">from Indonesia</cite>
         </footer>
         <br />
-        <p class="mb-0">
+        <p className="mb-0">
           Nothing is free. Nothing is easy. If you want to be successful, you
           have to pay the price.
         </p>
-        <footer class="blockquote-footer">
+        <footer className="blockquote-footer">
           Jack Ma <cite title="Source Title">, Alibaba Group</cite>
         </footer>
       </blockquote>

@@ -107,8 +107,8 @@ const contentJSX = (data) => {
                 ) : null}
                 {cur.content ? (
                   <ListGroup>
-                    {cur.content.map((cur) => (
-                      <ListGroup.Item key={cur.bold}>
+                    {cur.content.map((cur, i) => (
+                      <ListGroup.Item key={cur.bold + i}>
                         <b>{cur.bold}</b> {cur.text}{" "}
                         <a href={"" + cur.ahref}>{cur.ahrefText}</a>
                       </ListGroup.Item>

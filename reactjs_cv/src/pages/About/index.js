@@ -147,8 +147,8 @@ const contentJSX = (data) => {
                   <strong>{cur.content.strong}</strong>
                 ) : null}
                 {cur.content.italic ? <i>{cur.content.italic}</i> : null}
-                {cur.content.map((cur) => (
-                  <React.Fragment key={cur.strong}>
+                {cur.content.map((cur, i) => (
+                  <React.Fragment key={"body" + cur.strong + i}>
                     {cur.strong ? (
                       <React.Fragment>
                         <strong>{cur.strong}</strong>
