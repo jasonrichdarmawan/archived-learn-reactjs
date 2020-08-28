@@ -28,7 +28,7 @@ const contentJSX = (data) => {
     <Container>
       <Row>
         {data.map((cur) => (
-          <Col>
+          <Col key={cur.ahrefText}>
             <Card>
               <Card.Body>
                 <Card.Title>{cur.title}</Card.Title>
