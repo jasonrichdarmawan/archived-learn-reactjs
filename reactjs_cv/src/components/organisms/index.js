@@ -1,2 +1,2 @@
 export { NavigationBar } from "./NavigationBar";
-export { MiddleContent } from "./MiddleContent";
+export { Content } from "./Content";
