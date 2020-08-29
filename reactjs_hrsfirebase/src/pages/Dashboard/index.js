@@ -11,7 +11,7 @@ const contentJSX = (userData, cvData) => {
   if (userData.type === 0)
     return (
       <div className="d-flex flex-fill align-items-center">
-        <Container className="text-center">Hello, {userData.name}</Container>
+        <Container className="text-center">Hello, {userData.displayName}</Container>
       </div>
     );
   if (userData.type > 0) {
@@ -86,7 +86,7 @@ export const Dashboard = () => {
         .doc(authData.uid)
         .get()
         .then((doc) =>
-          doc.exists ? setCVData(doc.data()) : setCVData(doc.data())
+          doc.exists ? setCVData(doc.data()) : setCVData()
         );
     }
   }, [userData]);
