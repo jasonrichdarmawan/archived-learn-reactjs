@@ -1,18 +1,9 @@
 import React, { useContext } from "react";
 import { Route, Switch, Link, Redirect } from "react-router-dom";
-import { Login, PasswordReset, Dashboard } from "../pages";
+import { Login, PasswordReset, Dashboard, AddPage } from "../pages";
 import { AuthDataContext, UserDataContext } from "../App";
 
 // TODO
-const AddPage = (props) => {
-  if (props.match.params.request === "employee") {
-    if (props.match.params.id) return "Add Page Employee id";
-    else if (!props.match.params.id) return "Add Page Employee";
-  } else if (props.match.params.request === "department") {
-    if (props.match.params.id) return "Add Page Department id";
-    else if (!props.match.params.id) return "Add Page Department";
-  } else return <Route component={() => <h1>Not Found!</h1>} />;
-};
 const ListPage = (props) => {
   if (props.match.params.request === "employee") {
     if (props.match.params.id) return "List Page Employee id";
@@ -98,13 +89,6 @@ export const routes = [
           },
           {
             path: "/app/add/:request",
-            key: "APP_ADD_REQUEST",
-            exact: true,
-            display: false,
-            component: AddPage,
-          },
-          {
-            path: "/app/add/:request/:id",
             key: "APP_ADD_REQUEST",
             exact: true,
             display: false,
