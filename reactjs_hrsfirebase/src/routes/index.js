@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Route, Switch, Link, Redirect } from "react-router-dom";
 import { Login, PasswordReset } from "../pages";
+import { AuthDataContext } from "../App";
 
 // TODO
-const isAuthorized = () => {
-  return false;
-};
+let isAuthorized = "await";
 const user = {
   type: 0,
 };
@@ -41,7 +40,7 @@ export const routes = [
     key: "ROOT",
     exact: true,
     component: () => {
-      if (isAuthorized() === true) return <Redirect to={"/app"} />;
+      if (isAuthorized === true) return <Redirect to={"/app"} />;
       else return <Redirect to={"/login"} />;
     },
   },
@@ -50,7 +49,7 @@ export const routes = [
     key: "LOGIN",
     exact: true,
     component: () => {
-      if (isAuthorized() === true) return <Redirect to={"/app"} />;
+      if (isAuthorized === true) return <Redirect to={"/app"} />;
       else return <Login />;
     },
   },
@@ -59,15 +58,15 @@ export const routes = [
     key: "PASSWORDRESET",
     eaxct: true,
     component: () => {
-      if (isAuthorized() === true) return <Redirect to={"/app"} />;
+      if (isAuthorized === true) return <Redirect to={"/app"} />;
       else return <PasswordReset />;
-    }
+    },
   },
   {
     path: "/app",
     key: "APP",
     component: (props) => {
-      if (isAuthorized() === false) return <Redirect to={"/"} />;
+      if (isAuthorized === false) return <Redirect to={"/"} />;
       else return <RenderRoutes {...props} />;
     },
     routes: [
@@ -156,6 +155,10 @@ const RouteWithSubRoutes = (route) => (
 );
 
 export function RenderRoutes({ routes }) {
+  const auth = useContext(AuthDataContext);
+  if (auth && auth !== "await") isAuthorized = true;
+  else if (auth !== "await") isAuthorized = false;
+
   return (
     <Switch>
       {routes.map((route) => {
