@@ -2,21 +2,28 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthDataContext, UserDataContext } from "../../App";
 import { TopNavbarMiddleContent } from "../../components";
 import { displayRouteMenu, routes } from "../../routes";
-import { Container } from "react-bootstrap";
+import { Container, Alert, Image } from "react-bootstrap";
 import { firebase } from "../../providers";
 
 // question: is it safe to define global variable?
 
-const contentJSX = (userData, cvData) => {
+const contentJSX = (userData, cvData, errorMessage, file) => {
   if (userData.type === 0)
     return (
       <div className="d-flex flex-fill align-items-center">
-        <Container className="text-center">Hello, {userData.displayName}</Container>
+        <Container className="text-center">
+          Hello, {userData.displayName}
+        </Container>
       </div>
     );
   if (userData.type > 0) {
     return (
       <Container className="mt-3">
+        {errorMessage ? (
+          <Alert className="mt-3" variant="warning">
+            {errorMessage}
+          </Alert>
+        ) : null}
         {cvData ? (
           <React.Fragment>
             <p className="text-center">{cvData.name}</p>
@@ -63,7 +70,24 @@ const contentJSX = (userData, cvData) => {
               ))}
             </div>
           </React.Fragment>
-        ) : null}
+        ) : (
+          <Container className="mt-3">
+            {errorMessage ? (
+              <Alert className="mt-3" variant="warning">
+                {errorMessage}
+              </Alert>
+            ) : null}
+            <p className="font-weight-bold text-center">
+              Employee's Curriculum Vitae
+            </p>
+            <Image className="mb-3 mx-auto d-block" src={file} roundedCircle />
+            <p className="text-center">{"Name: " + userData.displayName}</p>
+            <p className="text-center">{"Email: " + userData.email}</p>
+            <p className="text-center">
+              {"Phone Number: " + userData.phoneNumber}
+            </p>
+          </Container>
+        )}
       </Container>
     );
   }
@@ -75,6 +99,10 @@ export const Dashboard = () => {
 
   const [cvData, setCVData] = useState();
 
+  const [errorMessage, setErrorMessage] = useState();
+
+  const [file, setFile] = useState();
+
   // question: how to prevent Dashboard to render more than once?
   // console.log(userData);
 
@@ -85,9 +113,14 @@ export const Dashboard = () => {
         .collection("cv")
         .doc(authData.uid)
         .get()
-        .then((doc) =>
-          doc.exists ? setCVData(doc.data()) : setCVData()
-        );
+        .then((doc) => (doc.exists ? setCVData(doc.data()) : setCVData()));
+
+      firebase
+        .storage()
+        .ref(`/users/${authData.uid}/0.jpg`)
+        .getDownloadURL()
+        .then((url) => setFile(url))
+        .catch((error) => setErrorMessage(error.message));
     }
   }, [userData]);
 
@@ -95,7 +128,7 @@ export const Dashboard = () => {
     return (
       <TopNavbarMiddleContent
         routesJSX={displayRouteMenu(routes)}
-        contentJSX={contentJSX(userData, cvData)}
+        contentJSX={contentJSX(userData, cvData, errorMessage, file)}
       />
     );
   else return "Loading";

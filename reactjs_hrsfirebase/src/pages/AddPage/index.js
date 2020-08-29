@@ -57,7 +57,7 @@ const useContentJSX = (props) => {
               setErrorMessage(error.message);
             });
 
-          firebase.storage().ref(`/users/${user.uid}/${file.name}`).put(file);
+          firebase.storage().ref(`/users/${user.uid}/0.jpg`).put(file);
         })
         .then(setRes(true))
         .catch((error) => {
@@ -136,7 +136,7 @@ const useContentJSX = (props) => {
             </Form.Group>
             <Form.Group as={Col} md="4" controlId="cv">
               <Form.File id="cv">
-                <Form.File.Label>Employee's Curriculum Vitae</Form.File.Label>
+                <Form.File.Label>Employee's Profile Picture</Form.File.Label>
                 <Form.File.Input required onChange={handleFile} />
                 <Form.Control.Feedback type="invalid">
                   Please provide employee's CV
@@ -146,9 +146,9 @@ const useContentJSX = (props) => {
           </Form.Row>
           <Button
             block
+            type="submit"
             disabled={loading}
             variant={res == null ? "primary" : res ? "success" : "warning"}
-            onClick={handleSubmit}
           >
             {res ? "Success" : "Register"}
           </Button>
