@@ -1,12 +1,10 @@
 import React from "react";
 import { Route, Switch, Link, Redirect } from "react-router-dom";
+import { Login, PasswordReset } from "../pages";
 
 // TODO
 const isAuthorized = () => {
   return false;
-};
-const Login = () => {
-  return "Login";
 };
 const user = {
   type: 0,
@@ -55,6 +53,15 @@ export const routes = [
       if (isAuthorized() === true) return <Redirect to={"/app"} />;
       else return <Login />;
     },
+  },
+  {
+    path: "/passwordreset",
+    key: "PASSWORDRESET",
+    eaxct: true,
+    component: () => {
+      if (isAuthorized() === true) return <Redirect to={"/app"} />;
+      else return <PasswordReset />;
+    }
   },
   {
     path: "/app",

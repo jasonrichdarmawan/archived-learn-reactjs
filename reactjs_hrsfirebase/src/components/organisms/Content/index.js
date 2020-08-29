@@ -1,8 +1,8 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import { Container, Alert } from "react-bootstrap";
 
 export const Content = (props) => (
-  <Container className="mt-3">
+  <Container className={props.className}>
     {props.contentJSX}
   </Container>
 );
