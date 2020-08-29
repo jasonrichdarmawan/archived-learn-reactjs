@@ -1,17 +1,9 @@
 import React, { useContext } from "react";
 import { Route, Switch, Link, Redirect } from "react-router-dom";
-import { Login, PasswordReset } from "../pages";
-import { AuthDataContext } from "../App";
+import { Login, PasswordReset, Dashboard } from "../pages";
+import { AuthDataContext, UserDataContext } from "../App";
 
 // TODO
-let isAuthorized = "await";
-const user = {
-  type: 0,
-};
-const Dashboard = () => {
-  if (user.type === 0) return "Dashboard HRD";
-  else if (user.type > 0) return "Dashboard Employee";
-};
 const AddPage = (props) => {
   if (props.match.params.request === "employee") {
     if (props.match.params.id) return "Add Page Employee id";
@@ -34,60 +26,72 @@ const PlacementPage = () => {
   return "Placement Page";
 };
 
+let isAuthorized = "await";
+let userData = "await";
 export const routes = [
   {
     path: "/",
     key: "ROOT",
     exact: true,
+    display: false,
     component: () => {
       if (isAuthorized === true) return <Redirect to={"/app"} />;
-      else return <Redirect to={"/login"} />;
+      else if (isAuthorized === false) return <Redirect to={"/login"} />;
+      else return "Loading";
     },
   },
   {
     path: "/login",
     key: "LOGIN",
     exact: true,
+    display: !isAuthorized,
     component: () => {
       if (isAuthorized === true) return <Redirect to={"/app"} />;
-      else return <Login />;
+      else if (isAuthorized === false) return <Login />;
+      else return "Loading";
     },
   },
   {
     path: "/passwordreset",
     key: "PASSWORDRESET",
     eaxct: true,
+    display: !isAuthorized,
     component: () => {
       if (isAuthorized === true) return <Redirect to={"/app"} />;
-      else return <PasswordReset />;
+      else if (isAuthorized === false) return <PasswordReset />;
+      else return "Loading";
     },
   },
   {
     path: "/app",
     key: "APP",
     component: (props) => {
-      if (isAuthorized === false) return <Redirect to={"/"} />;
-      else return <RenderRoutes {...props} />;
+      if (isAuthorized === true) return <RenderRoutes {...props} />;
+      else if (isAuthorized === false) return <Redirect to={"/"} />;
+      else return "Loading";
     },
     routes: [
       {
         path: "/app",
-        key: "APP_ROOT",
+        key: "Dashboard",
         exact: true,
+        display: isAuthorized,
         component: Dashboard,
       },
       {
         path: "/app/add",
         key: "APP_ADD",
         component: (props) => {
-          if (user.type === 0) return <RenderRoutes {...props} />;
-          else if (user.type > 0) return <Redirect to={"/"} />;
+          if (userData.type === 0) return <RenderRoutes {...props} />;
+          else if (userData.type > 0) return <Redirect to={"/"} />;
+          else return "Loading";
         },
         routes: [
           {
             path: "/app/add",
-            key: "APP_ADD_ROOT",
+            key: "Add",
             exact: true,
+            display: 0,
             component: () => {
               return <Redirect to={"/app/add/employee"} />;
             },
@@ -96,12 +100,14 @@ export const routes = [
             path: "/app/add/:request",
             key: "APP_ADD_REQUEST",
             exact: true,
+            display: false,
             component: AddPage,
           },
           {
             path: "/app/add/:request/:id",
             key: "APP_ADD_REQUEST",
             exact: true,
+            display: false,
             component: AddPage,
           },
         ],
@@ -110,14 +116,16 @@ export const routes = [
         path: "/app/list",
         key: "APP_LIST",
         component: (props) => {
-          if (user.type === 0) return <RenderRoutes {...props} />;
-          else if (user.type > 0) return <Redirect to={"/"} />;
+          if (userData.type === 0) return <RenderRoutes {...props} />;
+          else if (userData.type > 0) return <Redirect to={"/"} />;
+          else return "Loading";
         },
         routes: [
           {
             path: "/app/list",
-            key: "APP_LIST_ROOT",
+            key: "List",
             exact: true,
+            display: 0,
             component: () => {
               return <Redirect to={"/app/list/employee"} />;
             },
@@ -126,20 +134,23 @@ export const routes = [
             path: "/app/list/:request",
             key: "APP_LIST_REQUEST",
             exact: true,
+            display: false,
             component: ListPage,
           },
           {
             path: "/app/list/:request/:id",
             key: "APP_LIST_REQUEST_ID",
             exact: true,
+            display: false,
             component: ListPage,
           },
         ],
       },
       {
         path: "/app/placement",
-        key: "APP_PLACEMENT",
+        key: "Placement",
         exact: true,
+        display: 0,
         component: PlacementPage,
       },
     ],
@@ -158,6 +169,8 @@ export function RenderRoutes({ routes }) {
   const auth = useContext(AuthDataContext);
   if (auth && auth !== "await") isAuthorized = true;
   else if (auth !== "await") isAuthorized = false;
+
+  userData = useContext(UserDataContext);
 
   return (
     <Switch>
@@ -178,13 +191,13 @@ export const displayRouteMenu = (routes) => {
 
   return (
     <React.Fragment>
-      {routes.map((route) =>
+      {routes.map((route) => 
         route.routes ? (
           <React.Fragment key={route.key}>
             {displayRouteMenu(route.routes)}
           </React.Fragment>
         ) : (
-          singleRoute(route)
+          route.display ? singleRoute(route) : route.display !== false && route.display >= userData.type ? singleRoute(route) : null
         )
       )}
     </React.Fragment>
