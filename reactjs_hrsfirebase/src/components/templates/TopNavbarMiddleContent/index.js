@@ -1,11 +1,11 @@
 import React from "react";
-import { NavigationBar, Content } from "../../";
+import { NavigationBar } from "../../";
 
 export const TopNavbarMiddleContent = (props) => {
   return (
-    <React.Fragment>
+    <div className="min-vh-100 d-flex flex-column">
       <NavigationBar routesJSX={props.routesJSX} />
-      <Content className="mt-3" contentJSX={props.contentJSX} />
-    </React.Fragment>
+      {props.contentJSX}
+    </div>
   );
 }

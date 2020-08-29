@@ -21,7 +21,7 @@ const App = () => {
         .doc(authData.uid)
         .onSnapshot(
           (doc) => {
-            console.log("doc.data()", doc.data());
+            // console.log("doc.data()", doc.data());
             doc.exists ? setUserData(doc.data()) : setUserData();
           },
           (error) => {
