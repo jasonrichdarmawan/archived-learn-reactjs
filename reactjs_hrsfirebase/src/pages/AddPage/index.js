@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { TopNavbarMiddleContent } from "../../components";
 import { displayRouteMenu, routes } from "../../routes";
 import { Route } from "react-router-dom";
-import { Container, Form, Button, Col, Alert } from "react-bootstrap";
+import { Container, Form, Button, Row, Col, Alert } from "react-bootstrap";
 import { firebase } from "../../providers";
+import { Link } from "react-router-dom";
 
 const useContentJSX = (props) => {
   const [inputs, setInputs] = useState({
@@ -30,41 +31,57 @@ const useContentJSX = (props) => {
 
     const form = event.currentTarget;
     if (form.checkValidity() === true) {
-      const createUser = firebase
-        .app()
-        .functions("asia-southeast2")
-        .httpsCallable("createUser");
+      if (props.match.params.request === "employee") {
+        const createUser = firebase
+          .app()
+          .functions("asia-southeast2")
+          .httpsCallable("createUser");
 
-      createUser({
-        email: email,
-        password: password,
-        displayName: displayName,
-      })
-        .then(({ data: user }) => {
-          firebase
-            .firestore()
-            .collection("users")
-            .doc(user.uid)
-            .set({
-              type: 1,
-              email: email,
-              displayName: displayName,
-              phoneNumber: phoneNumber,
-            })
-            .catch((error) => {
-              setLoading(false);
-              setRes(false);
-              setErrorMessage(error.message);
-            });
-
-          firebase.storage().ref(`/users/${user.uid}/0.jpg`).put(file);
+        createUser({
+          email: email,
+          password: password,
+          displayName: displayName,
         })
-        .then(setRes(true))
-        .catch((error) => {
-          setLoading(false);
-          setRes(false);
-          setErrorMessage(error.message);
-        });
+          .then(({ data: user }) => {
+            firebase
+              .firestore()
+              .collection("users")
+              .doc(user.uid)
+              .set({
+                type: 1,
+                email: email,
+                displayName: displayName,
+                phoneNumber: phoneNumber,
+              })
+              .catch((error) => {
+                setLoading(false);
+                setRes(false);
+                setErrorMessage(error.message);
+              });
+
+            firebase.storage().ref(`/users/${user.uid}/0.jpg`).put(file);
+          })
+          .then(setRes(true))
+          .catch((error) => {
+            setLoading(false);
+            setRes(false);
+            setErrorMessage(error.message);
+          });
+      } else if (props.match.params.request === "department") {
+        firebase
+          .firestore()
+          .collection("departments")
+          .add({
+            email: email,
+            name: displayName,
+          })
+          .then(setRes(true))
+          .catch((error) => {
+            setLoading(false);
+            setRes(false);
+            setErrorMessage(error.message);
+          });
+      }
     } else setLoading(false);
 
     event.preventDefault();
@@ -81,7 +98,16 @@ const useContentJSX = (props) => {
             {errorMessage}
           </Alert>
         ) : null}
-        <p className="font-weight-bold">Add Employee</p>
+        <Row>
+          <Col sm="6">
+            <p className="font-weight-bold">Add Employee</p>
+          </Col>
+          <Col sm="6">
+            <Button className="float-right" size="sm" variant="outline-primary">
+              <Link to="/app/add/department">Department</Link>
+            </Button>
+          </Col>
+        </Row>
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <Form.Row>
             <Form.Group as={Col} md="6" controlId="email">
@@ -145,18 +171,72 @@ const useContentJSX = (props) => {
             </Form.Group>
           </Form.Row>
           <Button
-            block
             type="submit"
+            size="sm"
             disabled={loading}
             variant={res == null ? "primary" : res ? "success" : "warning"}
           >
-            {res ? "Success" : "Register"}
+            {res ? "Success" : "Submit"}
           </Button>
         </Form>
       </Container>
     );
   } else if (props.match.params.request === "department") {
-    return "Add Page Department";
+    return (
+      <Container className="mt-3 w-auto">
+        {errorMessage ? (
+          <Alert className="mt-3" variant="warning">
+            {errorMessage}
+          </Alert>
+        ) : null}
+        <Row>
+          <Col sm="6">
+            <p className="font-weight-bold">Add Department</p>
+          </Col>
+          <Col sm="6">
+            <Button className="float-right" size="sm" variant="outline-primary">
+              <Link to="/app/add/employee">Employee</Link>
+            </Button>
+          </Col>
+        </Row>
+        <Form noValidate validated={validated} onSubmit={handleSubmit}>
+          <Form.Row>
+            <Form.Group as={Col} md="6" controlId="email">
+              <Form.Label>Department's Email</Form.Label>
+              <Form.Control
+                required
+                type="email"
+                placeholder="Enter Email"
+                onChange={handleChange}
+              />
+              <Form.Control.Feedback type="invalid">
+                Please provide a valid email.
+              </Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group as={Col} md="6" controlId="displayName">
+              <Form.Label>Department's Name</Form.Label>
+              <Form.Control
+                required
+                type="text"
+                placeholder="Enter Name"
+                onChange={handleChange}
+              />
+              <Form.Control.Feedback type="invalid">
+                Please provide a valid password.
+              </Form.Control.Feedback>
+            </Form.Group>
+          </Form.Row>
+          <Button
+            type="submit"
+            size="sm"
+            disabled={loading}
+            variant={res == null ? "primary" : res ? "success" : "warning"}
+          >
+            {res ? "Success" : "Submit"}
+          </Button>
+        </Form>
+      </Container>
+    );
   } else return <Route component={() => <h1>Not Found!</h1>} />;
 };
 
