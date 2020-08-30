@@ -28,7 +28,7 @@ const data = [
   {
     title: {
       b: "Day 112:",
-      text: "Express, Firebase, Firestore, ReactJS",
+      text: "Express, Firebase, Firestore, Storage, Cloud Functions, ReactJS",
       subtext: "(Source Code)",
     },
     content: [
@@ -54,7 +54,7 @@ const data = [
       },
       {
         bold: "Day 123:",
-        text: "Designing Protected Routes",
+        text: "Learning Generate React Route with Config",
         ahref:
           "https://github.com/kidfrom/bc_g2_learn_reactjs/tree/reactjs_sdr/reactjs_sdr",
         ahrefText: "(Source Code)",
@@ -62,9 +62,17 @@ const data = [
       {
         bold: "Day 123:",
         text:
-          "Curriculum Vitae in ReactJS with Planned Routes and Atomic Design",
+          "Curriculum Vitae in ReactJS with Routes Config and Atomic Design",
         ahref:
           "https://github.com/kidfrom/bc_g2_learn_reactjs/tree/reactjs_cv/reactjs_cv",
+        ahrefText: "(Source Code)",
+      },
+      {
+        bold: "Day 124:",
+        text:
+          "HRS in ReactJS with Dynamically Generated Routes and Firebase, Firestore, Storage, Cloud Function",
+        ahref:
+          "https://github.com/kidfrom/bc_g2_learn_reactjs/tree/reactjs_hrsfirebase/reactjs_hrsfirebase",
         ahrefText: "(Source Code)",
       },
     ],
