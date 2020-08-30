@@ -2,8 +2,8 @@
 
 Notice: The SDR does not reflect actual logic used. The SDR is written in a Notepad and has not been tested. However, if the checkbox is checked, it means it has been successfully implemented either with exact logic or slightly different logic.
 
-- [ ] Data Schema
-  - [ ] Collection: users
+- [x] Data Schema
+  - [x] Collection: users
     ```
     uid = {
       type: number,
@@ -12,7 +12,7 @@ Notice: The SDR does not reflect actual logic used. The SDR is written in a Note
       phoneNumber: number,
     }
     ```
-  - [ ] Collection: cv
+  - [x] Collection: cv
     ```
     uid = {
       name: string,
@@ -33,7 +33,7 @@ Notice: The SDR does not reflect actual logic used. The SDR is written in a Note
       ],
     }
     ```
-  - [ ] Collection: departments
+  - [x] Collection: departments
     ```
     uid = {
       name: string,
@@ -129,19 +129,19 @@ Notice: The SDR does not reflect actual logic used. The SDR is written in a Note
     ]
     ```
 - [ ] Page
-  - [ ] Login
+  - [x] Login
   - [ ] HRD Dashboard
-    - [ ] Add New Employee + handler + passsword `/add/employee`
+    - [x] Add New Employee + handler + passsword `/add/employee`
     - [ ] List Employee `/list/employee`
     - [ ] View Employee's Information (in CV format) `/list/employee/:id`
-    - [ ] Add New Department `/add/department`
+    - [x] Add New Department `/add/department`
     - [ ] List Department `/list/department`
     - [ ] View Department's Information `/list/department/:id`
     - [ ] Work placement `/placement`
-  - [ ] Employee Dashboard
-    - [ ] View Employee's Information (in CV format) `/` -> `/list/employee/:id`
+  - [x] Employee Dashboard
+    - [x] View Employee's Information (in CV format) `/` -> `/list/employee/:id`
 - [ ] Template
-  - [ ] MinVH100Content(contentJSX)
+  - [ ] MinVH100Content(contentJSX) `cancelled`
   - [x] TopNavbarMiddleContent(routesJSX, contentJSX)
 - [x] Organisms:
   - [x] NavigationBar(routesJSX)
