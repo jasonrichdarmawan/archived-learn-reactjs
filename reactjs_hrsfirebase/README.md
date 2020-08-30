@@ -128,16 +128,16 @@ Notice: The SDR does not reflect actual logic used. The SDR is written in a Note
       },
     ]
     ```
-- [ ] Page
+- [x] Page
   - [x] Login
-  - [ ] HRD Dashboard
+  - [x] HRD Dashboard
     - [x] Add New Employee + handler + passsword `/add/employee`
     - [x] List Employee `/list/employee`
     - [x] View Employee's Information (in CV format) `/list/employee/:id`
     - [x] Add New Department `/add/department`
     - [x] List Department `/list/department`
     - [x] View Department's Information `/list/department/:id`
-    - [ ] Work placement `/placement`
+    - [x] Work placement `/placement`
   - [x] Employee Dashboard
     - [x] View Employee's Information (in CV format) `/` -> `/list/employee/:id`
 - [ ] Template

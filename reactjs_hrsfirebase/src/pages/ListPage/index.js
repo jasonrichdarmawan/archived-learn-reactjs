@@ -106,7 +106,7 @@ const useContentJSX = (props) => {
       }
     }
     return () => {};
-  }, [props.match.params.request]);
+  }, [props.match.params]);
 
   if (props.match.params.request === "employee") {
     if (!props.match.params.id)
