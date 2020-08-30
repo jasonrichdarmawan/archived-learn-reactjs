@@ -26,6 +26,7 @@ const contentJSX = (userData, cvData, errorMessage, file) => {
         ) : null}
         {cvData ? (
           <React.Fragment>
+            <Image className="mb-3 mx-auto d-block" src={file} roundedCircle />
             <p className="text-center">{cvData.name}</p>
             <p className="text-center">{cvData.majors}</p>
             <div className="d-flex flex-wrap">

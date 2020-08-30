@@ -132,11 +132,11 @@ Notice: The SDR does not reflect actual logic used. The SDR is written in a Note
   - [x] Login
   - [ ] HRD Dashboard
     - [x] Add New Employee + handler + passsword `/add/employee`
-    - [ ] List Employee `/list/employee`
-    - [ ] View Employee's Information (in CV format) `/list/employee/:id`
+    - [x] List Employee `/list/employee`
+    - [x] View Employee's Information (in CV format) `/list/employee/:id`
     - [x] Add New Department `/add/department`
-    - [ ] List Department `/list/department`
-    - [ ] View Department's Information `/list/department/:id`
+    - [x] List Department `/list/department`
+    - [x] View Department's Information `/list/department/:id`
     - [ ] Work placement `/placement`
   - [x] Employee Dashboard
     - [x] View Employee's Information (in CV format) `/` -> `/list/employee/:id`
