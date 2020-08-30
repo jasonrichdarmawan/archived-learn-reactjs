@@ -227,24 +227,7 @@ const useContentJSX = (props) => {
                 {"Phone Number: " + listData.phoneNumber}
               </p>
             </React.Fragment>
-          ) : // (
-          //   <React.Fragment>
-          //     <p className="font-weight-bold text-center">
-          //       Employee's Curriculum Vitae
-          //     </p>
-          //     <Image
-          //       className="mb-3 mx-auto d-block"
-          //       src={file}
-          //       roundedCircle
-          //     />
-          //     <p className="text-center">{"Name: " + userData.displayName}</p>
-          //     <p className="text-center">{"Email: " + userData.email}</p>
-          //     <p className="text-center">
-          //       {"Phone Number: " + userData.phoneNumber}
-          //     </p>
-          //   </React.Fragment>
-          // )
-          null}
+          ) : null}
         </Container>
       );
     }

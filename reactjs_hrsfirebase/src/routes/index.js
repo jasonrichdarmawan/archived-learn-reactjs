@@ -1,11 +1,14 @@
 import React, { useContext } from "react";
 import { Route, Switch, Link, Redirect } from "react-router-dom";
-import { Login, PasswordReset, Dashboard, AddPage, ListPage } from "../pages";
+import {
+  Login,
+  PasswordReset,
+  Dashboard,
+  AddPage,
+  ListPage,
+  PlacementPage,
+} from "../pages";
 import { AuthDataContext, UserDataContext } from "../App";
-
-const PlacementPage = () => {
-  return "Placement Page";
-};
 
 let isAuthorized = "await";
 let userData = "await";
@@ -122,10 +125,28 @@ export const routes = [
       },
       {
         path: "/app/placement",
-        key: "Placement",
-        exact: true,
-        display: 0,
-        component: PlacementPage,
+        key: "APP_PLACEMENT",
+        component: (props) => {
+          if (userData.type === 0) return <RenderRoutes {...props} />;
+          else if (userData.type > 0) return <Redirect to={"/"} />;
+          else return "Loading";
+        },
+        routes: [
+          {
+            path: "/app/placement",
+            key: "Placement",
+            exact: true,
+            display: 0,
+            component: PlacementPage,
+          },
+          {
+            path: "/app/placement/:id",
+            key: "APP_PLACEMENT_ID",
+            exact: true,
+            display: false,
+            component: PlacementPage,
+          },
+        ],
       },
     ],
   },
@@ -165,14 +186,16 @@ export const displayRouteMenu = (routes) => {
 
   return (
     <React.Fragment>
-      {routes.map((route) => 
+      {routes.map((route) =>
         route.routes ? (
           <React.Fragment key={route.key}>
             {displayRouteMenu(route.routes)}
           </React.Fragment>
-        ) : (
-          route.display ? singleRoute(route) : route.display !== false && route.display >= userData.type ? singleRoute(route) : null
-        )
+        ) : route.display ? (
+          singleRoute(route)
+        ) : route.display !== false && route.display >= userData.type ? (
+          singleRoute(route)
+        ) : null
       )}
     </React.Fragment>
   );
