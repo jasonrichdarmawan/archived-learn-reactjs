@@ -24,9 +24,7 @@ export const FormAlert = ({
         ))}
         <Button
           disabled={res === "await" ? true : false}
-          variant={
-            res === true ? "success" : "primary"
-          }
+          variant={res === true ? "success" : "primary"}
           type="submit"
         >
           {res === true ? "Success" : "Submit"}
