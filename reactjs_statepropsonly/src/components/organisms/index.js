@@ -1,1 +1,1 @@
-export { Form } from "./Form";
+export { FormAlert } from "./FormAlert";

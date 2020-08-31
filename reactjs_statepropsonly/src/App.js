@@ -1,19 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Routes } from "./config";
 import { RenderRoutes } from "./utils";
+import { AuthDatabaseContext, AuthDataContext } from "./providers";
 
 const App = () => {
-  const [AuthData, setAuthData] = useState({ res: "await" });
-  const routes = { routes: Routes({ isAuthorized: AuthData.res }) };
+  const [authDatabase, setAuthDatabase] = useState(
+    useContext(AuthDatabaseContext)
+  );
+  const [authData, setAuthData] = useState(useContext(AuthDataContext));
+
+  const routes = { routes: Routes({ isAuthorized: authData.res }) };
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setAuthData({ ...AuthData, res: false });
-    }, 2000);
+    const timer = setTimeout(
+      () => setAuthData({ ...authData, res: false }),
+      2000
+    );
     return () => clearTimeout(timer);
   }, []);
 
-  return <RenderRoutes routes={routes} />;
+  return (
+    <AuthDatabaseContext.Provider value={{ authDatabase, setAuthDatabase }}>
+      <AuthDataContext.Provider value={{ authData, setAuthData }}>
+        <RenderRoutes routes={routes} />
+      </AuthDataContext.Provider>
+    </AuthDatabaseContext.Provider>
+  );
 };
 
 export default App;
