@@ -10,9 +10,10 @@ const RouteWithSubRoutes = (route) => (
 );
 
 export const RenderRoutes = ({ routes }) => {
+  console.log(routes);
   return (
     <Switch>
-      {routes.routes.map((route) => (
+      {routes.map((route) => (
         <RouteWithSubRoutes key={route.key} {...route} />
       ))}
       <Route component={() => <h1>Not Found!</h1>} />

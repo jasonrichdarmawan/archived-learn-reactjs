@@ -9,7 +9,8 @@ const App = () => {
   );
   const [authData, setAuthData] = useState(useContext(AuthDataContext));
 
-  const routes = { routes: Routes({ isAuthorized: authData.res }) };
+  // const routes = { routes: Routes({ isAuthorized: authData.res }) };
+  const routes = Routes({ isAuthorized: authData.res });
 
   useEffect(() => {
     const timer = setTimeout(
