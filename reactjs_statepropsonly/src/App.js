@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Routes } from "./config";
 import { RenderRoutes } from "./utils";
 import { AuthDatabaseContext, AuthDataContext } from "./providers";

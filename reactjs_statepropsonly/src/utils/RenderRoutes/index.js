@@ -10,7 +10,6 @@ const RouteWithSubRoutes = (route) => (
 );
 
 export const RenderRoutes = ({ routes }) => {
-  console.log(routes);
   return (
     <Switch>
       {routes.map((route) => (

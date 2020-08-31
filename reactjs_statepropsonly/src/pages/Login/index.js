@@ -33,6 +33,7 @@ export const Login = () => {
     event.preventDefault();
     event.stopPropagation();
 
+    // TODO: function get() to fetch data.
     const timer = setTimeout(() => {
       const res = authDatabase.find((object, index) =>
         object.username === username
