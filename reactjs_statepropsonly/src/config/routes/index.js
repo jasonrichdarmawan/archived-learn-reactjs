@@ -1,5 +1,6 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
+import { Login } from "../../pages";
 
 export const Routes = ({ isAuthorized }) => {
   return [
@@ -13,5 +14,15 @@ export const Routes = ({ isAuthorized }) => {
         else return "Loading";
       },
     },
+    {
+      key: "LOGIN",
+      path: "/login",
+      exact: true,
+      component: () => {
+        if (isAuthorized === true) return <Redirect to="/app" />
+        else if (isAuthorized === false) return <Login />
+        else return "Loading"
+      }
+    }
   ];
 };
