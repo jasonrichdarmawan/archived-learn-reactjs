@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
-import { Container } from "react-bootstrap";
-import { FormAlert } from "../../components";
 import { AuthDatabaseContext, AuthDataContext } from "../../providers";
+import { LoginTemplate } from "../../components";
 
 export const Login = () => {
   const { authDatabase } = useContext(AuthDatabaseContext);
@@ -52,16 +51,12 @@ export const Login = () => {
   };
 
   return (
-    <div className="min-vh-100 d-flex align-items-center">
-      <Container className="w-auto">
-        <FormAlert
-          formInputs={formInputs}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          res={res}
-          errorMessage={errorMessage}
-        />
-      </Container>
-    </div>
+    <LoginTemplate
+      formInputs={formInputs}
+      handleChange={handleChange}
+      handleSubmit={handleSubmit}
+      res={res}
+      errorMessage={errorMessage}
+    />
   );
 };
