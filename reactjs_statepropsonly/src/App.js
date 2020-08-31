@@ -1,8 +1,12 @@
-import React from "react";
-import { routes, RenderRoutes } from "./routes";
+import React, { useState } from "react";
+import { Routes } from "./config";
+import { RenderRoutes } from "./utils";
 
-const App = () => (
-  <RenderRoutes routes={routes} />
-)
+const App = () => {
+  const [AuthData, setAuthData] = useState({ res: "await" });
+  const routes = { routes: Routes({ isAuthorized: AuthData.res }) };
+
+  return <RenderRoutes routes={routes} />;
+};
 
 export default App;
