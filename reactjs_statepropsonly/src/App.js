@@ -4,19 +4,27 @@ import { RenderRoutes } from "./utils";
 import { AuthDatabaseContext, AuthDataContext } from "./providers";
 
 const App = () => {
-  const [authDatabase, setAuthDatabase] = useState(
-    useContext(AuthDatabaseContext)
-  );
-  const [authData, setAuthData] = useState(useContext(AuthDataContext));
+  const [authDatabase, setAuthDatabase] = useState();
+  const [authData, setAuthData] = useState({ res: "await" });
 
   // const routes = { routes: Routes({ isAuthorized: authData.res }) };
   const routes = Routes({ isAuthorized: authData.res });
 
   useEffect(() => {
-    const timer = setTimeout(
-      () => setAuthData({ ...authData, res: false }),
-      2000
-    );
+    // TODO: function get() to fetch data.
+    const timer = setTimeout(() => {
+      setAuthData({ ...authData, res: false });
+      setAuthDatabase([
+        {
+          username: "admin",
+          password: "123456",
+        },
+        {
+          username: "employee",
+          password: "abcdefg",
+        },
+      ]);
+    }, 2000);
     return () => clearTimeout(timer);
   }, []);
 
