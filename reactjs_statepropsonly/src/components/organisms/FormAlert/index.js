@@ -25,11 +25,11 @@ export const FormAlert = ({
         <Button
           disabled={res === "await" ? true : false}
           variant={
-            res === true ? "success" : res === false ? "warning" : "primary"
+            res === true ? "success" : "primary"
           }
           type="submit"
         >
-          {res === true ? "Success" : res === false ? "Error" : "Submit"}
+          {res === true ? "Success" : "Submit"}
         </Button>
       </Form>
     </React.Fragment>
