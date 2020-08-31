@@ -1,6 +1,6 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-import { Login } from "../../pages";
+import { Login, DashboardPage } from "../../pages";
 import { RenderRoutes } from "../../utils";
 
 export const Routes = ({ isAuthorized }) => {
@@ -39,7 +39,7 @@ export const Routes = ({ isAuthorized }) => {
           key: "Dashboard",
           path: "/app",
           exact: true,
-          component: () => "Dashboard",
+          component: DashboardPage,
         },
       ],
     },

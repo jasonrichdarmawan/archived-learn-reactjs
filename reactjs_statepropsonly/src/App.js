@@ -18,10 +18,12 @@ const App = () => {
         {
           username: "admin",
           password: "123456",
+          type: 0,
         },
         {
           username: "employee",
           password: "abcdefg",
+          type: 1,
         },
       ]);
     }, 2000);
