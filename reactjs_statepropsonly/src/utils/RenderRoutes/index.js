@@ -1,5 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
+import { RoutesContext } from "../../providers";
 
 const RouteWithSubRoutes = (route) => (
   <Route
@@ -11,11 +12,13 @@ const RouteWithSubRoutes = (route) => (
 
 export const RenderRoutes = ({ routes }) => {
   return (
-    <Switch>
-      {routes.map((route) => (
-        <RouteWithSubRoutes key={route.key} {...route} />
-      ))}
-      <Route component={() => <h1>Not Found!</h1>} />
-    </Switch>
+    <RoutesContext.Provider value={routes}>
+      <Switch>
+        {routes.map((route) => (
+          <RouteWithSubRoutes key={route.key} {...route} />
+        ))}
+        <Route component={() => <h1>Not Found!</h1>} />
+      </Switch>
+    </RoutesContext.Provider>
   );
 };

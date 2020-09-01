@@ -1,10 +1,16 @@
 import React, { useContext } from "react";
 import { DashboardTemplate } from "../../components";
-import { AuthDataContext } from "../../providers";
+import { AuthDataContext, RoutesContext } from "../../providers";
 
 export const DashboardPage = () => {
   const { authData, setAuthData } = useContext(AuthDataContext);
+  const routes = useContext(RoutesContext);
 
-  if (authData.type === 0) return <DashboardTemplate authData={authData} setAuthData={setAuthData} />;
-  else if (authData.type > 0) return <DashboardTemplate />;
+  return (
+    <DashboardTemplate
+      routes={routes}
+      authData={authData}
+      setAuthData={setAuthData}
+    />
+  );
 };

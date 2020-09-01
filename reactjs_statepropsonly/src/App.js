@@ -5,15 +5,14 @@ import { AuthDatabaseContext, AuthDataContext } from "./providers";
 
 const App = () => {
   const [authDatabase, setAuthDatabase] = useState();
-  const [authData, setAuthData] = useState({ res: "await" });
+  const [authData, setAuthData] = useState({ isAuthorized: "await" });
 
-  // const routes = { routes: Routes({ isAuthorized: authData.res }) };
-  const routes = Routes({ isAuthorized: authData.res });
+  const routes = Routes({ authData: authData });
 
   useEffect(() => {
     // TODO: function get() to fetch data.
     const timer = setTimeout(() => {
-      setAuthData({ ...authData, res: false });
+      setAuthData((a) => ({ ...a, isAuthorized: false }));
       setAuthDatabase([
         {
           username: "admin",

@@ -1,13 +1,13 @@
 import React from "react";
 import { Navbar, Nav, Form, Button } from "react-bootstrap";
-import { handleLogout } from "../../../utils";
+import { handleLogout, displayRouteNavbar } from "../../../utils";
 
-export const NavigationBar = ({ authData, setAuthData }) => (
+export const NavigationBar = ({ authData, setAuthData, routes }) => (
   <Navbar bg="light" expand="lg">
     <Navbar.Brand>HRS</Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
-      <Nav className="mr-auto"></Nav>
+      <Nav className="mr-auto">{displayRouteNavbar({ authData, routes })}</Nav>
       <Form inline>
         <Button
           variant="danger"
