@@ -74,7 +74,7 @@ export const AddPage = (props) => {
                 name: name,
                 phoneNumber: phoneNumber,
                 email: email,
-                type: 0,
+                type: 1,
               },
             ])
           : props.match.params.request === "department" &&
