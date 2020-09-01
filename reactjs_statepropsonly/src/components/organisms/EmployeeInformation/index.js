@@ -9,34 +9,40 @@ export const EmployeeInformation = ({
   handleSubmit,
   res,
   errorMessage,
+  todoRefactorRoutesLogic,
 }) => {
   return (
     <div className="d-flex flex-fill align-items-center">
       <Container>
-        {errorMessage && <Alert variant="warning">{errorMessage}</Alert>}
+        {todoRefactorRoutesLogic === "list" ||
+          (errorMessage && <Alert variant="warning">{errorMessage}</Alert>)}
+        {/* {errorMessage && <Alert variant="warning">{errorMessage}</Alert>} */}
         <Form onSubmit={handleSubmit}>
-          <div className="row">
-            <div className="col">
-              {readOnly ? (
-                <div
-                  className="float-right btn btn-outline-primary btn-sm"
-                  onClick={handleButton}
-                >
-                  Edit
-                </div>
-              ) : (
-                <Button
-                  className="float-right"
-                  type="submit"
-                  size="sm"
-                  disabled={res === "await" ? true : false}
-                  variant={res === true ? "success" : "primary"}
-                >
-                  {res === true ? "Success" : "Submit"}
-                </Button>
-              )}
+          {todoRefactorRoutesLogic === "list" || (
+            <div className="row">
+              <div className="col">
+                {readOnly ? (
+                  <div
+                    className="float-right btn btn-outline-primary btn-sm"
+                    onClick={handleButton}
+                  >
+                    Edit
+                  </div>
+                ) : (
+                  <Button
+                    className="float-right"
+                    type="submit"
+                    size="sm"
+                    disabled={res === "await" ? true : false}
+                    variant={res === true ? "success" : "primary"}
+                  >
+                    {res === true ? "Success" : "Submit"}
+                  </Button>
+                )}
+              </div>
             </div>
-          </div>
+          )}
+
           <Form.Row>
             {formInputs.map(
               (input, i) =>
