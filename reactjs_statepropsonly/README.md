@@ -1,17 +1,17 @@
 ### Features
 
-- [ ] Login `/login`
-- [ ] HRD Dashboard `/app`
-  - [ ] Add Employee + handler + password `/app/add/employee`
-  - [ ] Add Department `/app/add/department`
-  - [ ] List Employee `/app/list/employee`
-  - [ ] List Department `/app/list/department`
-  - [ ] Employee Information `/app/list/employee/:id`
-  - [ ] Department Information `/app/list/department/:id`
+- [x] Login `/login`
+- [x] HRD Dashboard `/app`
+  - [x] Add Employee + handler + password `/app/add/employee`
+  - [x] Add Department `/app/add/department`
+  - [x] List Employee `/app/list/employee`
+  - [x] List Department `/app/list/department`
+  - [x] Employee Information `/app/list/employee/:id`
+  - [x] Department Information `/app/list/department/:id`
   - [ ] Employee Placement `/app/placement` -> `/app/placement/:id` id is department_id
-- [ ] Employee Dashboard
-  - [ ] Employee Information `/app`
-  - [ ] Department Information `/app`
+- [x] Employee Dashboard
+  - [x] Employee Information `/app`
+  - [ ] Department Information `/app` `cancelled`
 
 ### Documentation: React patterns
 
