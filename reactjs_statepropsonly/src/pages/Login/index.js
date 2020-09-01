@@ -41,7 +41,7 @@ export const Login = () => {
       );
       if (res) {
         setRes(true);
-        setAuthData({ ...authData, isAuthorized: true, type: res.type });
+        setAuthData({ ...res, isAuthorized: true });
       } else {
         setRes(false);
         setErrorMessage("Either username or password is incorrect");

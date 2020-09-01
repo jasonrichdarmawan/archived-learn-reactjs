@@ -1,14 +1,15 @@
 import React from "react";
-import { NavigationBar } from "../../organisms";
+import { NavigationBar, EmployeeInformation } from "../../organisms";
 
 export const DashboardTemplate = ({ routes, authData, setAuthData }) => {
   return (
-    <React.Fragment>
+    <div className="min-vh-100 d-flex flex-column">
       <NavigationBar
         routes={routes}
         authData={authData}
         setAuthData={setAuthData}
       />
-    </React.Fragment>
+      <EmployeeInformation authData={authData} />
+    </div>
   );
 };
