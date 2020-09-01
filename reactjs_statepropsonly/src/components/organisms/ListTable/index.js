@@ -62,7 +62,8 @@ export const ListTable = ({ ...props }) => {
                   <td>{department.username}</td>
                 </tr>
               ))
-          : authDatabase
+          : props.match.params.request === "department" &&
+            authDatabase
               .filter((object) => {
                 return (
                   departmentDatabase[props.match.params.id].members.find(
@@ -73,9 +74,7 @@ export const ListTable = ({ ...props }) => {
               .map((user, i) => (
                 <tr key={user.name + i}>
                   <td>
-                    <Link
-                      to={`/app/list/${props.match.params.request}/${user.uid}`}
-                    >
+                    <Link to={`/app/list/employee/${user.uid}`}>
                       {user.uid}
                     </Link>
                   </td>
