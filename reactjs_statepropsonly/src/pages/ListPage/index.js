@@ -1,9 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { ListTemplate } from "../../components";
 import { RoutesContext, AuthDatabaseContext } from "../../providers";
 
 export const ListPage = (props) => {
   const { authDatabase } = useContext(AuthDatabaseContext);
+  const routes = useContext(RoutesContext);
 
   const id = props.match.params.id && props.match.params.id;
   const formInputs = props.match.params.id && [
@@ -39,6 +40,5 @@ export const ListPage = (props) => {
     },
   ];
 
-  const routes = useContext(RoutesContext);
   return <ListTemplate {...props} routes={routes} formInputs={formInputs} />;
 };
