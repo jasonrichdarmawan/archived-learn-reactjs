@@ -33,7 +33,7 @@ const App = () => {
           phoneNumber: "0889 0889 2668",
         },
       ]);
-    }, 2000);
+    }, 1000);
     return () => clearTimeout(timer);
   }, []);
 

@@ -48,7 +48,7 @@ export const Login = () => {
         setRes(false);
         setErrorMessage("Either username or password is incorrect");
       }
-    }, 2000);
+    }, 1000);
     return () => clearTimeout(timer);
   };
 

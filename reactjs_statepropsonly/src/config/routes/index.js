@@ -1,6 +1,6 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-import { Login, DashboardPage } from "../../pages";
+import { Login, DashboardPage, AddPage } from "../../pages";
 import { RenderRoutes } from "../../utils";
 
 export const Routes = ({ authData }) => {
@@ -68,9 +68,7 @@ export const Routes = ({ authData }) => {
               path: "/app/add/:request",
               exact: true,
               display: false,
-              component: () => {
-                return "AddPage";
-              },
+              component: AddPage,
             },
           ],
         },

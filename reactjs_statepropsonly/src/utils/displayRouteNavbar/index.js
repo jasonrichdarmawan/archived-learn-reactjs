@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export const displayRouteNavbar = ({ authData, routes }) => {
+  console.log(routes);
   const singleRoute = (route) => (
     <Link to={route.path} className="nav-link" key={route.key}>
       {route.key}
