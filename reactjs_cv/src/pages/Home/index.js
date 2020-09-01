@@ -75,6 +75,14 @@ const data = [
           "https://github.com/kidfrom/bc_g2_learn_reactjs/tree/reactjs_hrsfirebase/reactjs_hrsfirebase",
         ahrefText: "(Source Code)",
       },
+      {
+        boldy: "Day 127:",
+        text:
+          "HRS in ReactJS with only state & props allowed / store the database in state & props",
+        ahref:
+          "https://github.com/kidfrom/bc_g2_learn_reactjs/tree/reactjs_statepropsonly/reactjs_statepropsonly",
+        ahrefText: "Source Code",
+      },
     ],
   },
 ];
