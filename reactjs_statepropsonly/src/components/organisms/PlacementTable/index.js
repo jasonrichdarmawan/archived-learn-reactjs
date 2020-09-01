@@ -15,6 +15,7 @@ export const PlacementTable = (props) => {
 
   useEffect(() => {
     if (props.match.params.id) {
+      // question: why useReducer instead of useState if it needs the current value of a props?
       setCheckedUID(
         departmentDatabase[props.match.params.id].members.reduce((acc, cur) => {
           acc[cur] = true;
@@ -22,7 +23,8 @@ export const PlacementTable = (props) => {
         }, {})
       );
     }
-  }, []);
+    // question: why useEffect require depedencies of departmentDatabase and props.match.params.id ?
+  }, [departmentDatabase, props.match.params.id]);
 
   const handleCheckbox = (event) => {
     setCanEdit(true);
