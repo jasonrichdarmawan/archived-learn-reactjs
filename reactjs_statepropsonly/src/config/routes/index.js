@@ -1,6 +1,6 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-import { Login, DashboardPage, AddPage } from "../../pages";
+import { Login, DashboardPage, AddPage, ListPage } from "../../pages";
 import { RenderRoutes } from "../../utils";
 
 export const Routes = ({ authData }) => {
@@ -69,6 +69,41 @@ export const Routes = ({ authData }) => {
               exact: true,
               display: false,
               component: AddPage,
+            },
+          ],
+        },
+        {
+          key: "APP_LIST_ROOT",
+          path: "/app/list",
+          exact: false,
+          component: (props) => {
+            if (authData.type === 0) return <RenderRoutes {...props} />;
+            else if (authData.type > 0) return <Redirect to="/login" />;
+            else return "Loading";
+          },
+          routes: [
+            {
+              key: "List",
+              path: "/app/list",
+              exact: true,
+              display: 0,
+              component: () => {
+                return <Redirect to="/app/list/employee" />;
+              },
+            },
+            {
+              key: "APP_LIST_REQUEST",
+              path: "/app/list/:request",
+              exact: true,
+              display: false,
+              component: ListPage,
+            },
+            {
+              key: "APP_LIST_REQUEST_ID",
+              path: "/app/list/:request/:id",
+              exact: true,
+              display: false,
+              component: ListPage,
             },
           ],
         },
