@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Routes } from "./config";
 import { RenderRoutes } from "./utils";
-import { AuthDatabaseContext, AuthDataContext, RoutesContext } from "./providers";
+import {
+  AuthDatabaseContext,
+  AuthDataContext,
+  RoutesContext,
+  DepartmentDatabaseContext,
+} from "./providers";
 
 const App = () => {
   const [authDatabase, setAuthDatabase] = useState();
   const [authData, setAuthData] = useState({ isAuthorized: "await" });
+  const [departmentDatabase, setDepartmentDatabase] = useState();
 
   const routes = Routes({ authData: authData });
 
@@ -27,10 +33,22 @@ const App = () => {
           username: "employee",
           password: "abcdefg",
           type: 1,
-          uid: 0,
+          uid: 1,
           name: "Jason employee",
           email: "jason@employee.com",
           phoneNumber: "0889 0889 2668",
+        },
+      ]);
+      setDepartmentDatabase([
+        {
+          username: "management",
+          uid: 0,
+          members: [0],
+        },
+        {
+          username: "marketing",
+          uid: 1,
+          members: [0, 1],
         },
       ]);
     }, 1000);
@@ -39,11 +57,15 @@ const App = () => {
 
   return (
     <AuthDatabaseContext.Provider value={{ authDatabase, setAuthDatabase }}>
-      <AuthDataContext.Provider value={{ authData, setAuthData }}>
-        <RoutesContext.Provider value={routes}>
-          <RenderRoutes routes={routes} />
-        </RoutesContext.Provider>
-      </AuthDataContext.Provider>
+      <DepartmentDatabaseContext.Provider
+        value={{ departmentDatabase, setDepartmentDatabase }}
+      >
+        <AuthDataContext.Provider value={{ authData, setAuthData }}>
+          <RoutesContext.Provider value={routes}>
+            <RenderRoutes routes={routes} />
+          </RoutesContext.Provider>
+        </AuthDataContext.Provider>
+      </DepartmentDatabaseContext.Provider>
     </AuthDatabaseContext.Provider>
   );
 };

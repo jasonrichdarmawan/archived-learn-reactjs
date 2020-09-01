@@ -5,7 +5,6 @@ export const DashboardTemplate = ({
   routes,
   authData,
   setAuthData,
-
   formInputs,
   handleChange,
   handleButton,

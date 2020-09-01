@@ -1,12 +1,22 @@
-import React, { useState } from "react";
-import { NavigationBar } from "../../organisms";
+import React from "react";
+import { NavigationBar, AddForm } from "../../organisms";
 
-import { Container, Alert } from "react-bootstrap";
-
-export const AddTemplate = ({ routes, authData, setAuthData }) => {
-
-  const [errorMessage, setErrorMessage] = useState();
-
+export const AddTemplate = ({
+  routes,
+  authData,
+  setAuthData,
+  authDatabase,
+  setAuthDatabase,
+  departmentDatabase,
+  setDepartmentDatabase,
+  formInputs,
+  handleChange,
+  readOnly,
+  errorMessage,
+  res,
+  handleSubmit,
+  ...props
+}) => {
   return (
     <div className="min-vh-100 d-flex flex-column">
       <NavigationBar
@@ -14,11 +24,15 @@ export const AddTemplate = ({ routes, authData, setAuthData }) => {
         authData={authData}
         setAuthData={setAuthData}
       />
-      <div className="d-flex flex-fill align-items-center">
-        <Container>
-          {errorMessage && <Alert variant="warning">{errorMessage}</Alert>}
-        </Container>
-      </div>
+      <AddForm
+        formInputs={formInputs}
+        handleChange={handleChange}
+        errorMessage={errorMessage}
+        readOnly={readOnly}
+        res={res}
+        handleSubmit={handleSubmit}
+        {...props}
+      />
     </div>
   );
 };
