@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Routes } from "./config";
 import { RenderRoutes } from "./utils";
-import { AuthDatabaseContext, AuthDataContext } from "./providers";
+import { AuthDatabaseContext, AuthDataContext, RoutesContext } from "./providers";
 
 const App = () => {
   const [authDatabase, setAuthDatabase] = useState();
@@ -32,7 +32,9 @@ const App = () => {
   return (
     <AuthDatabaseContext.Provider value={{ authDatabase, setAuthDatabase }}>
       <AuthDataContext.Provider value={{ authData, setAuthData }}>
-        <RenderRoutes routes={routes} />
+        <RoutesContext.Provider value={routes}>
+          <RenderRoutes routes={routes} />
+        </RoutesContext.Provider>
       </AuthDataContext.Provider>
     </AuthDatabaseContext.Provider>
   );
