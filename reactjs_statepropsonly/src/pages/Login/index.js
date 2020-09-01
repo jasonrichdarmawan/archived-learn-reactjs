@@ -41,6 +41,8 @@ export const Login = () => {
       );
       if (res) {
         setRes(true);
+        setErrorMessage();
+
         setAuthData({ ...res, isAuthorized: true });
       } else {
         setRes(false);

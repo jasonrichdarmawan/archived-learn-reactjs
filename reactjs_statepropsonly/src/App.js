@@ -18,13 +18,19 @@ const App = () => {
           username: "admin",
           password: "123456",
           type: 0,
-          displayName: "Jason admin",
+          uid: 0,
+          name: "Jason admin",
+          email: "jason@admin.com",
+          phoneNumber: "0889 0889 2668",
         },
         {
           username: "employee",
           password: "abcdefg",
           type: 1,
-          displayName: "Jason employee"
+          uid: 0,
+          name: "Jason employee",
+          email: "jason@employee.com",
+          phoneNumber: "0889 0889 2668",
         },
       ]);
     }, 2000);
