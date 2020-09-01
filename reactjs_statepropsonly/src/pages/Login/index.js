@@ -4,7 +4,7 @@ import { LoginTemplate } from "../../components";
 
 export const Login = () => {
   const { authDatabase } = useContext(AuthDatabaseContext);
-  const { authData, setAuthData } = useContext(AuthDataContext);
+  const { setAuthData } = useContext(AuthDataContext);
 
   const formInputs = [
     { label: "username", type: "text" },
