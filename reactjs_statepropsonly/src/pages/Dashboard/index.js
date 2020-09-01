@@ -81,8 +81,6 @@ export const DashboardPage = () => {
   return (
     <DashboardTemplate
       routes={routes}
-      authDatabase={authDatabase}
-      setAuthDatabase={setAuthDatabase}
       authData={authData}
       setAuthData={setAuthData}
 
