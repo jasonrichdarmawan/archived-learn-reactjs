@@ -206,8 +206,9 @@ export const NavBarOrganism = ({ authData, setAuthData }) => {
 
 export const ArraySplicer = (array, lengthCol) => {
   let res = [];
-  for (let i = array.length / lengthCol; i > 0; i--) {
-    res.push(array.splice(0, lengthCol));
+  let temporary = array;
+  for (let i = temporary.length / lengthCol; i > 0; i--) {
+    res.push(temporary.splice(0, lengthCol));
   }
   return res;
 };
@@ -215,6 +216,7 @@ export const ArraySplicer = (array, lengthCol) => {
 export const CardOrganism = ({ database }) => {
   return (
     <Container className="mt-3">
+      {/* why ArraySplicer change { database } value? */}
       {ArraySplicer(database, 3).map((row, i) => {
         return (
           <div className="card-group mt-3" key={"RowCardGroup" + i}>
