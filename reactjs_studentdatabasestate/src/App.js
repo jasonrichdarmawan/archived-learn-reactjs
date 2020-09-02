@@ -190,29 +190,76 @@ export const NavBarOrganism = ({ authData, setAuthData }) => {
         <Nav className="mr-auto">
           {displayRouteNavbar({ authData, routes })}
         </Nav>
-        <Form inline>
-          <Button
-            variant="danger"
-            size="sm"
-            onClick={() => handleLogout({ setAuthData })}
-          >
-            Log Out
-          </Button>
-        </Form>
+        {authData.isAuthorized && (
+          <Form inline>
+            <Button
+              variant="danger"
+              size="sm"
+              onClick={() => handleLogout({ setAuthData })}
+            >
+              Log Out
+            </Button>
+          </Form>
+        )}
       </Navbar.Collapse>
     </Navbar>
   );
 };
 
-export const DashboardTemplate = ({ authData, setAuthData }) => (
+export const ArraySplicer = (array, lengthRow) => {
+  let res = [];
+  for (let i = array.length / lengthRow; i > 0; i--) {
+    res.push(array.splice(0, lengthRow));
+  }
+  return res;
+};
+
+export const CardOrganism = ({ database }) => {
+  return (
+    <Container className="mt-3">
+      {ArraySplicer(database, 3).map((row, i) => {
+        return (
+          <div className="row mt-3" key={"RowCardGroup" + i}>
+            {row.map((user, i) => {
+              return (
+                <div className="col" key={"ColCardGroup" + i}>
+                  <div className="card" key={user.displayName}>
+                    <img className="card-img-top" src={user.profileUrl} />
+                    <div className="card-body">
+                      <h5 className="card-title">{user.displayName}</h5>
+                      <p className="card-text">{user.quotes}</p>
+                      <Button variant="primary" href={user.githubUrl}>
+                        Github
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        );
+      })}
+    </Container>
+  );
+};
+
+export const DashboardTemplate = ({ authData, setAuthData, database }) => (
   <div className="min-vh-100 d-flex flex-column">
     <NavBarOrganism authData={authData} setAuthData={setAuthData} />
+    <CardOrganism database={database} />
   </div>
 );
 
 export const DashboardPage = () => {
   const { authData, setAuthData } = useContext(AuthDataContext);
-  return <DashboardTemplate authData={authData} setAuthData={setAuthData} />;
+  const { database } = useContext(DatabaseContext);
+  return (
+    <DashboardTemplate
+      authData={authData}
+      setAuthData={setAuthData}
+      database={database}
+    />
+  );
 };
 
 export const Routes = ({ authData }) => {
@@ -223,8 +270,7 @@ export const Routes = ({ authData }) => {
       exact: true,
       component: () => {
         if (authData.isAuthorized === true) return <Redirect to="/app" />;
-        else if (authData.isAuthorized === false)
-          return <Redirect to="/login" />;
+        else if (authData.isAuthorized === false) return <DashboardPage />;
         else return <FetchAuthData />;
       },
     },
