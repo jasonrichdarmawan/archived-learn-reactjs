@@ -20,6 +20,7 @@ export const RenderRoutes = () => {
       {routes.map((route) => (
         <RouteWithSubRoutes key={route.key} {...route} />
       ))}
+      <Route component={() => <h1>Not Found</h1>} />
     </Switch>
   );
 };
@@ -301,7 +302,6 @@ function App() {
   return (
     <DatabaseProvider>
       <AuthDataProvider>
-        {/* <RenderRoutes routes={Routes({ authData: authData })} /> */}
         <RenderRoutes />
       </AuthDataProvider>
     </DatabaseProvider>
