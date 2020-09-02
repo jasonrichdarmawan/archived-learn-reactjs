@@ -12,114 +12,17 @@ import {
   Table,
 } from "react-bootstrap";
 
-import { DatabaseProvider, DatabaseContext, AuthDataProvider, AuthDataContext } from "./providers";
+import {
+  DatabaseProvider,
+  DatabaseContext,
+  AuthDataProvider,
+  AuthDataContext,
+} from "./providers";
 import { RenderRoutes } from "./utils";
 
 // TEMP
 import { Routes } from "./config";
-
-export const FormOrganism = ({ forms, res, handleChange, handleSubmit }) => {
-  return (
-    <Form onSubmit={handleSubmit}>
-      {forms.map((form) => (
-        <Form.Group key={form.label} controlId={form.controlId}>
-          <Form.Label>{form.label}</Form.Label>
-          <Form.Control
-            type={form.type}
-            placeholder={form.placeholder}
-            value={form.value}
-            onChange={handleChange}
-          />
-        </Form.Group>
-      ))}
-      <Button
-        type="submit"
-        size="sm"
-        variant={res === true ? "success" : "primary"}
-        disabled={res === "await" ? true : false}
-      >
-        {res === true ? "Success" : "Submit"}
-      </Button>
-    </Form>
-  );
-};
-
-export const LoginTemplate = ({ database, setAuthData }) => {
-  const [error, setError] = useState();
-
-  const [res, setRes] = useState();
-
-  const forms = [
-    {
-      controlId: "username",
-      label: "username",
-      type: "text",
-      placeholder: "Enter username",
-    },
-    {
-      controlId: "password",
-      label: "password",
-      type: "password",
-      placeholder: "Enter password",
-    },
-  ];
-
-  const [inputs, setInputs] = useState({
-    username: "",
-    password: "",
-  });
-
-  const { username, password } = inputs;
-
-  const handleChange = (event) => {
-    setInputs({ ...inputs, [event.target.id]: event.target.value });
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    setRes("await");
-
-    const timer = setTimeout(() => {
-      // TODO: Database. Listener.
-      // question: how to make a listener?
-      const res = database.find((object, index) =>
-        object.username === username
-          ? database[index].password === password && true
-          : false
-      );
-      if (res) {
-        setRes(true);
-        setError();
-        setAuthData({ ...res, isAuthorized: true });
-      } else if (!res) {
-        setRes(false);
-        setError("Either username or password is incorrect.");
-      }
-    }, 1000);
-  };
-
-  return (
-    <div className="min-vh-100 d-flex align-items-center">
-      <Container className="w-auto">
-        {error && <Alert variant="warning">{error}</Alert>}
-        <FormOrganism
-          forms={forms}
-          res={res}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-        />
-      </Container>
-    </div>
-  );
-};
-
-export const LoginPage = () => {
-  const { database } = useContext(DatabaseContext);
-  const { setAuthData } = useContext(AuthDataContext);
-
-  return <LoginTemplate database={database} setAuthData={setAuthData} />;
-};
+import { FormOrganism } from "./components";
 
 export const displayRouteNavbar = ({ authData, routes }) => {
   const singleRoute = (route) => (
