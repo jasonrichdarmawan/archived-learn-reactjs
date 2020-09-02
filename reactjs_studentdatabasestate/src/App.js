@@ -1,6 +1,15 @@
 import React, { useState, useContext } from "react";
 import { Redirect, Switch, Route, Link } from "react-router-dom";
-import { Container, Form, Button, Alert, Navbar, Nav } from "react-bootstrap";
+import {
+  Container,
+  Form,
+  Button,
+  Alert,
+  Navbar,
+  Nav,
+  Row,
+  Col,
+} from "react-bootstrap";
 
 const RouteWithSubRoutes = (route) => (
   <Route
@@ -190,11 +199,7 @@ export const NavBarOrganism = ({ authData, setAuthData }) => {
         </Nav>
         {authData.isAuthorized && (
           <Form inline>
-            <Button
-              variant="danger"
-              size="sm"
-              onClick={handleLogout}
-            >
+            <Button variant="danger" size="sm" onClick={handleLogout}>
               Log Out
             </Button>
           </Form>
@@ -213,66 +218,218 @@ export const ArraySplicer = (array, lengthCol) => {
   return res;
 };
 
-export const CardOrganism = ({ database }) => {
-  return (
-    <Container className="mt-3">
-      {/* why ArraySplicer change { database } value? */}
-      {ArraySplicer(database, 3).map((row, i) => {
-        return (
-          <div className="card-group mt-3" key={"RowCardGroup" + i}>
-            {row.map((user, i) => {
-              return (
-                <div className="card" key={"ColCardGroup" + i}>
-                  <img
-                    className="card-img-top"
-                    height="180"
-                    alt=""
-                    src={
-                      user.profileUrl ||
-                      "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22286%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20286%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1744ea317a8%20text%20%7B%20fill%3A%23999%3Bfont-weight%3Anormal%3Bfont-family%3A-apple-system%2CBlinkMacSystemFont%2C%26quot%3BSegoe%20UI%26quot%3B%2CRoboto%2C%26quot%3BHelvetica%20Neue%26quot%3B%2CArial%2C%26quot%3BNoto%20Sans%26quot%3B%2Csans-serif%2C%26quot%3BApple%20Color%20Emoji%26quot%3B%2C%26quot%3BSegoe%20UI%20Emoji%26quot%3B%2C%26quot%3BSegoe%20UI%20Symbol%26quot%3B%2C%26quot%3BNoto%20Color%20Emoji%26quot%3B%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1744ea317a8%22%3E%3Crect%20width%3D%22286%22%20height%3D%22180%22%20fill%3D%22%23373940%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22108.5234375%22%20y%3D%2297.4015625%22%3E286x180%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
-                    }
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">
-                      {user.displayName || "lorem ipsum"}
-                    </h5>
-                    <p className="card-text">
-                      {user.quotes || "lorem ipsum lorem ipsum"}
-                    </p>
-                  </div>
-                  <div className="card-footer">
-                    <Button
-                      variant="outline-primary"
-                      href={user.githubUrl || "https://github.com/"}
-                    >
-                      Github
-                    </Button>
-                  </div>
-                </div>
-              );
-            })}
+export const CardOrganism = ({
+  database,
+  setDatabase,
+  authData,
+  setAuthData,
+}) => {
+  const [editMode, setEditMode] = useState(false);
+  const [res, setRes] = useState();
+  const [inputs, setInputs] = useState({
+    profileUrl: authData.profileUrl,
+    displayName: authData.displayName,
+    quotes: authData.quotes,
+    githubUrl: authData.githubUrl,
+  });
+
+  const { profileUrl, displayName, quotes, githubUrl } = inputs;
+
+  if (authData.isAuthorized === true) {
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      if (editMode === true) {
+        setRes("await");
+        setTimeout(() => {
+          setRes(true);
+
+          setDatabase(
+            database.map((user) =>
+              user.uid === authData.uid
+                ? {
+                    ...user,
+                    profileUrl: profileUrl,
+                    displayName: displayName,
+                    quotes: quotes,
+                    githubUrl: githubUrl,
+                  }
+                : user
+            )
+          );
+          setAuthData({
+            ...authData,
+            profileUrl: profileUrl,
+            displayName: displayName,
+            quotes: quotes,
+            githubUrl: githubUrl,
+          });
+        }, 1000);
+      } else if (editMode === false) setEditMode(true);
+    };
+
+    const forms = [
+      {
+        controlId: "profileUrl",
+        label: "Profile Url",
+        type: "text",
+        value: profileUrl,
+      },
+      {
+        controlId: "displayName",
+        label: "Name",
+        type: "text",
+        value: displayName,
+      },
+      {
+        controlId: "quotes",
+        label: "Quotes",
+        type: "text",
+        value: quotes,
+      },
+      {
+        controlId: "githubUrl",
+        label: "Github Url",
+        type: "text",
+        value: githubUrl,
+      },
+    ];
+
+    const handleChange = (event) => {
+      setInputs({ ...inputs, [event.target.id]: event.target.value });
+    };
+
+    return (
+      <Container className="mt-3 w-auto">
+        <Row>
+          <Col>
+            <Button
+              type="submit"
+              className="float-right"
+              size="sm"
+              variant={res === true ? "success" : "outline-primary"}
+              onClick={handleSubmit}
+              disabled={res === "await" ? true : false}
+            >
+              {editMode ? (res === true ? "Success" : "Submit") : "Edit"}
+            </Button>
+          </Col>
+        </Row>
+        {editMode ? (
+          <Form className="mt-3" onSubmit={handleSubmit}>
+            {forms.map((form) => (
+              <Form.Group key={form.label} controlId={form.controlId}>
+                <Form.Label>{form.label}</Form.Label>
+                <Form.Control
+                  type={form.type}
+                  value={form.value}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            ))}
+          </Form>
+        ) : (
+          <div className="card mt-3" style={{ width: "18" + "rem" }}>
+            <img
+              className="card-img-top"
+              height="180"
+              alt=""
+              src={
+                authData.profileUrl ||
+                "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22286%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20286%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1744ea317a8%20text%20%7B%20fill%3A%23999%3Bfont-weight%3Anormal%3Bfont-family%3A-apple-system%2CBlinkMacSystemFont%2C%26quot%3BSegoe%20UI%26quot%3B%2CRoboto%2C%26quot%3BHelvetica%20Neue%26quot%3B%2CArial%2C%26quot%3BNoto%20Sans%26quot%3B%2Csans-serif%2C%26quot%3BApple%20Color%20Emoji%26quot%3B%2C%26quot%3BSegoe%20UI%20Emoji%26quot%3B%2C%26quot%3BSegoe%20UI%20Symbol%26quot%3B%2C%26quot%3BNoto%20Color%20Emoji%26quot%3B%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1744ea317a8%22%3E%3Crect%20width%3D%22286%22%20height%3D%22180%22%20fill%3D%22%23373940%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22108.5234375%22%20y%3D%2297.4015625%22%3E286x180%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+              }
+            />
+            <div className="card-body">
+              <h5 className="card-title">
+                {authData.displayName || "lorem ipsum"}
+              </h5>
+              <p className="card-text">
+                {authData.quotes || "lorem ipsum lorem ipsum"}
+              </p>
+            </div>
+            <div className="card-footer">
+              <Button
+                variant="outline-primary"
+                href={authData.githubUrl || "https://github.com/"}
+              >
+                Github
+              </Button>
+            </div>
           </div>
-        );
-      })}
-    </Container>
-  );
+        )}
+      </Container>
+    );
+  } else
+    return (
+      <Container className="mt-3">
+        {/* why ArraySplicer change { database } value? */}
+        {ArraySplicer(database, 3).map((row, i) => {
+          return (
+            <div className="card-group mt-3" key={"RowCardGroup" + i}>
+              {row.map((user, i) => {
+                return (
+                  <div className="card" key={"ColCardGroup" + i}>
+                    <img
+                      className="card-img-top"
+                      height="180"
+                      alt=""
+                      src={
+                        user.profileUrl ||
+                        "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22286%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20286%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1744ea317a8%20text%20%7B%20fill%3A%23999%3Bfont-weight%3Anormal%3Bfont-family%3A-apple-system%2CBlinkMacSystemFont%2C%26quot%3BSegoe%20UI%26quot%3B%2CRoboto%2C%26quot%3BHelvetica%20Neue%26quot%3B%2CArial%2C%26quot%3BNoto%20Sans%26quot%3B%2Csans-serif%2C%26quot%3BApple%20Color%20Emoji%26quot%3B%2C%26quot%3BSegoe%20UI%20Emoji%26quot%3B%2C%26quot%3BSegoe%20UI%20Symbol%26quot%3B%2C%26quot%3BNoto%20Color%20Emoji%26quot%3B%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1744ea317a8%22%3E%3Crect%20width%3D%22286%22%20height%3D%22180%22%20fill%3D%22%23373940%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22108.5234375%22%20y%3D%2297.4015625%22%3E286x180%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+                      }
+                    />
+                    <div className="card-body">
+                      <h5 className="card-title">
+                        {user.displayName || "lorem ipsum"}
+                      </h5>
+                      <p className="card-text">
+                        {user.quotes || "lorem ipsum lorem ipsum"}
+                      </p>
+                    </div>
+                    <div className="card-footer">
+                      <Button
+                        variant="outline-primary"
+                        href={user.githubUrl || "https://github.com/"}
+                      >
+                        Github
+                      </Button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          );
+        })}
+      </Container>
+    );
 };
 
-export const DashboardTemplate = ({ authData, setAuthData, database }) => (
+export const DashboardTemplate = ({
+  authData,
+  setAuthData,
+  database,
+  setDatabase,
+}) => (
   <div className="min-vh-100 d-flex flex-column">
     <NavBarOrganism authData={authData} setAuthData={setAuthData} />
-    <CardOrganism database={database} />
+    <CardOrganism
+      database={database}
+      setDatabase={setDatabase}
+      authData={authData}
+      setAuthData={setAuthData}
+    />
   </div>
 );
 
 export const DashboardPage = () => {
   const { authData, setAuthData } = useContext(AuthDataContext);
-  const { database } = useContext(DatabaseContext);
+  const { database, setDatabase } = useContext(DatabaseContext);
   return (
     <DashboardTemplate
       authData={authData}
       setAuthData={setAuthData}
       database={database}
+      setDatabase={setDatabase}
     />
   );
 };
@@ -328,6 +485,7 @@ export const DatabaseProvider = ({ children }) => {
   // question: why popping out component "DashboardPage" cause the { database } value to [] ?
   const [database, setDatabase] = useState([
     {
+      uid: 0,
       username: "jason",
       password: "0",
       profileUrl:
@@ -339,16 +497,19 @@ export const DatabaseProvider = ({ children }) => {
     },
     // TODO
     {
+      uid: 1,
       username: "fawwaazrahman",
       password: "1",
     },
     // TODO
     {
+      uid: 2,
       username: "jenedy",
       password: "2",
     },
     // TODO
     {
+      uid: 3,
       username: "taufik",
       password: "3",
       profile: "",
@@ -357,6 +518,7 @@ export const DatabaseProvider = ({ children }) => {
       githubUrl: "https://github.com/taufik-muharrom",
     },
     {
+      uid: 4,
       username: "aisah",
       password: "4",
       profileUrl:
@@ -366,6 +528,7 @@ export const DatabaseProvider = ({ children }) => {
       githubUrl: "https://github.com/athaisyah",
     },
     {
+      uid: 5,
       username: "fauzan",
       password: "5",
       profileUrl:
@@ -375,6 +538,7 @@ export const DatabaseProvider = ({ children }) => {
       githubUrl: "https://github.com/fauzanmuhtadi/BootcampG2AcademyBatch2",
     },
     {
+      uid: 6,
       username: "rifqi",
       password: "6",
       profileUrl:
@@ -385,6 +549,7 @@ export const DatabaseProvider = ({ children }) => {
     },
     // TODO
     {
+      uid: 7,
       username: "ryan",
       password: "7",
       profileUrl: "",
@@ -394,6 +559,7 @@ export const DatabaseProvider = ({ children }) => {
     },
     // TODO
     {
+      uid: 8,
       username: "yusal",
       password: "8",
       profileUrl: "",
@@ -404,10 +570,12 @@ export const DatabaseProvider = ({ children }) => {
     },
     // TODO
     {
+      uid: 9,
       username: "nurul",
       password: "9",
     },
     {
+      uid: 10,
       username: "ahmad",
       password: "10",
       profileUrl: "https://i.ibb.co/yFkZY5y/photoku.jpg",
