@@ -230,7 +230,7 @@ export const CardOrganism = ({ database }) => {
                       <p className="card-text">{user.quotes || "lorem ipsum lorem ipsum"}</p>
                     </div>
                     <div class="card-footer">
-                      <Button variant="primary" href={user.githubUrl || "https://github.com/"}>Github</Button>
+                      <Button variant="outline-primary" href={user.githubUrl || "https://github.com/"}>Github</Button>
                     </div>
                   </div>
                 // </div>
