@@ -23,7 +23,7 @@ export const RenderRoutes = () => {
   );
 };
 
-const FetchAuthData = () => {
+export const FetchAuthData = () => {
   const { authData, setAuthData } = useContext(AuthDataContext);
 
   if (authData.isAuthorized === "await") {
@@ -74,9 +74,9 @@ export const Routes = ({ authData }) => {
   ];
 };
 
-const AuthDataContext = React.createContext();
+export const AuthDataContext = React.createContext();
 
-const AuthDataProvider = ({ children }) => {
+export const AuthDataProvider = ({ children }) => {
   const [authData, setAuthData] = useState({ isAuthorized: "await" });
   return (
     <AuthDataContext.Provider value={{ authData, setAuthData }}>
