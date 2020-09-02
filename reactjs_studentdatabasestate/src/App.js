@@ -219,21 +219,21 @@ export const CardOrganism = ({ database }) => {
     <Container className="mt-3">
       {ArraySplicer(database, 3).map((row, i) => {
         return (
-          <div className="row mt-3" key={"RowCardGroup" + i}>
+          <div className="card-group mt-3" key={"RowCardGroup" + i}>
             {row.map((user, i) => {
               return (
-                <div className="col" key={"ColCardGroup" + i}>
-                  <div className="card" key={user.displayName}>
-                    <img className="card-img-top" src={user.profileUrl} />
+                // <div className="col col-4" key={"ColCardGroup" + i}>
+                  <div className="card">
+                    <img className="card-img-top" height="180" src={user.profileUrl || "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22286%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20286%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1744ea317a8%20text%20%7B%20fill%3A%23999%3Bfont-weight%3Anormal%3Bfont-family%3A-apple-system%2CBlinkMacSystemFont%2C%26quot%3BSegoe%20UI%26quot%3B%2CRoboto%2C%26quot%3BHelvetica%20Neue%26quot%3B%2CArial%2C%26quot%3BNoto%20Sans%26quot%3B%2Csans-serif%2C%26quot%3BApple%20Color%20Emoji%26quot%3B%2C%26quot%3BSegoe%20UI%20Emoji%26quot%3B%2C%26quot%3BSegoe%20UI%20Symbol%26quot%3B%2C%26quot%3BNoto%20Color%20Emoji%26quot%3B%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1744ea317a8%22%3E%3Crect%20width%3D%22286%22%20height%3D%22180%22%20fill%3D%22%23373940%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22108.5234375%22%20y%3D%2297.4015625%22%3E286x180%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"} />
                     <div className="card-body">
-                      <h5 className="card-title">{user.displayName}</h5>
-                      <p className="card-text">{user.quotes}</p>
-                      <Button variant="primary" href={user.githubUrl}>
-                        Github
-                      </Button>
+                      <h5 className="card-title">{user.displayName || "lorem ipsum"}</h5>
+                      <p className="card-text">{user.quotes || "lorem ipsum lorem ipsum"}</p>
+                    </div>
+                    <div class="card-footer">
+                      <Button variant="primary" href={user.githubUrl || "https://github.com/"}>Github</Button>
                     </div>
                   </div>
-                </div>
+                // </div>
               );
             })}
           </div>
