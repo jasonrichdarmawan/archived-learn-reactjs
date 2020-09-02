@@ -36,56 +36,50 @@ export const FetchAuthData = () => {
   }
 };
 
-export const FormOrganism = ({ forms, handleSubmit }) => {
-  // example in React.Component
-  // constructor(props) {
-  //   super(props)
+export const FormOrganism = ({
+  forms,
+  setError,
+  res,
+  setRes,
+  database,
+  setAuthData,
+}) => {
+  const [inputs, setInputs] = useState({
+    username: "",
+    password: "",
+  });
 
-  //   this.state = {
-  //     username: "",
-  //     password: "",
-  //   }
-  // }
-
-  // handleChange = (event) => {
-  //   this.setState({ [event.target.id]: event.target.value });
-  // }
-
-  // <Form.Control onChange={this.handleChange} />
-  // <Form.Control onChange={() => this.handleChange} />
-
-  // const [username, setUsername] = useState();
-  // const [password, setPassword] = useState();
-
-  // const [inputs, setInputs] = useState();
-
-  // const handleChange = useCallback((event) => {
-  //   console.log('hi')
-  //   setInputs({ ...inputs, [event.target.id]: event.target.value });
-  //   // if (event.target.id === "username") setUsername(event.target.value);
-  //   // else if (event.target.id === "password") setPassword(event.target.value);
-  // }, []);
-
-  // const handleChange = (event) => {
-  //   setInputs({ ...inputs, [event.target.id]: event.target.value });
-  //   console.log("s", inputs);
-  // };
-
-  const [inputs, setInputs] = useState();
+  const { username, password } = inputs;
 
   const handleChange = (event) => {
     setInputs({ ...inputs, [event.target.id]: event.target.value });
-    // if (event.target.id === "username") setUsername(event.target.value);
-    // else if (event.target.id === "password") setPassword(event.target.value);
   };
 
-  // <Form.Group controlId="formBasicEmail">
-  //   <Form.Label>Email address</Form.Label>
-  //   <Form.Control type="email" placeholder="Enter email" />
-  //   <Form.Text className="text-muted">
-  //     We'll never share your email with anyone else.
-  //   </Form.Text>
-  // </Form.Group>;
+  // const [res, setRes] = useState();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setRes("await");
+
+    const timer = setTimeout(() => {
+      // TODO: Database.
+      const res = database.find((object, index) =>
+        object.username === username
+          ? database[index].password === password && true
+          : false
+      );
+      if (res) {
+        setRes(true);
+        setError();
+        setAuthData({ ...res, isAuthorized: true });
+      } else if (!res) {
+        setRes(false);
+        setError("Either username or password is incorrect.");
+      }
+    }, 1000);
+  };
+
   return (
     <Form onSubmit={handleSubmit}>
       {forms.map((form) => (
@@ -98,15 +92,22 @@ export const FormOrganism = ({ forms, handleSubmit }) => {
           />
         </Form.Group>
       ))}
-      <Button type="submit" size="sm" variant="primary">
-        Submit
+      <Button
+        type="submit"
+        size="sm"
+        variant={res === true ? "success" : "primary"}
+        disabled={res === "await" ? true : false}
+      >
+        {res === true ? "Success" : "Submit"}
       </Button>
     </Form>
   );
 };
 
-export const LoginTemplate = () => {
+export const LoginTemplate = ({ database, setAuthData }) => {
   const [error, setError] = useState();
+
+  const [res, setRes] = useState();
 
   const forms = [
     {
@@ -123,27 +124,28 @@ export const LoginTemplate = () => {
     },
   ];
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-
-    const timer = setTimeout(() => {
-      // TODO: authDatabase.
-    }, 1000);
-  };
-
   return (
     <div className="min-vh-100 d-flex align-items-center">
       <Container className="w-auto">
         {error && <Alert variant="warning">{error}</Alert>}
-        <FormOrganism forms={forms} handleSubmit={handleSubmit} />
+        <FormOrganism
+          forms={forms}
+          setError={setError}
+          res={res}
+          setRes={setRes}
+          database={database}
+          setAuthData={setAuthData}
+        />
       </Container>
     </div>
   );
 };
 
 export const LoginPage = () => {
-  return <LoginTemplate />;
+  const { database } = useContext(DatabaseContext);
+  const { setAuthData } = useContext(AuthDataContext);
+
+  return <LoginTemplate database={database} setAuthData={setAuthData} />;
 };
 
 export const Routes = ({ authData }) => {
