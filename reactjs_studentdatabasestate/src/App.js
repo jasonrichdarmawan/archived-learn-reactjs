@@ -48,46 +48,10 @@ export const FetchAuthData = () => {
 
 export const FormOrganism = ({
   forms,
-  setError,
   res,
-  setRes,
-  database,
-  setAuthData,
+  handleChange,
+  handleSubmit,
 }) => {
-  const [inputs, setInputs] = useState({
-    username: "",
-    password: "",
-  });
-
-  const { username, password } = inputs;
-
-  const handleChange = (event) => {
-    setInputs({ ...inputs, [event.target.id]: event.target.value });
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    setRes("await");
-
-    const timer = setTimeout(() => {
-      // TODO: Database.
-      const res = database.find((object, index) =>
-        object.username === username
-          ? database[index].password === password && true
-          : false
-      );
-      if (res) {
-        setRes(true);
-        setError();
-        setAuthData({ ...res, isAuthorized: true });
-      } else if (!res) {
-        setRes(false);
-        setError("Either username or password is incorrect.");
-      }
-    }, 1000);
-  };
-
   return (
     <Form onSubmit={handleSubmit}>
       {forms.map((form) => (
@@ -132,17 +96,49 @@ export const LoginTemplate = ({ database, setAuthData }) => {
     },
   ];
 
+  const [inputs, setInputs] = useState({
+    username: "",
+    password: "",
+  });
+
+  const { username, password } = inputs;
+
+  const handleChange = (event) => {
+    setInputs({ ...inputs, [event.target.id]: event.target.value });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setRes("await");
+
+    const timer = setTimeout(() => {
+      // TODO: Database.
+      const res = database.find((object, index) =>
+        object.username === username
+          ? database[index].password === password && true
+          : false
+      );
+      if (res) {
+        setRes(true);
+        setError();
+        setAuthData({ ...res, isAuthorized: true });
+      } else if (!res) {
+        setRes(false);
+        setError("Either username or password is incorrect.");
+      }
+    }, 1000);
+  };
+
   return (
     <div className="min-vh-100 d-flex align-items-center">
       <Container className="w-auto">
         {error && <Alert variant="warning">{error}</Alert>}
         <FormOrganism
           forms={forms}
-          setError={setError}
           res={res}
-          setRes={setRes}
-          database={database}
-          setAuthData={setAuthData}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
         />
       </Container>
     </div>
@@ -436,9 +432,24 @@ export const DashboardPage = () => {
   );
 };
 
+export const AddTemplate = ({ authData, setAuthData }) => (
+  <div className="min-vh-100 d-flex flex-column">
+    <NavBarOrganism authData={authData} setAuthData={setAuthData} />
+    {/* <FormOrganism /> */}
+  </div>
+);
+
 export const AddPage = () => {
   const { database, setDatabase } = useContext(DatabaseContext);
-  return "AddPage";
+  const { authData, setAuthData } = useContext(AuthDataContext);
+  return (
+    <AddTemplate
+      authData={authData}
+      setAuthData={setAuthData}
+      database={database}
+      setDatabase={setDatabase}
+    />
+  );
 };
 
 export const Routes = ({ authData }) => {
