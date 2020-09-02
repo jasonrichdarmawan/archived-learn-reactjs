@@ -46,12 +46,7 @@ export const FetchAuthData = () => {
   }
 };
 
-export const FormOrganism = ({
-  forms,
-  res,
-  handleChange,
-  handleSubmit,
-}) => {
+export const FormOrganism = ({ forms, res, handleChange, handleSubmit }) => {
   return (
     <Form onSubmit={handleSubmit}>
       {forms.map((form) => (
