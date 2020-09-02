@@ -206,10 +206,10 @@ export const NavBarOrganism = ({ authData, setAuthData }) => {
   );
 };
 
-export const ArraySplicer = (array, lengthRow) => {
+export const ArraySplicer = (array, lengthCol) => {
   let res = [];
-  for (let i = array.length / lengthRow; i > 0; i--) {
-    res.push(array.splice(0, lengthRow));
+  for (let i = array.length / lengthCol; i > 0; i--) {
+    res.push(array.splice(0, lengthCol));
   }
   return res;
 };
