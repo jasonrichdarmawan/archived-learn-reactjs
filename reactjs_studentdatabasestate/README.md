@@ -1,16 +1,16 @@
 ### Features
 
-- [ ] Public Routes
-  - [ ] Login System
-  - [ ] Home `list all of students' profile`
-- [ ] Admin Routes
-  - [ ] Home `user's profile`, can edit.
-  - [ ] Register new student's
-  - [ ] Edit student's profile
-- [ ] Student Routes
-  - [ ] Home `user's profile`, can edit.
+- [x] Public Routes
+  - [x] Login System
+  - [x] Home `list all of students' profile`
+- [x] Admin Routes
+  - [x] Home `user's profile`, can edit.
+  - [x] Register new student's
+  - [x] Edit student's profile
+- [x] Student Routes
+  - [x] Home `user's profile`, can edit.
 
 ### Requirements
 
-- [ ] Only use LocalStorage in 1 class / 1 function.
-- [ ] Pass data only with state & props.
+- [ ] Only use LocalStorage in 1 class / 1 function. `cancelled`
+- [x] Pass data only with state & props.
