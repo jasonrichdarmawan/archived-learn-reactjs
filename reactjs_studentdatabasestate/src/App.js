@@ -9,6 +9,7 @@ import {
   Nav,
   Row,
   Col,
+  Table,
 } from "react-bootstrap";
 
 const RouteWithSubRoutes = (route) => (
@@ -209,7 +210,7 @@ export const ArraySplicer = (array, lengthCol) => {
   return res;
 };
 
-export const CardOrganism = ({
+export const CardTemplate = ({
   database,
   setDatabase,
   authData,
@@ -321,7 +322,7 @@ export const CardOrganism = ({
             ))}
           </Form>
         ) : (
-          <div className="card mt-3" style={{ width: "18" + "rem" }}>
+          <div className="card mt-3" style={{ width: "18rem" }}>
             <img
               className="card-img-top"
               height="180"
@@ -405,7 +406,7 @@ export const DashboardTemplate = ({
 }) => (
   <div className="min-vh-100 d-flex flex-column">
     <NavBarOrganism authData={authData} setAuthData={setAuthData} />
-    <CardOrganism
+    <CardTemplate
       database={database}
       setDatabase={setDatabase}
       authData={authData}
@@ -485,14 +486,7 @@ export const AddTemplate = ({
     githubUrl: "",
   });
 
-  const {
-    username,
-    password,
-    profileUrl,
-    displayName,
-    quotes,
-    githubUrl,
-  } = inputs;
+  const { username } = inputs;
 
   const handleChange = (event) => {
     setInputs({ ...inputs, [event.target.id]: event.target.value });
@@ -537,6 +531,7 @@ export const AddTemplate = ({
     </div>
   );
 };
+
 export const AddPage = () => {
   const { database, setDatabase } = useContext(DatabaseContext);
   const { authData, setAuthData } = useContext(AuthDataContext);
@@ -546,6 +541,68 @@ export const AddPage = () => {
       setAuthData={setAuthData}
       database={database}
       setDatabase={setDatabase}
+    />
+  );
+};
+
+export const TableOrganism = ({ database }) => {
+  return (
+    <Table responsive>
+      <thead>
+        <tr>
+          <th>Student's UID</th>
+          <th>Student's Name</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {database.map((object) => (
+          <tr key={object.displayName}>
+            <td>{object.uid}</td>
+            <td>{object.displayName}</td>
+            <td>
+              <Link to={"/app/edit/" + object.uid}>
+                <Button size="sm" variant="outline-primary">
+                  Edit
+                </Button>
+              </Link>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </Table>
+  );
+};
+
+export const EditTemplate = ({ authData, setAuthData, database, props }) => {
+  return (
+    <div className="min-vh-100 d-flex flex-column">
+      <NavBarOrganism authData={authData} setAuthData={setAuthData} />
+      <Container className="w-auto mt-3">
+        {!props.match.params.id ? <TableOrganism database={database} /> : null}
+      </Container>
+      {/* <Container className="w-auto mt-3">
+        {error && <Alert variant="warning">{error}</Alert>}
+        <FormOrganism
+          forms={forms}
+          res={res}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+        />
+      </Container> */}
+    </div>
+  );
+};
+
+export const EditPage = (props) => {
+  const { authData, setAuthData } = useContext(AuthDataContext);
+  const { database } = useContext(DatabaseContext);
+  return (
+    <EditTemplate
+      authData={authData}
+      setAuthData={setAuthData}
+      database={database}
+      props={props}
     />
   );
 };
@@ -609,6 +666,32 @@ export const Routes = ({ authData }) => {
             },
           ],
         },
+        {
+          key: "EDIT_ROOT",
+          path: "/app/edit",
+          exact: false,
+          component: (props) => {
+            if (authData.type === 0) return <RenderRoutes {...props} />;
+            else if (authData.type > 0) return <Redirect to="/app" />;
+            else return <FetchAuthData />;
+          },
+          routes: [
+            {
+              key: "Edit",
+              path: "/app/edit",
+              exact: true,
+              display: 0,
+              component: EditPage,
+            },
+            {
+              key: "EDIT_ID",
+              path: "/app/edit/:id",
+              exact: true,
+              display: false,
+              component: EditPage,
+            },
+          ],
+        },
       ],
     },
   ];
@@ -637,6 +720,12 @@ export const DatabaseProvider = ({ children }) => {
       type: 1,
       username: "fawwaazrahman",
       password: "1",
+      profileUrl:
+        "https://bc3-production-assets-cdn.basecamp-static.com/3969846/people/30316027/avatars/avatar-0114179c9e592fa2088f97feceec41e6-128-x1",
+      displayName: "Fawwaazrahman Arandhana W",
+      quotes:
+        "Beraki-rakit dahulu berakit-rakit kemudian, bersakit-sakit dahulu bersakit-sakit kemudian.",
+      githubUrl: "https://github.com/fwzfwz",
     },
     // TODO
     {
@@ -644,6 +733,7 @@ export const DatabaseProvider = ({ children }) => {
       type: 1,
       username: "jenedy",
       password: "2",
+      displayName: "Jenedy Hidayat",
     },
     // TODO
     {
@@ -718,6 +808,8 @@ export const DatabaseProvider = ({ children }) => {
       type: 1,
       username: "nurul",
       password: "9",
+      displayName: "M Nurul Fadhil",
+      githubUrl: "https://github.com/mnurulfadhil",
     },
     {
       uid: 10,
