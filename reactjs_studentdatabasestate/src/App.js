@@ -176,7 +176,7 @@ export const displayRouteNavbar = ({ authData, routes }) => {
 export const NavBarOrganism = ({ authData, setAuthData }) => {
   const routes = Routes({ authData: authData });
 
-  const handleLogout = ({ setAuthData }) => {
+  const handleLogout = () => {
     setAuthData({ isAuthorized: false });
   };
 
@@ -193,7 +193,7 @@ export const NavBarOrganism = ({ authData, setAuthData }) => {
             <Button
               variant="danger"
               size="sm"
-              onClick={() => handleLogout({ setAuthData })}
+              onClick={handleLogout}
             >
               Log Out
             </Button>
