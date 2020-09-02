@@ -56,8 +56,6 @@ export const FormOrganism = ({
     setInputs({ ...inputs, [event.target.id]: event.target.value });
   };
 
-  // const [res, setRes] = useState();
-
   const handleSubmit = (event) => {
     event.preventDefault();
     event.stopPropagation();
@@ -325,6 +323,7 @@ export const Routes = ({ authData }) => {
 export const DatabaseContext = React.createContext();
 
 export const DatabaseProvider = ({ children }) => {
+  // question: why popping out component "DashboardPage" cause the { database } value to [] ?
   const [database, setDatabase] = useState([
     {
       username: "jason",
