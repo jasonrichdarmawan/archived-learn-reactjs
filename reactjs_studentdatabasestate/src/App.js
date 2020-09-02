@@ -211,7 +211,7 @@ export const NavBarOrganism = ({ authData, setAuthData }) => {
 
 export const ArraySplicer = (array, lengthCol) => {
   let res = [];
-  let temporary = array;
+  let temporary = array.slice();
   for (let i = temporary.length / lengthCol; i > 0; i--) {
     res.push(temporary.splice(0, lengthCol));
   }
@@ -227,15 +227,21 @@ export const CardOrganism = ({
   const [editMode, setEditMode] = useState(false);
   const [res, setRes] = useState();
   const [inputs, setInputs] = useState({
-    profileUrl: authData.profileUrl,
-    displayName: authData.displayName,
-    quotes: authData.quotes,
-    githubUrl: authData.githubUrl,
+    profileUrl: "",
+    displayName: "",
+    quotes: "",
+    githubUrl: "",
   });
 
   const { profileUrl, displayName, quotes, githubUrl } = inputs;
 
   if (authData.isAuthorized === true) {
+    setInputs({
+      profileUrl: authData.profileUrl,
+      displayName: authData.displayName,
+      quotes: authData.quotes,
+      githubUrl: authData.githubUrl,
+    });
     const handleSubmit = (event) => {
       event.preventDefault();
       event.stopPropagation();
@@ -359,7 +365,8 @@ export const CardOrganism = ({
         )}
       </Container>
     );
-  } else
+  } else {
+    console.log(ArraySplicer(database, 3))
     return (
       <Container className="mt-3">
         {/* why ArraySplicer change { database } value? */}
@@ -402,6 +409,7 @@ export const CardOrganism = ({
         })}
       </Container>
     );
+  }
 };
 
 export const DashboardTemplate = ({
