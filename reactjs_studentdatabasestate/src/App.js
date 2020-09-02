@@ -56,6 +56,7 @@ export const FormOrganism = ({ forms, res, handleChange, handleSubmit }) => {
           <Form.Control
             type={form.type}
             placeholder={form.placeholder}
+            value={form.value}
             onChange={handleChange}
           />
         </Form.Group>
@@ -109,7 +110,8 @@ export const LoginTemplate = ({ database, setAuthData }) => {
     setRes("await");
 
     const timer = setTimeout(() => {
-      // TODO: Database.
+      // TODO: Database. Listener.
+      // question: how to make a listener?
       const res = database.find((object, index) =>
         object.username === username
           ? database[index].password === password && true
@@ -574,34 +576,117 @@ export const TableOrganism = ({ database }) => {
   );
 };
 
-export const EditTemplate = ({ authData, setAuthData, database, props }) => {
-  return (
-    <div className="min-vh-100 d-flex flex-column">
-      <NavBarOrganism authData={authData} setAuthData={setAuthData} />
-      <Container className="w-auto mt-3">
-        {!props.match.params.id ? <TableOrganism database={database} /> : null}
-      </Container>
-      {/* <Container className="w-auto mt-3">
-        {error && <Alert variant="warning">{error}</Alert>}
-        <FormOrganism
-          forms={forms}
-          res={res}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-        />
-      </Container> */}
-    </div>
-  );
+export const EditTemplate = ({
+  authData,
+  setAuthData,
+  database,
+  setDatabase,
+  props,
+}) => {
+  const [inputs, setInputs] = useState({
+    profileUrl: props.match.params.id
+      ? database[props.match.params.id].profileUrl
+      : "",
+    displayName: props.match.params.id
+      ? database[props.match.params.id].displayName
+      : "",
+    quotes: props.match.params.id ? database[props.match.params.id].quotes : "",
+    githubUrl: props.match.params.id
+      ? database[props.match.params.id].githubUrl
+      : "",
+  });
+
+  console.log(inputs);
+
+  const [res, setRes] = useState();
+
+  if (!props.match.params.id) {
+    return (
+      <div className="min-vh-100 d-flex flex-column">
+        <NavBarOrganism authData={authData} setAuthData={setAuthData} />
+        <Container className="w-auto mt-3">
+          <TableOrganism database={database} />
+        </Container>
+      </div>
+    );
+  } else if (props.match.params.id) {
+    const { profileUrl, displayName, quotes, githubUrl } = inputs;
+
+    const forms = [
+      {
+        controlId: "profileUrl",
+        label: "Profile Url",
+        type: "text",
+        value: profileUrl,
+      },
+      {
+        controlId: "displayName",
+        label: "Name",
+        type: "text",
+        value: displayName,
+      },
+      {
+        controlId: "quotes",
+        label: "Quotes",
+        type: "text",
+        value: quotes,
+      },
+      {
+        controlId: "githubUrl",
+        label: "Github Url",
+        type: "text",
+        value: githubUrl,
+      },
+    ];
+
+    const handleChange = (event) => {
+      const { id, value } = event.target;
+      setInputs({ ...inputs, [id]: value });
+    };
+
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      setRes("await");
+
+      const timer = setTimeout(() => {
+        setRes(true);
+
+        setDatabase(
+          database.map((object) =>
+            object.uid == props.match.params.id ? { ...object, ...inputs } : object
+          )
+        );
+
+        setAuthData()
+      }, 1000);
+    };
+
+    return (
+      <div className="min-vh-100 d-flex flex-column">
+        <NavBarOrganism authData={authData} setAuthData={setAuthData} />
+        <Container className="w-auto mt-3">
+          <FormOrganism
+            forms={forms}
+            res={res}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+          />
+        </Container>
+      </div>
+    );
+  }
 };
 
 export const EditPage = (props) => {
   const { authData, setAuthData } = useContext(AuthDataContext);
-  const { database } = useContext(DatabaseContext);
+  const { database, setDatabase } = useContext(DatabaseContext);
   return (
     <EditTemplate
       authData={authData}
       setAuthData={setAuthData}
       database={database}
+      setDatabase={setDatabase}
       props={props}
     />
   );
