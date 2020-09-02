@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
-import { Redirect, Switch, Route } from "react-router-dom";
-import { Container, Form, Button, Alert } from "react-bootstrap";
+import { Redirect, Switch, Route, Link } from "react-router-dom";
+import { Container, Form, Button, Alert, Navbar, Nav } from "react-bootstrap";
 
 const RouteWithSubRoutes = (route) => (
   <Route
@@ -10,10 +10,10 @@ const RouteWithSubRoutes = (route) => (
   />
 );
 
-export const RenderRoutes = () => {
+export const RenderRoutes = ({ routes }) => {
   const { authData } = useContext(AuthDataContext);
 
-  const routes = Routes({ authData: authData });
+  routes = routes ? routes : Routes({ authData: authData });
 
   return (
     <Switch>
@@ -149,6 +149,70 @@ export const LoginPage = () => {
   return <LoginTemplate database={database} setAuthData={setAuthData} />;
 };
 
+export const displayRouteNavbar = ({ authData, routes }) => {
+  const singleRoute = (route) => (
+    <Link to={route.path} className="nav-link" key={route.key}>
+      {route.key}
+    </Link>
+  );
+
+  return (
+    <>
+      {routes.map((route) =>
+        route.routes ? (
+          <React.Fragment key={route.key}>
+            {displayRouteNavbar({ authData: authData, routes: route.routes })}
+          </React.Fragment>
+        ) : route.display ? (
+          singleRoute(route)
+        ) : route.display !== false && route.display >= authData.type ? (
+          singleRoute(route)
+        ) : null
+      )}
+    </>
+  );
+};
+
+export const NavBarOrganism = ({ authData, setAuthData }) => {
+  const routes = Routes({ authData: authData });
+
+  const handleLogout = ({ setAuthData }) => {
+    setAuthData({ isAuthorized: false });
+  };
+
+  return (
+    <Navbar bg="light" expand="lg">
+      <Navbar.Brand>HRS</Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="mr-auto">
+          {displayRouteNavbar({ authData, routes })}
+        </Nav>
+        <Form inline>
+          <Button
+            variant="danger"
+            size="sm"
+            onClick={() => handleLogout({ setAuthData })}
+          >
+            Log Out
+          </Button>
+        </Form>
+      </Navbar.Collapse>
+    </Navbar>
+  );
+};
+
+export const DashboardTemplate = ({ authData, setAuthData }) => (
+  <div className="min-vh-100 d-flex flex-column">
+    <NavBarOrganism authData={authData} setAuthData={setAuthData} />
+  </div>
+);
+
+export const DashboardPage = () => {
+  const { authData, setAuthData } = useContext(AuthDataContext);
+  return <DashboardTemplate authData={authData} setAuthData={setAuthData} />;
+};
+
 export const Routes = ({ authData }) => {
   return [
     {
@@ -172,16 +236,26 @@ export const Routes = ({ authData }) => {
         else return <FetchAuthData />;
       },
     },
-    // {
-    //   key: "APP_ROOT",
-    //   path: "/app",
-    //   exact: false,
-    //   component: (props) => {
-    //     if (authData.isAuthorized === true) return <RenderRoutes {...props} />;
-    //     else if (authData.isAuthorized === false) return <Redirect to="/login" />;
-    //     else return "Loading";
-    //   },
-    // },
+    {
+      key: "APP_ROOT",
+      path: "/app",
+      exact: false,
+      component: (props) => {
+        if (authData.isAuthorized === true) return <RenderRoutes {...props} />;
+        else if (authData.isAuthorized === false)
+          return <Redirect to="/login" />;
+        else return <FetchAuthData />;
+      },
+      routes: [
+        {
+          key: "Dashboard",
+          path: "/app",
+          exact: true,
+          display: true,
+          component: DashboardPage,
+        },
+      ],
+    },
   ];
 };
 
