@@ -361,7 +361,6 @@ export const CardOrganism = ({
       </Container>
     );
   } else if (authData.isAuthorized === false) {
-    console.log(ArraySplicer(database, 3));
     return (
       <Container className="mt-3">
         {/* why ArraySplicer change { database } value? */}
@@ -437,6 +436,11 @@ export const DashboardPage = () => {
   );
 };
 
+export const AddPage = () => {
+  const { database, setDatabase } = useContext(DatabaseContext);
+  return "AddPage";
+};
+
 export const Routes = ({ authData }) => {
   return [
     {
@@ -477,6 +481,25 @@ export const Routes = ({ authData }) => {
           display: true,
           component: DashboardPage,
         },
+        {
+          key: "ADD_ROOT",
+          path: "/app/add",
+          exact: false,
+          component: (props) => {
+            if (authData.type === 0) return <RenderRoutes {...props} />;
+            else if (authData.type > 0) return <Redirect to="/app" />;
+            else return <FetchAuthData />;
+          },
+          routes: [
+            {
+              key: "Add",
+              path: "/app/add",
+              exact: true,
+              display: 0,
+              component: AddPage,
+            },
+          ],
+        },
       ],
     },
   ];
@@ -489,6 +512,7 @@ export const DatabaseProvider = ({ children }) => {
   const [database, setDatabase] = useState([
     {
       uid: 0,
+      type: 0,
       username: "jason",
       password: "0",
       profileUrl:
@@ -501,18 +525,21 @@ export const DatabaseProvider = ({ children }) => {
     // TODO
     {
       uid: 1,
+      type: 1,
       username: "fawwaazrahman",
       password: "1",
     },
     // TODO
     {
       uid: 2,
+      type: 1,
       username: "jenedy",
       password: "2",
     },
     // TODO
     {
       uid: 3,
+      type: 1,
       username: "taufik",
       password: "3",
       profile: "",
@@ -522,6 +549,7 @@ export const DatabaseProvider = ({ children }) => {
     },
     {
       uid: 4,
+      type: 1,
       username: "aisah",
       password: "4",
       profileUrl:
@@ -532,6 +560,7 @@ export const DatabaseProvider = ({ children }) => {
     },
     {
       uid: 5,
+      type: 1,
       username: "fauzan",
       password: "5",
       profileUrl:
@@ -542,6 +571,7 @@ export const DatabaseProvider = ({ children }) => {
     },
     {
       uid: 6,
+      type: 1,
       username: "rifqi",
       password: "6",
       profileUrl:
@@ -553,6 +583,7 @@ export const DatabaseProvider = ({ children }) => {
     // TODO
     {
       uid: 7,
+      type: 1,
       username: "ryan",
       password: "7",
       profileUrl: "",
@@ -563,6 +594,7 @@ export const DatabaseProvider = ({ children }) => {
     // TODO
     {
       uid: 8,
+      type: 1,
       username: "yusal",
       password: "8",
       profileUrl: "",
@@ -574,11 +606,13 @@ export const DatabaseProvider = ({ children }) => {
     // TODO
     {
       uid: 9,
+      type: 1,
       username: "nurul",
       password: "9",
     },
     {
       uid: 10,
+      type: 1,
       username: "ahmad",
       password: "10",
       profileUrl: "https://i.ibb.co/yFkZY5y/photoku.jpg",
