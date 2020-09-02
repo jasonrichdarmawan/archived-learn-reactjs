@@ -21,61 +21,7 @@ import {
 import { RenderRoutes } from "./utils";
 
 // TEMP
-import { Routes } from "./config";
-import { FormOrganism } from "./components";
-
-export const displayRouteNavbar = ({ authData, routes }) => {
-  const singleRoute = (route) => (
-    <Link to={route.path} className="nav-link" key={route.key}>
-      {route.key}
-    </Link>
-  );
-
-  return (
-    <>
-      {routes.map((route) =>
-        route.routes ? (
-          <React.Fragment key={route.key}>
-            {displayRouteNavbar({ authData: authData, routes: route.routes })}
-          </React.Fragment>
-        ) : route.display ? (
-          singleRoute(route)
-        ) : (
-          route.display !== false &&
-          route.display >= authData.type &&
-          singleRoute(route)
-        )
-      )}
-    </>
-  );
-};
-
-export const NavBarOrganism = ({ authData, setAuthData }) => {
-  const routes = Routes({ authData: authData });
-
-  const handleLogout = () => {
-    setAuthData({ isAuthorized: false });
-  };
-
-  return (
-    <Navbar bg="light" expand="lg">
-      <Navbar.Brand>HRS</Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="mr-auto">
-          {displayRouteNavbar({ authData, routes })}
-        </Nav>
-        {authData.isAuthorized && (
-          <Form inline>
-            <Button variant="danger" size="sm" onClick={handleLogout}>
-              Log Out
-            </Button>
-          </Form>
-        )}
-      </Navbar.Collapse>
-    </Navbar>
-  );
-};
+import { FormOrganism, NavBarOrganism } from "./components";
 
 export const ArraySplicer = (array, lengthCol) => {
   let res = [];
