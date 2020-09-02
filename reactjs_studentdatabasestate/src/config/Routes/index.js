@@ -2,10 +2,10 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 
 // TEMP
-import { DashboardPage, AddPage, EditPage } from "../../App";
+import { AddPage, EditPage } from "../../App";
 
 import { FetchAuthData, RenderRoutes } from "../../utils";
-import { LoginPage } from "../../pages";
+import { LoginPage, DashboardPage } from "../../pages";
 
 export const Routes = ({ authData }) => {
   return [
