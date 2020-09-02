@@ -227,21 +227,15 @@ export const CardOrganism = ({
   const [editMode, setEditMode] = useState(false);
   const [res, setRes] = useState();
   const [inputs, setInputs] = useState({
-    profileUrl: "",
-    displayName: "",
-    quotes: "",
-    githubUrl: "",
+    profileUrl: authData.profileUrl,
+    displayName: authData.displayName,
+    quotes: authData.quotes,
+    githubUrl: authData.githubUrl,
   });
 
   const { profileUrl, displayName, quotes, githubUrl } = inputs;
 
   if (authData.isAuthorized === true) {
-    setInputs({
-      profileUrl: authData.profileUrl,
-      displayName: authData.displayName,
-      quotes: authData.quotes,
-      githubUrl: authData.githubUrl,
-    });
     const handleSubmit = (event) => {
       event.preventDefault();
       event.stopPropagation();
@@ -302,7 +296,8 @@ export const CardOrganism = ({
     ];
 
     const handleChange = (event) => {
-      setInputs({ ...inputs, [event.target.id]: event.target.value });
+      const { id, value } = event.target;
+      setInputs({ ...inputs, [id]: value });
     };
 
     return (
@@ -365,8 +360,8 @@ export const CardOrganism = ({
         )}
       </Container>
     );
-  } else {
-    console.log(ArraySplicer(database, 3))
+  } else if (authData.isAuthorized === false) {
+    console.log(ArraySplicer(database, 3));
     return (
       <Container className="mt-3">
         {/* why ArraySplicer change { database } value? */}
