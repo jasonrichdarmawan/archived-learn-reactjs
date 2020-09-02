@@ -13,42 +13,10 @@ import {
 } from "react-bootstrap";
 
 import { DatabaseProvider, DatabaseContext, AuthDataProvider, AuthDataContext } from "./providers";
+import { RenderRoutes } from "./utils";
+
+// TEMP
 import { Routes } from "./config";
-
-const RouteWithSubRoutes = (route) => (
-  <Route
-    path={route.path}
-    exact={route.exact}
-    render={(props) => <route.component {...props} routes={route.routes} />}
-  />
-);
-
-export const RenderRoutes = ({ routes }) => {
-  const { authData } = useContext(AuthDataContext);
-
-  routes = routes ? routes : Routes({ authData: authData });
-
-  return (
-    <Switch>
-      {routes.map((route) => (
-        <RouteWithSubRoutes key={route.key} {...route} />
-      ))}
-      <Route component={() => <h1>Not Found</h1>} />
-    </Switch>
-  );
-};
-
-// Fake Auth Req, Res
-export const FetchAuthData = () => {
-  const { authData, setAuthData } = useContext(AuthDataContext);
-
-  if (authData.isAuthorized === "await") {
-    const timer = setTimeout(() => {
-      setAuthData({ isAuthorized: false });
-    }, 1000);
-    return "Loading";
-  }
-};
 
 export const FormOrganism = ({ forms, res, handleChange, handleSubmit }) => {
   return (
