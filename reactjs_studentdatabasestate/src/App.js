@@ -165,9 +165,11 @@ export const displayRouteNavbar = ({ authData, routes }) => {
           </React.Fragment>
         ) : route.display ? (
           singleRoute(route)
-        ) : route.display !== false && route.display >= authData.type ? (
+        ) : (
+          route.display !== false &&
+          route.display >= authData.type &&
           singleRoute(route)
-        ) : null
+        )
       )}
     </>
   );
