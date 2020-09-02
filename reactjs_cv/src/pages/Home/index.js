@@ -76,12 +76,20 @@ const data = [
         ahrefText: "(Source Code)",
       },
       {
-        boldy: "Day 127:",
+        bold: "Day 127:",
         text:
           "HRS in ReactJS with only state & props allowed / store the database in state & props",
         ahref:
           "https://github.com/kidfrom/bc_g2_learn_reactjs/tree/reactjs_statepropsonly/reactjs_statepropsonly",
-        ahrefText: "Source Code",
+        ahrefText: "(Source Code)",
+      },
+      {
+        bold: "Day 129:",
+        text:
+          "Student Database with only state and props to store the data in ReactJS",
+        ahref:
+          "https://github.com/kidfrom/bc_g2_learn_reactjs/tree/reactjs_studentdatabasestate/reactjs_studentdatabasestate",
+        ahrefText: "(Source Code)",
       },
     ],
   },
