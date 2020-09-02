@@ -75,12 +75,12 @@ export const EditTemplate = ({
       event.stopPropagation();
       setRes("await");
 
-      const timer = setTimeout(() => {
+      setTimeout(() => {
         setRes(true);
 
         setDatabase(
           database.map((object) =>
-            object.uid == props.match.params.id
+            object.uid === parseInt(props.match.params.id)
               ? { ...object, ...inputs }
               : object
           )

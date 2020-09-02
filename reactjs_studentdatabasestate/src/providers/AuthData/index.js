@@ -9,7 +9,9 @@ export const AuthDataProvider = ({ children }) => {
   const { database } = useContext(DatabaseContext);
 
   useEffect(() => {
-    setAuthData({ ...authData, ...database[authData.uid] });
+    setAuthData((authData) => {
+      return { ...authData, ...database[authData.uid] };
+    });
   }, [database]);
 
   return (

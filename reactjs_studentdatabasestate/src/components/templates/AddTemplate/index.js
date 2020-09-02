@@ -71,7 +71,7 @@ export const AddTemplate = ({
     event.stopPropagation();
     setRes("await");
 
-    const timer = setTimeout(() => {
+    setTimeout(() => {
       const res = database.find((object) =>
         object.username === username ? true : false
       );

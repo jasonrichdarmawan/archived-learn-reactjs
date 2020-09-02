@@ -38,7 +38,7 @@ export const LoginTemplate = ({ database, setAuthData }) => {
     event.stopPropagation();
     setRes("await");
 
-    const timer = setTimeout(() => {
+    setTimeout(() => {
       // TODO: Database. Listener.
       // question: how to make a listener?
       const res = database.find((object, index) =>
