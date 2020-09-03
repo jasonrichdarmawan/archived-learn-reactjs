@@ -2,6 +2,7 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 import FetchAuthData from "../../utils/FetchAuthData";
 import RenderRoutes from "../../utils/RenderRoutes";
+import { LoginPage } from "../../pages";
 
 const routesConfig = ({ isAuthorized }) => {
   // console.log("routesConfig", isAuthorized);
@@ -24,7 +25,7 @@ const routesConfig = ({ isAuthorized }) => {
       component: () => {
         if (isAuthorized === true) return <Redirect to="/app" />;
         // TODO LoginPage
-        else if (isAuthorized === false) return "Login";
+        else if (isAuthorized === false) return <LoginPage />;
         else return <FetchAuthData isAuthorized={isAuthorized} />;
       },
     },
