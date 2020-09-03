@@ -6,7 +6,7 @@ import { selectAuthData } from "./providers/authDataSlice";
 
 const App = () => {
   const authData = useSelector(selectAuthData);
-  const routes = routesConfig({ isAuthorized: authData.isAuthorized });
+  const routes = routesConfig({ authData });
   return <RenderRoutes routes={routes} />;
 };
 

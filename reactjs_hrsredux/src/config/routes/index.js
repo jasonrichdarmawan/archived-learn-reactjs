@@ -2,9 +2,9 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 import FetchAuthData from "../../utils/FetchAuthData";
 import RenderRoutes from "../../utils/RenderRoutes";
-import { LoginPage } from "../../pages";
+import { LoginPage, DashboardPage } from "../../pages";
 
-const routesConfig = ({ isAuthorized }) => {
+const routesConfig = ({ authData }) => {
   // console.log("routesConfig", isAuthorized);
 
   return [
@@ -13,9 +13,9 @@ const routesConfig = ({ isAuthorized }) => {
       path: "/",
       exact: true,
       component: () => {
-        if (isAuthorized === true) return <Redirect to="/app" />;
-        else if (isAuthorized === false) return <Redirect to="/login" />;
-        else return <FetchAuthData isAuthorized={isAuthorized} />;
+        if (authData.isAuthorized === true) return <Redirect to="/app" />;
+        else if (authData.isAuthorized === false) return <Redirect to="/login" />;
+        else return <FetchAuthData isAuthorized={authData.isAuthorized} />;
       },
     },
     {
@@ -23,10 +23,10 @@ const routesConfig = ({ isAuthorized }) => {
       path: "/login",
       exact: true,
       component: () => {
-        if (isAuthorized === true) return <Redirect to="/app" />;
+        if (authData.isAuthorized === true) return <Redirect to="/app" />;
         // TODO LoginPage
-        else if (isAuthorized === false) return <LoginPage />;
-        else return <FetchAuthData isAuthorized={isAuthorized} />;
+        else if (authData.isAuthorized === false) return <LoginPage />;
+        else return <FetchAuthData isAuthorized={authData.isAuthorized} />;
       },
     },
     {
@@ -34,18 +34,23 @@ const routesConfig = ({ isAuthorized }) => {
       path: "/app",
       exact: false,
       component: (props) => {
-        if (isAuthorized === true) return <RenderRoutes {...props} />;
-        else if (isAuthorized === false) return <Redirect to="/login" />;
-        else return <FetchAuthData isAuthorized={isAuthorized} />;
+        if (authData.isAuthorized === true) return <RenderRoutes {...props} />;
+        else if (authData.isAuthorized === false) return <Redirect to="/login" />;
+        else return <FetchAuthData isAuthorized={authData.isAuthorized} />;
       },
       routes: [
         {
           key: "Dashboard",
           path: "/app",
           exact: true,
-          // TODO DashboardPage
+          display: 0,
           component: () => {
-            return "Dashboard";
+            return (
+              <DashboardPage
+                authData={authData}
+                routesConfig={routesConfig({ authData })}
+              />
+            );
           },
         },
       ],
