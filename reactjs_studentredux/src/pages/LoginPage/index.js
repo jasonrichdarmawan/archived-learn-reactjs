@@ -1,11 +1,18 @@
 import React, { useContext } from "react";
-import { AuthDataContext, DatabaseContext } from "../../providers";
+import {
+  // AuthDataContext,
+  DatabaseContext,
+} from "../../providers";
 import { LoginTemplate } from "../../components";
-
 
 export const LoginPage = () => {
   const { database } = useContext(DatabaseContext);
-  const { setAuthData } = useContext(AuthDataContext);
+  // const { setAuthData } = useContext(AuthDataContext);
 
-  return <LoginTemplate database={database} setAuthData={setAuthData} />;
+  return (
+    <LoginTemplate
+      database={database}
+      // setAuthData={setAuthData}
+    />
+  );
 };

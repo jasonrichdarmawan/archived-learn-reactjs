@@ -1,8 +1,11 @@
 import React, { useContext } from "react";
 import { Switch, Route } from "react-router-dom";
 
-import { AuthDataContext } from "../../providers";
+// import { AuthDataContext } from "../../providers";
 import { Routes } from "../../config";
+
+import { useSelector } from "react-redux";
+import { selectAuthData } from "../../providers/AuthDataSlice";
 
 const RouteWithSubRoutes = (route) => (
   <Route
@@ -13,7 +16,9 @@ const RouteWithSubRoutes = (route) => (
 );
 
 export const RenderRoutes = ({ routes }) => {
-  const { authData } = useContext(AuthDataContext);
+  // const { authData } = useContext(AuthDataContext);
+  
+  const authData = useSelector(selectAuthData);
 
   routes = routes ? routes : Routes({ authData: authData });
 

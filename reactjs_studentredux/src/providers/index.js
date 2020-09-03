@@ -1,2 +1,2 @@
 export { DatabaseProvider, DatabaseContext } from "./Database";
-export { AuthDataProvider, AuthDataContext } from "./AuthData";
+// export { AuthDataProvider, AuthDataContext } from "./AuthData";

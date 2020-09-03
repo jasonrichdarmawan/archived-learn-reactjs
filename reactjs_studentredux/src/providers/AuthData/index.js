@@ -1,22 +1,24 @@
-import React, { useState, useEffect, useContext } from "react";
-import { DatabaseContext } from "../Database";
+// Migrated to AuthDataSlice.
 
-// Fake Database
-export const AuthDataContext = React.createContext();
+// import React, { useState, useEffect, useContext } from "react";
+// import { DatabaseContext } from "../Database";
 
-export const AuthDataProvider = ({ children }) => {
-  const [authData, setAuthData] = useState({ isAuthorized: "await" });
-  const { database } = useContext(DatabaseContext);
+// // Fake Database
+// export const AuthDataContext = React.createContext();
 
-  useEffect(() => {
-    setAuthData((authData) => {
-      return { ...authData, ...database[authData.uid] };
-    });
-  }, [database]);
+// export const AuthDataProvider = ({ children }) => {
+//   const [authData, setAuthData] = useState({ isAuthorized: "await" });
+//   const { database } = useContext(DatabaseContext);
 
-  return (
-    <AuthDataContext.Provider value={{ authData, setAuthData }}>
-      {children}
-    </AuthDataContext.Provider>
-  );
-};
+//   useEffect(() => {
+//     setAuthData((authData) => {
+//       return { ...authData, ...database[authData.uid] };
+//     });
+//   }, [database]);
+
+//   return (
+//     <AuthDataContext.Provider value={{ authData, setAuthData }}>
+//       {children}
+//     </AuthDataContext.Provider>
+//   );
+// };

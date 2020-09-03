@@ -1,6 +1,8 @@
 import React from "react";
 import { NavBarOrganism, CardTemplate } from "../../";
 
+import { logout, update } from "../../../providers/AuthDataSlice";
+
 export const DashboardTemplate = ({
   authData,
   setAuthData,
@@ -8,7 +10,7 @@ export const DashboardTemplate = ({
   setDatabase,
 }) => (
   <div className="min-vh-100 d-flex flex-column">
-    <NavBarOrganism authData={authData} setAuthData={setAuthData} />
+    <NavBarOrganism authData={authData} setAuthData={() => setAuthData(logout())} />
     <CardTemplate
       database={database}
       setDatabase={setDatabase}
@@ -17,3 +19,5 @@ export const DashboardTemplate = ({
     />
   </div>
 );
+
+// setAuthData({update({"konten": "konten"}))

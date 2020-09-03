@@ -2,13 +2,20 @@ import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 import { NavBarOrganism, FormOrganism, TableOrganism } from "../../organisms";
 
+import { useSelector, useDispatch } from "react-redux";
+import { selectAuthData, logout } from "../../../providers/AuthDataSlice";
+
 export const EditTemplate = ({
-  authData,
-  setAuthData,
+  // authData,
+  // setAuthData,
   database,
   setDatabase,
   props,
 }) => {
+  const authData = useSelector(selectAuthData);
+  const dispatch = useDispatch();
+  const setAuthData = () => dispatch(logout());
+
   const [inputs, setInputs] = useState({
     profileUrl: props.match.params.id
       ? database[props.match.params.id].profileUrl
@@ -21,8 +28,6 @@ export const EditTemplate = ({
       ? database[props.match.params.id].githubUrl
       : "",
   });
-
-  console.log(inputs);
 
   const [res, setRes] = useState();
 
@@ -85,7 +90,6 @@ export const EditTemplate = ({
               : object
           )
         );
-
       }, 1000);
     };
 

@@ -2,12 +2,21 @@ import React, { useState } from "react";
 import { Container, Alert } from "react-bootstrap";
 import { NavBarOrganism, FormOrganism } from "../../organisms";
 
+import { useSelector, useDispatch } from "react-redux";
+import { selectAuthData } from "../../../providers/AuthDataSlice";
+
+import { logout } from "../../../providers/AuthDataSlice";
+
 export const AddTemplate = ({
-  authData,
-  setAuthData,
+  // authData,
+  // setAuthData,
   database,
   setDatabase,
 }) => {
+  const authData = useSelector(selectAuthData);
+  const dispatch = useDispatch();
+  const setAuthData = () => dispatch(logout());
+
   const [error, setError] = useState();
 
   const [res, setRes] = useState();

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import { ArraySplicer } from "../../../utils";
 
+import { update } from "../../../providers/AuthDataSlice";
+
 export const CardTemplate = ({
   database,
   setDatabase,
@@ -41,13 +43,16 @@ export const CardTemplate = ({
                 : user
             )
           );
-          setAuthData({
-            ...authData,
-            profileUrl: profileUrl,
-            displayName: displayName,
-            quotes: quotes,
-            githubUrl: githubUrl,
-          });
+
+          setAuthData(
+            update({
+              ...authData,
+              profileUrl: profileUrl,
+              displayName: displayName,
+              quotes: quotes,
+              githubUrl: githubUrl,
+            })
+          );
         }, 1000);
       } else if (editMode === false) setEditMode(true);
     };
@@ -153,7 +158,11 @@ export const CardTemplate = ({
             <div className="card-deck mt-3" key={"RowCardGroup" + i}>
               {row.map((user, i) => {
                 return (
-                  <div className="card" style={{maxWidth: "30%"}} key={"ColCardGroup" + i}>
+                  <div
+                    className="card"
+                    style={{ maxWidth: "30%" }}
+                    key={"ColCardGroup" + i}
+                  >
                     <img
                       className="card-img-top"
                       height="180"

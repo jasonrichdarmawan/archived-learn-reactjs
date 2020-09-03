@@ -2,7 +2,16 @@ import React, { useState } from "react";
 import { Container, Alert } from "react-bootstrap";
 import { FormOrganism } from "../../organisms";
 
-export const LoginTemplate = ({ database, setAuthData }) => {
+import { useDispatch } from "react-redux";
+import { loginAsync } from "../../../providers/AuthDataSlice";
+
+export const LoginTemplate = ({
+  database,
+  // setAuthData
+}) => {
+  // const authData = useSelector(selectAuthData);
+  const dispatch = useDispatch();
+
   const [error, setError] = useState();
 
   const [res, setRes] = useState();
@@ -49,7 +58,9 @@ export const LoginTemplate = ({ database, setAuthData }) => {
       if (res) {
         setRes(true);
         setError();
-        setAuthData({ ...res, isAuthorized: true });
+        // setAuthData({ ...res, isAuthorized: true });
+
+        dispatch(loginAsync(res));
       } else if (!res) {
         setRes(false);
         setError("Either username or password is incorrect.");

@@ -1,13 +1,19 @@
 import { useContext } from "react";
-import { AuthDataContext } from "../../providers";
+// import { AuthDataContext } from "../../providers";
+
+import { useSelector, useDispatch } from "react-redux";
+import { selectAuthData, logout } from "../../providers/AuthDataSlice";
 
 // Fake Auth Req, Res
 export const FetchAuthData = () => {
-  const { authData, setAuthData } = useContext(AuthDataContext);
+  // const { authData, setAuthData } = useContext(AuthDataContext);
+
+  const authData = useSelector(selectAuthData);
+  const dispatch = useDispatch();
 
   if (authData.isAuthorized === "await") {
     setTimeout(() => {
-      setAuthData({ isAuthorized: false });
+      dispatch(logout());
     }, 1000);
     return "Loading";
   }
