@@ -7,8 +7,9 @@ const userDatabaseSlice = createSlice({
       uid: 0,
       email: "jasonong713@gmail.com",
       password: "123456",
-      access: 0,
+      access: 1,
       displayName: "Jason admin's account",
+      phoneNumber: "123 456 789",
     },
     {
       uid: 1,
@@ -16,13 +17,13 @@ const userDatabaseSlice = createSlice({
       password: "abcdefg",
       access: 1,
       displayName: "Jason employee's account",
+      phoneNumber: "123 123 123",
     },
   ],
   reducers: {
     createUserWithEmailPasswordAndDisplayName: (state, action) => {
       return [...state, action.payload];
     },
-    // TODO: updateUser
     updateUserWithUID: (state, action) => {
       return state.map((user) =>
         user.uid === action.payload.uid ? { ...user, ...action.payload } : user
