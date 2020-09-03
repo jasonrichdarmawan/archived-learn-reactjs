@@ -44,7 +44,7 @@ export const DatabaseProvider = ({ children }) => {
       type: 1,
       username: "taufik",
       password: "3",
-      profile: "",
+      profileUrl: "",
       displayName: "Taufik Muharrom",
       quotes: "Your future is created by what you to do today, not tommorow",
       githubUrl: "https://github.com/taufik-muharrom",
@@ -82,13 +82,12 @@ export const DatabaseProvider = ({ children }) => {
       quotes: "Being good is about how to combine consistency and integrity",
       githubUrl: "https://github.com/rifqifakhirin",
     },
-    // TODO
     {
       uid: 7,
       type: 1,
       username: "ryan",
       password: "7",
-      profileUrl: "",
+      profileUrl: "https://i.ibb.co/kQMJF86/DSC-7410.jpg",
       displayName: "Ryan Suryohadiprojo S",
       quotes: "ASK! Attitude, Skill and Knowledge",
       githubUrl: "https://github.com/RYANSUTODIWIRYO",
