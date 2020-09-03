@@ -1,7 +1,7 @@
 import React from "react";
 import { NavBarOrganism, CardTemplate } from "../../";
 
-import { logout, update } from "../../../providers/AuthDataSlice";
+import { logout } from "../../../providers/AuthDataSlice";
 
 export const DashboardTemplate = ({
   authData,

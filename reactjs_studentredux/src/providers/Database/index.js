@@ -3,7 +3,6 @@ import React, { useState } from "react";
 export const DatabaseContext = React.createContext();
 
 export const DatabaseProvider = ({ children }) => {
-  // question: why popping out component "DashboardPage" cause the { database } value to [] ?
   const [database, setDatabase] = useState([
     {
       uid: 0,
