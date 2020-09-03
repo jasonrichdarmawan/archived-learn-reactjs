@@ -1,68 +1,122 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+### Redux Reducers
 
-## Available Scripts
+```
+import React from "react";
 
-In the project directory, you can run:
+// temporary
+import { useSelector, useDispatch } from "react-redux";
+import {
+  selectAuthData,
+  loginAsync,
+  updateAuthData,
+} from "./providers/authDataSlice";
+import {
+  selectUserDatabase,
+  createUserWithEmailPasswordAndDisplayNameAsync,
+  updateUserWithUID,
+} from "./providers/userDatabaseSlice";
+import {
+  selectDepartmentDatabase,
+  createDepartmentWithHandlerAndUsersUIDAsync,
+  updateDepartmentWithUID,
+} from "./providers/departmentDatabaseSlice";
 
-### `npm start`
+const App = () => {
+  // temporary
+  const userDatabase = useSelector(selectUserDatabase);
+  const departmentDatabase = useSelector(selectDepartmentDatabase);
+  const authData = useSelector(selectAuthData);
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+  const dispatch = useDispatch();
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+  console.log(
+    "userDatabase",
+    userDatabase,
+    "departmentDatabase",
+    departmentDatabase,
+    "authData",
+    authData
+  );
 
-### `npm test`
+  const handleLogin = () => {
+    dispatch(
+      loginAsync({
+        uid: 0,
+        email: "jasonong713@gmail.com",
+        password: "123456",
+        access: 0,
+        displayName: "Jason admin's account",
+      })
+    );
+    console.log("loginAsync", authData);
+  };
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  const handleUpdateAuthData = () => {
+    dispatch(updateAuthData({ isAuthorized: false }));
+    console.log("update", authData);
+  };
 
-### `npm run build`
+  const handleCreateDepartment = () => {
+    dispatch(
+      createDepartmentWithHandlerAndUsersUIDAsync({
+        uid: 2,
+        handler: "abcd",
+        users_uid: [0, 1],
+      })
+    );
+    console.log("createDepartment", departmentDatabase);
+  };
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  const handleUpdateDepartmentWithUID = () => {
+    dispatch(
+      updateDepartmentWithUID({ uid: 2, handler: "new name", users_uid: [0] })
+    );
+    console.log("updateDepartment", departmentDatabase);
+  };
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+  const handleCreateUser = () => {
+    dispatch(
+      createUserWithEmailPasswordAndDisplayNameAsync({
+        uid: 2,
+        email: "jadada",
+        password: "abcdeadafg",
+        access: 1,
+        displayName: "Jasonadada employee's account",
+      })
+    );
+    console.log("create user", userDatabase);
+  };
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  const handleUpdateUserWithUID = () => {
+    dispatch(updateUserWithUID({ uid: 2, email: "aaa", displayName: "aaa" }));
+    console.log("update user with uid", userDatabase);
+  };
 
-### `npm run eject`
+  return (
+    <>
+      <p>
+        {authData.isAuthorized === true
+          ? "authorized"
+          : authData.isAuthorized === false
+          ? "not authorized"
+          : "awaiting"}
+      </p>
+      <p>{authData.email}</p>
+      {departmentDatabase.map((department) => (
+        <p key={department.handler}>{department.handler}</p>
+      ))}
+      {userDatabase[2] && <p>{userDatabase[2].displayName}</p>}
+      <button onClick={handleLogin}>Login</button>
+      <button onClick={handleUpdateAuthData}>Update Auth Data</button>
+      <button onClick={handleCreateDepartment}>Create Department</button>
+      <button onClick={handleUpdateDepartmentWithUID}>
+        Update Department With UID
+      </button>
+      <button onClick={handleCreateUser}>Create User</button>
+      <button onClick={handleUpdateUserWithUID}>Update User With UID</button>
+    </>
+  );
+};
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+export default App;
+```
