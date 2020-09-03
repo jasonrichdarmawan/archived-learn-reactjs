@@ -1,40 +1,26 @@
 import React, { useState } from "react";
-import { Container, Form, Button, Alert } from "react-bootstrap";
+import { Container, Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../providers/authDataSlice";
 import { selectUserDatabase } from "../../providers/userDatabaseSlice";
+import { FormGroupsOrganism } from "../../components/Organisms/FormGroupsOrganism";
 
-export const FormGroupsOrganism = ({
-  formsMap,
-  handleChange,
-  handleSubmit,
-  res,
-}) => {
-  return (
-    <Form onSubmit={handleSubmit}>
-      {formsMap.map((form) => (
-        <Form.Group key={form.controlId} controlId={form.controlId}>
-          <Form.Label>{form.label}</Form.Label>
-          <Form.Control
-            type={form.type}
-            placeholder={form.placeholder}
-            onChange={handleChange}
-          />
-        </Form.Group>
-      ))}
-      <Button
-        type="submit"
-        size="sm"
-        variant={res === true ? "success" : "primary"}
-        disabled={res === "await" ? true : false}
-      >
-        {res === true ? "Success" : "Login"}
-      </Button>
-    </Form>
-  );
-};
+export const LoginTemplate = () => {
+  const formsMap = [
+    {
+      controlId: "email",
+      label: "email",
+      type: "email",
+      placeholder: "Enter email",
+    },
+    {
+      controlId: "password",
+      label: "password",
+      type: "password",
+      placeholder: "password",
+    },
+  ];
 
-export const LoginTemplate = ({ formsMap, setError }) => {
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
@@ -44,6 +30,7 @@ export const LoginTemplate = ({ formsMap, setError }) => {
     setInputs({ ...inputs, [event.target.id]: event.target.value });
 
   const [res, setRes] = useState();
+  const [error, setError] = useState();
 
   const dispatch = useDispatch();
   const database = useSelector(selectUserDatabase);
@@ -70,7 +57,7 @@ export const LoginTemplate = ({ formsMap, setError }) => {
         dispatch(login(res));
       } else if (res === undefined) {
         setRes(false);
-        setError("Either username or password is incorrect.");
+        setError("Either email or password is incorrect.");
       }
     }, 1000);
   };
@@ -81,33 +68,16 @@ export const LoginTemplate = ({ formsMap, setError }) => {
       handleChange={handleChange}
       handleSubmit={handleSubmit}
       res={res}
+      error={error}
     />
   );
 };
 
 export const LoginPage = () => {
-  const formsMap = [
-    {
-      controlId: "email",
-      label: "email",
-      type: "email",
-      placeholder: "Enter email",
-    },
-    {
-      controlId: "password",
-      label: "password",
-      type: "password",
-      placeholder: "password",
-    },
-  ];
-
-  const [error, setError] = useState();
-
   return (
     <div className="min-vh-100 d-flex align-items-center">
       <Container className="w-auto">
-        {error && <Alert variant="warning">{error}</Alert>}
-        <LoginTemplate formsMap={formsMap} setError={setError} />
+        <LoginTemplate />
       </Container>
     </div>
   );

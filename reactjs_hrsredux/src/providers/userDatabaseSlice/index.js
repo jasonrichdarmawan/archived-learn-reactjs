@@ -7,7 +7,7 @@ const userDatabaseSlice = createSlice({
       uid: 0,
       email: "jasonong713@gmail.com",
       password: "123456",
-      access: 1,
+      access: 0,
       displayName: "Jason admin's account",
       phoneNumber: "123 456 789",
     },

@@ -9,7 +9,7 @@ const RouteWithSubRoutes = (route) => (
   />
 );
 
-const RenderRoutes = ({ routes }) => {
+export const RenderRoutes = ({ routes }) => {
   // console.log('routes', routes);
   return (
     <Switch>
@@ -20,5 +20,3 @@ const RenderRoutes = ({ routes }) => {
     </Switch>
   );
 };
-
-export default RenderRoutes;

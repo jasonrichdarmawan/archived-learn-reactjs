@@ -1,9 +1,7 @@
-// const { updateAuthData } = require("../../providers/authDataSlice");
-
 import { useDispatch } from "react-redux";
 import { updateAuthData } from "../../providers/authDataSlice";
 
-const FetchAuthData = ({ isAuthorized }) => {
+export const FetchAuthData = ({ isAuthorized }) => {
   // console.log('isAuthorized', isAuthorized);
   const dispatch = useDispatch();
 
@@ -16,5 +14,3 @@ const FetchAuthData = ({ isAuthorized }) => {
     return "Loading";
   }
 };
-
-export default FetchAuthData;

@@ -1,8 +1,7 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-import FetchAuthData from "../../utils/FetchAuthData";
-import RenderRoutes from "../../utils/RenderRoutes";
-import { LoginPage, DashboardPage } from "../../pages";
+import { FetchAuthData, RenderRoutes } from "../../utils";
+import { LoginPage, DashboardPage, AddPage } from "../../pages";
 
 const routesConfig = ({ authData }) => {
   // console.log("routesConfig", isAuthorized);
@@ -14,7 +13,8 @@ const routesConfig = ({ authData }) => {
       exact: true,
       component: () => {
         if (authData.isAuthorized === true) return <Redirect to="/app" />;
-        else if (authData.isAuthorized === false) return <Redirect to="/login" />;
+        else if (authData.isAuthorized === false)
+          return <Redirect to="/login" />;
         else return <FetchAuthData isAuthorized={authData.isAuthorized} />;
       },
     },
@@ -35,7 +35,8 @@ const routesConfig = ({ authData }) => {
       exact: false,
       component: (props) => {
         if (authData.isAuthorized === true) return <RenderRoutes {...props} />;
-        else if (authData.isAuthorized === false) return <Redirect to="/login" />;
+        else if (authData.isAuthorized === false)
+          return <Redirect to="/login" />;
         else return <FetchAuthData isAuthorized={authData.isAuthorized} />;
       },
       routes: [
@@ -52,6 +53,40 @@ const routesConfig = ({ authData }) => {
               />
             );
           },
+        },
+        {
+          key: "ADD_ROOT",
+          path: "/app/add",
+          exact: false,
+          component: (props) => {
+            if (authData.access === 0) return <RenderRoutes {...props} />;
+            else if (authData.access > 0) return <Redirect to="/app" />;
+          },
+          routes: [
+            {
+              key: "Add",
+              path: "/app/add",
+              exact: true,
+              display: 0,
+              component: () => {
+                return <Redirect to="/app/add/employee" />;
+              },
+            },
+            {
+              key: "APP_ADD_REQUEST",
+              path: "/app/add/:request(employee|department)",
+              exact: true,
+              display: false,
+              component: () => {
+                return (
+                  <AddPage
+                    authData={authData}
+                    routesConfig={routesConfig({ authData })}
+                  />
+                );
+              },
+            },
+          ],
         },
       ],
     },

@@ -1,63 +1,44 @@
 import React, { useState } from "react";
-import {
-  NavbarOrganism,
-  EmployeeInformationOrganism,
-} from "../../components/Organisms";
+import { NavbarOrganism, FormGroupsOrganism } from "../../components/Organisms";
 import { useSelector, useDispatch } from "react-redux";
 import {
   selectUserDatabase,
-  updateUserWithUID,
+  createUserWithEmailPasswordAndDisplayName,
 } from "../../providers/userDatabaseSlice";
 
-export const DashboardTemplate = ({ authData }) => {
-  const [readOnly, setReadOnly] = useState(true);
-  const handleButton = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-
-    setRes();
-    readOnly ? setReadOnly(false) : setReadOnly(true);
-  };
-
+export const AddTemplate = () => {
   const [inputs, setInputs] = useState({
-    uid: authData.uid,
-    email: authData.email,
+    uid: "",
+    email: "",
     password: "",
-    displayName: authData.displayName,
-    phoneNumber: authData.phoneNumber,
+    displayName: "",
+    phoneNumber: "",
   });
   const { uid, email, password, displayName, phoneNumber } = inputs;
   const formsMap = [
     {
-      controlId: "uid",
-      label: "uid",
-      type: "text",
-      value: uid,
-      readOnly: true,
-    },
-    {
       controlId: "email",
       label: "email",
       type: "email",
-      value: email,
-      readOnly: true,
+      placeholder: "Enter email",
     },
     {
       controlId: "password",
       label: "password",
       type: "password",
+      placeholder: "password",
     },
     {
       controlId: "displayName",
       label: "name",
       type: "text",
-      value: displayName,
+      placeholder: "Enter name",
     },
     {
       controlId: "phoneNumber",
       label: "phone number",
       type: "text",
-      value: phoneNumber,
+      placeholder: "Enter phone number",
     },
   ];
   const handleChange = (event) => {
@@ -76,47 +57,47 @@ export const DashboardTemplate = ({ authData }) => {
     setRes("await");
 
     setTimeout(() => {
-      // question: can a reducer return specific value while also changing the state?
-      const res = database.find(
-        (user) => user.email === email && user.password === password && true
-      );
+      const res = database.find((user) => user.email === email && true);
 
-      if (res !== undefined) {
+      console.log(res);
+      if (res === undefined) {
         setRes(true);
-        setReadOnly(true);
         setError();
 
-        dispatch(updateUserWithUID({ ...inputs }));
-      } else if (res === undefined) {
+        dispatch(
+          createUserWithEmailPasswordAndDisplayName({
+            uid: database.length,
+            ...inputs,
+            access: 1,
+          })
+        );
+      } else if (res !== undefined) {
         setRes(false);
-        setError("Either username or password is incorrect.");
+        setError("Email is taken.");
       }
     }, 1000);
   };
 
+  console.log(database);
+
   return (
-    <EmployeeInformationOrganism
-      authData={authData}
+    <FormGroupsOrganism
       formsMap={formsMap}
-      readOnly={readOnly}
-      handleButton={handleButton}
       handleChange={handleChange}
+      handleSubmit={handleSubmit}
       res={res}
       error={error}
-      handleSubmit={handleSubmit}
     />
   );
 };
 
-export const DashboardPage = ({ authData, routesConfig }) => {
-  // console.log("dashboardPage", routesConfig);
-
+export const AddPage = ({ authData, routesConfig }) => {
   return (
     <div className="min-vh-100 d-flex flex-column">
       <NavbarOrganism authData={authData} routesConfig={routesConfig} />
       <div className="d-flex flex-fill align-items-center">
         <div className="container w-auto">
-          <DashboardTemplate authData={authData} />
+          <AddTemplate />
         </div>
       </div>
     </div>
