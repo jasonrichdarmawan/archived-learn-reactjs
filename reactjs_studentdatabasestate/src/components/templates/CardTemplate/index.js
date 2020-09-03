@@ -150,10 +150,10 @@ export const CardTemplate = ({
         {/* why ArraySplicer change { database } value? */}
         {ArraySplicer(database, 3).map((row, i) => {
           return (
-            <div className="card-group mt-3" key={"RowCardGroup" + i}>
+            <div className="card-deck mt-3" key={"RowCardGroup" + i}>
               {row.map((user, i) => {
                 return (
-                  <div className="card" key={"ColCardGroup" + i}>
+                  <div className="card" style={{maxWidth: "30%"}} key={"ColCardGroup" + i}>
                     <img
                       className="card-img-top"
                       height="180"
