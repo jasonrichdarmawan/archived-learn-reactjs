@@ -26,7 +26,7 @@ export const EmployeeInformationOrganism = ({
                 disabled={readOnly ? false : res === "await" ? true : false}
                 onClick={readOnly ? handleButton : undefined}
               >
-                {readOnly ? "Edit" : res === true ? "Success" : "Save"}
+                {res === true ? "Success" : readOnly ? "Edit" : "Save"}
               </Button>
             </div>
           </div>
