@@ -17,9 +17,9 @@ The scope is limited to the use cases written below which is considered as the c
   ![Order](https://app.lucidchart.com/publicSegments/view/b79c2cbd-378d-44f4-a317-4a428c9afe3b/image.png)
 
 - [x] What products are best sellers?
-- [x] How many times the product is sold?
+  - [x] How many times the product is sold?
 
-  ![Order_Product](https://app.lucidchart.com/publicSegments/view/6b6108f4-0ff7-451f-98bb-6f000a2bff86/image.png)
+    ![Order_Product](https://app.lucidchart.com/publicSegments/view/6b6108f4-0ff7-451f-98bb-6f000a2bff86/image.png)
 
 - [x] Is the order has been fulfilled?
 
