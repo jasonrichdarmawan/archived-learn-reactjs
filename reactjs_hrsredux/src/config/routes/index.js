@@ -4,7 +4,7 @@ import { FetchAuthData, RenderRoutes } from "../../utils";
 import { LoginPage, DashboardPage, AddPage, ListPage } from "../../pages";
 
 const routesConfig = ({ authData }) => {
-  console.log("routesConfig", authData);
+  // console.log("routesConfig", authData);
 
   return [
     {

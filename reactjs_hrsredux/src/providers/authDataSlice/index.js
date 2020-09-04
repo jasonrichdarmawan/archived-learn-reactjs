@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const jwt = require("jsonwebtoken");
+
 const authDataSlice = createSlice({
   name: "authData",
   initialState: { isAuthorized: "await" },
@@ -16,9 +18,19 @@ const authDataSlice = createSlice({
     //   if (res !== undefined) return { ...res, isAuthorized: true };
     // },
     login: (state, action) => {
-      return { isAuthorized: true, ...action.payload }
+      try {
+        const encoded = jwt.sign(
+          { isAuthorized: true, ...action.payload },
+          "secretOrPublicKey"
+        );
+        localStorage.setItem("state", encoded);
+      } catch (err) {
+        console.log(err);
+      }
+      return { isAuthorized: true, ...action.payload };
     },
     logout: () => {
+      localStorage.removeItem("state");
       return { isAuthorized: false };
     },
     updateAuthData: (state, action) => {
