@@ -25,7 +25,8 @@ The scope is limited to the use cases written below which is considered as the c
 
   ![Bridge_Table](https://app.lucidchart.com/publicSegments/view/d74440c3-043a-4893-9e8f-24e7db900579/image.png)
 
-- [x] How many quantity left of a product?
+- [x] How many quantity left of a product? `QtyInStock`
+  - [x] Do this store has substitute product in the inventory? `type varchar(1) NOT NULL`
 
   ![Product](https://app.lucidchart.com/publicSegments/view/a6e7c26c-a61b-4d38-9be0-5ff38b8e048f/image.png)
 
