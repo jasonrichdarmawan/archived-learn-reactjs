@@ -1,7 +1,7 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import { FetchAuthData, RenderRoutes } from "../../utils";
-import { LoginPage, DashboardPage, AddPage } from "../../pages";
+import { LoginPage, DashboardPage, AddPage, ListPage } from "../../pages";
 
 const routesConfig = ({ authData }) => {
   // console.log("routesConfig", isAuthorized);
@@ -76,10 +76,42 @@ const routesConfig = ({ authData }) => {
               key: "APP_ADD_REQUEST",
               path: "/app/add/:request(employee|department)",
               exact: true,
-              display: false,
               component: () => {
                 return (
                   <AddPage
+                    authData={authData}
+                    routesConfig={routesConfig({ authData })}
+                  />
+                );
+              },
+            },
+          ],
+        },
+        {
+          key: "LIST_ROOT",
+          path: "/app/list",
+          exact: false,
+          component: (props) => {
+            if (authData.access === 0) return <RenderRoutes {...props} />;
+            else if (authData.access > 0) return <Redirect to="/app" />;
+          },
+          routes: [
+            {
+              key: "List",
+              path: "/app/list",
+              exact: true,
+              display: 0,
+              component: () => {
+                return <Redirect to="/app/list/employee" />;
+              },
+            },
+            {
+              key: "APP_LIST_REQUEST",
+              path: "/app/list/:request(employee|department)?/:id?",
+              exact: true,
+              component: () => {
+                return (
+                  <ListPage
                     authData={authData}
                     routesConfig={routesConfig({ authData })}
                   />

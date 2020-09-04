@@ -86,6 +86,7 @@ export const DashboardTemplate = ({ authData }) => {
         setReadOnly(true);
         setError();
 
+        // question: how to make a reducer listener?
         dispatch(updateUserWithUID({ ...inputs }));
       } else if (res === undefined) {
         setRes(false);
