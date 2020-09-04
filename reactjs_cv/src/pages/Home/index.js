@@ -7,7 +7,7 @@ const data = [
   {
     title: "About this website",
     ul: [
-      "The purpose of this website is to present Jason's Curriculum Vitae in ReactJS with Atomic Design",
+      "The purpose of this website is to present Jason's Curriculum Vitae in ReactJS. The portfolio starts from 26 April 2020, the day I discovered GitHub.",
     ],
   },
   {
@@ -90,6 +90,21 @@ const data = [
         ahref:
           "https://github.com/kidfrom/bc_g2_learn_reactjs/tree/reactjs_studentdatabasestate/reactjs_studentdatabasestate",
         ahrefText: "(Source Code)",
+      },
+      {
+        bold: "Day 130:",
+        text:
+          "Migrate React Context used by assignment (Student Database, state and props only) to React Redux",
+        ahref:
+          "https://github.com/kidfrom/bc_g2_learn_reactjs/tree/reactjs_studentredux/reactjs_studentredux",
+        ahrefText: "Source Code",
+      },
+      {
+        bold: "Day 131:",
+        text: "Refactor HRS using React Redux instead of React Context",
+        ahref:
+          "https://github.com/kidfrom/bc_g2_learn_reactjs/tree/reactjs_hrsredux/reactjs_hrsredux",
+        ahrefText: "Source Code",
       },
     ],
   },
