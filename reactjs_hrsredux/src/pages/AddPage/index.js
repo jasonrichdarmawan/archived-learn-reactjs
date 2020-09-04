@@ -8,13 +8,12 @@ import {
 
 export const AddTemplate = () => {
   const [inputs, setInputs] = useState({
-    uid: "",
     email: "",
     password: "",
     displayName: "",
     phoneNumber: "",
   });
-  const { uid, email, password, displayName, phoneNumber } = inputs;
+  const { email } = inputs;
   const formsMap = [
     {
       controlId: "email",

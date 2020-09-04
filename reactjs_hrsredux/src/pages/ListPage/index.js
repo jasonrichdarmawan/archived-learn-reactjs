@@ -32,29 +32,21 @@ export const ListTemplate = ({ authData }) => {
     password: "",
     displayName: "",
     phoneNumber: "",
-    handler: "",
-    users_uid: "",
   });
 
-  const {
-    uid,
-    email,
-    password,
-    displayName,
-    phoneNumber,
-    handler,
-    users_uid,
-  } = inputs;
-  console.log(inputs);
+  const { uid, email, password, displayName, phoneNumber } = inputs;
+  // console.log(inputs);
 
   useEffect(() => {
     if (id !== undefined && request === "employee") {
-      setInputs({
-        ...inputs,
-        uid: userDatabase[id].uid,
-        email: userDatabase[id].email,
-        displayName: userDatabase[id].displayName,
-        phoneNumber: userDatabase[id].phoneNumber,
+      setInputs((inputs) => {
+        return {
+          ...inputs,
+          uid: userDatabase[id].uid,
+          email: userDatabase[id].email,
+          displayName: userDatabase[id].displayName,
+          phoneNumber: userDatabase[id].phoneNumber,
+        };
       });
     } else if (id !== undefined && request === "department") {
       setCheckedUID(
@@ -64,7 +56,7 @@ export const ListTemplate = ({ authData }) => {
         }, {})
       );
     }
-  }, [request, id]);
+  }, [request, id, userDatabase, departmentDatabase]);
 
   const formsMap = [
     {
@@ -115,7 +107,7 @@ export const ListTemplate = ({ authData }) => {
 
   const dispatch = useDispatch();
   const [res, setRes] = useState();
-  const [error, setError] = useState(); // not used.
+  const error = undefined; // not used.
   const handleSubmit = (event) => {
     event.preventDefault();
     event.stopPropagation();
