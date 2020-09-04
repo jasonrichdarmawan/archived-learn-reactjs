@@ -44,6 +44,8 @@ The scope is limited to the use cases written below which is considered as the c
 
 ### Data Integrity
 
+[Reference](https://stackoverflow.com/questions/17122656/database-design-for-multiple-product-types-with-variable-attributes)
+
 - [x] Customer
 
   ```
