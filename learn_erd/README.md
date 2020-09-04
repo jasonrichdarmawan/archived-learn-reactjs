@@ -36,6 +36,14 @@ How to read: e.g `Who are the customers?`, the picture below is the correspondin
 
 ![Overview](https://app.lucidchart.com/publicSegments/view/0ccb65dd-aa75-430a-8120-720950fde47f/image.png)
 
+### TableAccess
+
+  ![User](https://app.lucidchart.com/publicSegments/view/3255a5be-20dc-4b6e-bd56-2f199706c53a/image.png)
+
+- [x] TableAccess: SS `sales staff` has access to table `Customer`, `Order` and `Product`. The staff's responsibility is to sell a product.
+- [x] TableAccess: FS `fulfillment staff` has access to table `Order`, `Order Product`, `Order Shipment`. The staff's responsibility is to fulfill an order.
+- [x] TableAccess: WS `warehouse staff` has access to table `Product`. The staff's responsibility is to maintain `QtyInStock` by issuing `Purchase Order`.
+
 ### Data Integrity
 
 [Reference](https://stackoverflow.com/questions/17122656/database-design-for-multiple-product-types-with-variable-attributes)
