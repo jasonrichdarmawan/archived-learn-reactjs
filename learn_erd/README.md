@@ -8,6 +8,8 @@ The scope is limited to the use cases written below which is considered as the c
 
 ### Use cases
 
+How to read: e.g `Who are the customers?`, the picture below is the corresponding table used to answer the question.
+
 - [x] Who are the customers? `name, address, contact details`
 
   ![Customer](https://app.lucidchart.com/publicSegments/view/5deaee2c-e765-483c-ab18-b8a274ec4d92/image.png)
@@ -29,14 +31,6 @@ The scope is limited to the use cases written below which is considered as the c
   - [x] Do this store has substitute product in the inventory? `type varchar(1) NOT NULL`
 
   ![Product](https://app.lucidchart.com/publicSegments/view/a6e7c26c-a61b-4d38-9be0-5ff38b8e048f/image.png)
-
-### TableAccess
-
-  ![User](https://app.lucidchart.com/publicSegments/view/3255a5be-20dc-4b6e-bd56-2f199706c53a/image.png)
-
-- [x] TableAccess: SS `sales staff` has access to table `Customer`, `Order` and `Product`. The staff's responsibility is to sell a product.
-- [x] TableAccess: FS `fulfillment staff` has access to table `Order`, `Order Product`, `Order Shipment`. The staff's responsibility is to fulfill an order.
-- [x] TableAccess: WS `warehouse staff` has access to table `Product`. The staff's responsibility is to maintain `QtyInStock` by issuing `Purchase Order`.
 
 ### Entity Relationsihp Diagram Overview
 
