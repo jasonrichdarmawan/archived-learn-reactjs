@@ -116,10 +116,12 @@ export const ListTemplate = ({ authData }) => {
       setRes("await");
 
       if (request === "employee") {
+        setRes(true);
         dispatch(
           updateUserWithUID({ uid, email, password, displayName, phoneNumber })
         );
       } else if (request === "department") {
+        setRes(true);
         dispatch(
           updateDepartmentWithUID({
             ...departmentDatabase[id],
@@ -222,11 +224,11 @@ export const ListTemplate = ({ authData }) => {
                     type="button"
                     className="float-right"
                     size="sm"
-                    variant="outline-primary"
+                    variant={res === true ? "success" : "outline-primary"}
                     disabled={readOnly ? true : res === "await" ? true : false}
                     onClick={readOnly ? handleButton : handleSubmit}
                   >
-                    {readOnly ? "Edit" : "Save"}
+                    {readOnly ? "Edit" : res === true ? "Success" : "Save"}
                   </Button>
                 </div>
               </div>
@@ -259,7 +261,11 @@ export const ListTemplate = ({ authData }) => {
                             className="form-check-input"
                             id={"checkbox" + i}
                             value={user.uid}
-                            checked={checkedUID[user.uid] ? checkedUID[user.uid] : false}
+                            checked={
+                              checkedUID[user.uid]
+                                ? checkedUID[user.uid]
+                                : false
+                            }
                             onChange={handleCheckbox}
                           />
                           <label

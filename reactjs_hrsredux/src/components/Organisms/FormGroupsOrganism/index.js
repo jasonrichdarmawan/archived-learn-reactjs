@@ -29,7 +29,7 @@ export const FormGroupsOrganism = ({
           variant={res === true ? "success" : "primary"}
           disabled={res === "await" ? true : false}
         >
-          {res === true ? "Success" : "Login"}
+          {res === true ? "Success" : "Submit"}
         </Button>
       </Form>
     </>

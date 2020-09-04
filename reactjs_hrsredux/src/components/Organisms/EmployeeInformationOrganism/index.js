@@ -22,11 +22,11 @@ export const EmployeeInformationOrganism = ({
                 type={readOnly ? "button" : "submit"}
                 className="float-right"
                 size="sm"
-                variant="outline-primary"
+                variant={res === true ? "success" : "outline-primary"}
                 disabled={readOnly ? false : res === "await" ? true : false}
                 onClick={readOnly ? handleButton : undefined}
               >
-                {readOnly ? "Edit" : "Save"}
+                {readOnly ? "Edit" : res === true ? "Success" : "Save"}
               </Button>
             </div>
           </div>
