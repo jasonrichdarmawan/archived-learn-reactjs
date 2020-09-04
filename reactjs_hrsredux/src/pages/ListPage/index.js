@@ -96,7 +96,7 @@ export const ListTemplate = ({ authData }) => {
     setInputs((inputs) => ({ ...inputs, [id]: value }));
   };
 
-  const [checkedUID, setCheckedUID] = useState({});
+  const [checkedUID, setCheckedUID] = useState({ 0: false, 1: false });
   const handleCheckbox = (event) => {
     setReadOnly(false);
 
@@ -253,18 +253,18 @@ export const ListTemplate = ({ authData }) => {
                   .map((user, i) => (
                     <tr key={user.email}>
                       <td>
-                        <div class="form-check">
+                        <div className="form-check">
                           <input
                             type="checkbox"
-                            class="form-check-input"
+                            className="form-check-input"
                             id={"checkbox" + i}
                             value={user.uid}
-                            checked={checkedUID[user.uid]}
+                            checked={checkedUID[user.uid] ? checkedUID[user.uid] : false}
                             onChange={handleCheckbox}
                           />
                           <label
-                            class="form-check-label"
-                            for={"checkbox" + i}
+                            className="form-check-label"
+                            htmlFor={"checkbox" + i}
                           ></label>
                         </div>
                       </td>

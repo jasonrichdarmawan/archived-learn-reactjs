@@ -58,7 +58,7 @@ export const AddTemplate = () => {
     setTimeout(() => {
       const res = database.find((user) => user.email === email && true);
 
-      console.log(res);
+      // console.log(res);
       if (res === undefined) {
         setRes(true);
         setError();
