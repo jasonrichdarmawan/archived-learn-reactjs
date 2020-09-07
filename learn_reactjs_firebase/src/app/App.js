@@ -1,28 +1,16 @@
-import React from 'react';
-import logo from 'logo.svg';
-import './App.css';
-
+import React from "react";
 import { FirebaseContext } from "providers/firebase";
+import routesConfig, { RenderRoutes } from "utils/routes";
 
 function App() {
-  const FirebaseConsumer = React.useContext(FirebaseContext)
+  const FirebaseConsumer = React.useContext(FirebaseContext);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <RenderRoutes
+      routesConfig={routesConfig({
+        authenticated: FirebaseConsumer.authenticated,
+        userData: FirebaseConsumer.userData,
+      })}
+    />
   );
 }
 
