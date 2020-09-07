@@ -1,8 +1,11 @@
 import React from 'react';
-import logo from './logo.svg';
+import logo from 'logo.svg';
 import './App.css';
 
+import { FirebaseContext } from "providers/firebase";
+
 function App() {
+  const FirebaseConsumer = React.useContext(FirebaseContext)
   return (
     <div className="App">
       <header className="App-header">

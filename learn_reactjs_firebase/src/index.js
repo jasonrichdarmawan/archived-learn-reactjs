@@ -1,14 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import { BrowserRouter } from "react-router-dom";
+import App from "./app/App";
+import * as serviceWorker from "./serviceWorker";
+import { FirebaseProvider } from "providers/firebase";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <FirebaseProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </FirebaseProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
