@@ -4,6 +4,7 @@ import { Navbar, Nav, Button } from "react-bootstrap";
 
 export function NavbarOrganism() {
   const handleLogout = () => {
+    localStorage.removeItem("userData");
     firebase.auth().signOut();
   };
   return (

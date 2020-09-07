@@ -13,8 +13,7 @@ export function FirebaseProvider({ children }) {
     firebase.auth().onAuthStateChanged((authData) => {
       setAuthData(authData);
       setLoadingAuthState(false);
-
-      if (!localStorage.getItem("userData")) {
+      if (authData != null && !localStorage.getItem("userData")) {
         firebase
           .firestore()
           .collection("users")
@@ -23,7 +22,7 @@ export function FirebaseProvider({ children }) {
             (doc) => {
               if (doc.exists) {
                 try {
-                  setUserData(doc.data());
+                  setUserData({ uid: doc.id, ...doc.data()});
 
                   // bad practice
                   const encoded = jwt.sign(doc.data(), "secretOrPublicKey");

@@ -1,7 +1,22 @@
 ### Data Schema
 
+firestore collections `users`
+
 ```
-user = {
+user.uid = {
+  access: number,
+  email: string,
+  profileUrl: string,
+  displayName: string,
+  quotes: string,
+  githubUrl: string,
+}
+```
+
+state
+
+```
+userData = {
   uid: number,
   access: number,
   email: string,

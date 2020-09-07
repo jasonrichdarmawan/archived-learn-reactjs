@@ -1,6 +1,6 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-import { LoginPage, DashboardPage } from "pages";
+import { LoginPage, DashboardPage, RegisterPage } from "pages";
 
 function routesConfig({ authenticated, userData }) {
   return [
@@ -23,6 +23,16 @@ function routesConfig({ authenticated, userData }) {
         else if (authenticated === false) return <LoginPage />;
         else return "Loading";
       },
+    },
+    {
+      key: "REGISTER",
+      path: "/register",
+      exact: true,
+      component: () => {
+        if (authenticated === true) return <Redirect to="/app" />;
+        else if (authenticated === false) return <RegisterPage />;
+        else return "Loading";
+      }
     },
     {
       key: "APP_ROOT",

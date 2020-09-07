@@ -2,6 +2,7 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import { FormGroupsOrganism } from "components/organisms/FormGroupsOrganism";
 import firebase from "api/firebase";
+import { Link } from "react-router-dom";
 
 function LoginTemplate() {
   const formsMap = [
@@ -65,6 +66,9 @@ export function LoginPage() {
     <div className="min-vh-100 d-flex align-items-center">
       <Container className="w-auto">
         <LoginTemplate />
+        <p className="mt-2">
+          <Link to="/register">New to LMS?</Link>
+        </p>
       </Container>
     </div>
   );
