@@ -6,9 +6,10 @@ function App() {
   const FirebaseConsumer = React.useContext(FirebaseContext);
   return (
     <RenderRoutes
-      routesConfig={routesConfig({
+      routes={routesConfig({
         authenticated: FirebaseConsumer.authenticated,
         userData: FirebaseConsumer.userData,
+        setUserData: FirebaseConsumer.setUserData,
       })}
     />
   );

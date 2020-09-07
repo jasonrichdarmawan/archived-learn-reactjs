@@ -2,17 +2,9 @@ import React from "react";
 import { NavbarOrganism } from "components/organisms/NavbarOrganism";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import firebase from "api/firebase";
+import jwt from "jsonwebtoken";
 
-function ArraySplicer(array, lengthCol) {
-  let res = [];
-  let temporary = array.slice();
-  for (let i = temporary.length / lengthCol; i > 0; i--) {
-    res.push(temporary.splice(0, lengthCol));
-  }
-  return res;
-}
-
-function DashboardTemplate({ userData }) {
+function DashboardTemplate({ userData, setUserData }) {
   const [editMode, setEditMode] = React.useState(false);
   const [res, setRes] = React.useState();
   const [inputs, setInputs] = React.useState({
@@ -70,7 +62,7 @@ function DashboardTemplate({ userData }) {
           {
             profileUrl: profileUrl,
             displayName: displayName,
-            quoes: quotes,
+            quotes: quotes,
             githubUrl: githubUrl,
           },
           { merge: true }
@@ -82,14 +74,33 @@ function DashboardTemplate({ userData }) {
           setRes(false);
           console.error(error);
         });
+
+      setUserData((userData) => {
+        return {
+          ...userData,
+          profileUrl: profileUrl,
+          displayName: displayName,
+          quotes: quotes,
+          githubUrl: githubUrl,
+        };
+      });
+
+      // bad practice
+      const payload = {
+        ...userData,
+        profileUrl: profileUrl,
+        displayName: displayName,
+        quotes: quotes,
+        githubUrl: githubUrl,
+      };
+      const encoded = jwt.sign(payload, "secretOrPublicKey");
+      localStorage.setItem("userData", encoded);
     } else if (editMode === false) setEditMode(true);
   };
 
   return (
     <div className="d-flex flex-fill align-items-center">
       <Container className="w-auto">
-        {/* {editMode === false && (
-        )} */}
         {editMode ? (
           <Form className="mt-3" onSubmit={handleSubmit}>
             <Row>
@@ -166,11 +177,11 @@ function DashboardTemplate({ userData }) {
   );
 }
 
-export function DashboardPage({ routesConfig, userData }) {
+export function DashboardPage({ userData, routes, setUserData }) {
   return (
     <div className="min-vh-100 d-flex flex-column">
-      <NavbarOrganism />
-      <DashboardTemplate userData={userData} />
+      <NavbarOrganism userData={userData} routes={routes} />
+      <DashboardTemplate userData={userData} setUserData={setUserData} />
     </div>
   );
 }

@@ -11,7 +11,8 @@ function RouteWithSubRoutes(route) {
   );
 }
 
-export function RenderRoutes({ routesConfig: routes }) {
+export function RenderRoutes({ routes }) {
+  console.log(routes);
   return (
     <Switch>
       {routes.map((route) => (
@@ -21,3 +22,5 @@ export function RenderRoutes({ routesConfig: routes }) {
     </Switch>
   );
 }
+
+export default RenderRoutes;

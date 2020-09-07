@@ -13,7 +13,7 @@ export function FirebaseProvider({ children }) {
     firebase.auth().onAuthStateChanged((authData) => {
       setAuthData(authData);
       // setLoadingAuthState(false);
-      if (authData != null && !localStorage.getItem("userData")) {
+      if (authData !== null && !localStorage.getItem("userData")) {
         firebase
           .firestore()
           .collection("users")
@@ -22,11 +22,11 @@ export function FirebaseProvider({ children }) {
             (doc) => {
               if (doc.exists) {
                 try {
-                  console.log({ uid: doc.id, ...doc.data() });
-                  setUserData({ uid: doc.id, ...doc.data() });
+                  const payload = { ...doc.data(), uid: doc.id };
+                  setUserData(payload);
 
                   // bad practice
-                  const encoded = jwt.sign(doc.data(), "secretOrPublicKey");
+                  const encoded = jwt.sign(payload, "secretOrPublicKey");
                   localStorage.setItem("userData", encoded);
                 } catch (error) {
                   console.log("error jwt.sign()", error);
@@ -47,7 +47,6 @@ export function FirebaseProvider({ children }) {
           localStorage.getItem("userData"),
           "secretOrPublicKey"
         );
-
         setUserData(payload);
       } catch (error) {
         localStorage.removeItem("userData");
@@ -60,10 +59,11 @@ export function FirebaseProvider({ children }) {
     <FirebaseContext.Provider
       value={{
         // loadingAuthState,
-        authenticated: authData !== null ? true : false,
+        authenticated: authData !== null && userData !== null ? true : false,
         // authData,
         // setAuthData,
         userData,
+        setUserData,
       }}
     >
       {children}
