@@ -2,7 +2,7 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 import { LoginPage, DashboardPage } from "pages";
 
-function routesConfig({ authenticated, user }) {
+function routesConfig({ authenticated, userData }) {
   return [
     {
       key: "ROOT",
@@ -32,7 +32,7 @@ function routesConfig({ authenticated, user }) {
         if (authenticated === true)
           return (
             <DashboardPage
-              user={user}
+              userData={userData}
               routesConfig={routesConfig({ authenticated })}
             />
           );
