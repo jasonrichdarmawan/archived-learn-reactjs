@@ -1,7 +1,7 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import RenderRoutes from "./RenderRoutes";
-import { LoginPage, DashboardPage, RegisterPage } from "pages";
+import { LoginPage, RegisterPage, DashboardPage, ListPage } from "pages";
 
 function routesConfig({ authenticated, userData, setUserData }) {
   return [
@@ -35,23 +35,6 @@ function routesConfig({ authenticated, userData, setUserData }) {
         else return "Loading";
       },
     },
-    // {
-    //   key: "APP_ROOT",
-    //   path: "/app",
-    //   exact: false,
-    // component: () => {
-    //   if (authenticated === true)
-    //     return (
-    //       <DashboardPage
-    //         routesConfig={routesConfig({ authenticated })}
-    //         userData={userData}
-    //         setUserData={setUserData}
-    //       />
-    //     );
-    //   else if (authenticated === false) return <Redirect to="/login" />;
-    //   else return "Loading";
-    // },
-    // },
     {
       key: "APP_ROOT",
       path: "/app",
@@ -68,16 +51,27 @@ function routesConfig({ authenticated, userData, setUserData }) {
           exact: true,
           display: 1,
           component: () => {
-            if (authenticated === true)
-              return (
-                <DashboardPage
-                  routes={routesConfig({ authenticated })}
-                  userData={userData}
-                  setUserData={setUserData}
-                />
-              );
-            else if (authenticated === false) return <Redirect to="/login" />;
-            else return "Loading";
+            return (
+              <DashboardPage
+                routes={routesConfig({ authenticated })}
+                userData={userData}
+                setUserData={setUserData}
+              />
+            );
+          },
+        },
+        {
+          key: "List",
+          path: "/app/list",
+          exact: true,
+          display: 0,
+          component: () => {
+            return (
+              <ListPage
+                routes={routesConfig({ authenticated })}
+                userData={userData}
+              />
+            );
           },
         },
       ],
