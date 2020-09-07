@@ -32,7 +32,7 @@ function routesConfig({ authenticated, userData }) {
         if (authenticated === true) return <Redirect to="/app" />;
         else if (authenticated === false) return <RegisterPage />;
         else return "Loading";
-      }
+      },
     },
     {
       key: "APP_ROOT",
@@ -42,8 +42,8 @@ function routesConfig({ authenticated, userData }) {
         if (authenticated === true)
           return (
             <DashboardPage
-              userData={userData}
               routesConfig={routesConfig({ authenticated })}
+              userData={userData}
             />
           );
         else if (authenticated === false) return <Redirect to="/login" />;

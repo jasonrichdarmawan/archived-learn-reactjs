@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import firebase from "api/firebase";
 import jwt from "jsonwebtoken";
 
 export const FirebaseContext = React.createContext();
 
 export function FirebaseProvider({ children }) {
-  const [loadingAuthState, setLoadingAuthState] = useState(true);
-  const [authData, setAuthData] = useState(null);
-  const [userData, setUserData] = useState(null);
+  // const [loadingAuthState, setLoadingAuthState] = useState(true);
+  const [authData, setAuthData] = React.useState(null);
+  const [userData, setUserData] = React.useState(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     firebase.auth().onAuthStateChanged((authData) => {
       setAuthData(authData);
-      setLoadingAuthState(false);
+      // setLoadingAuthState(false);
       if (authData != null && !localStorage.getItem("userData")) {
         firebase
           .firestore()
@@ -22,7 +22,8 @@ export function FirebaseProvider({ children }) {
             (doc) => {
               if (doc.exists) {
                 try {
-                  setUserData({ uid: doc.id, ...doc.data()});
+                  console.log({ uid: doc.id, ...doc.data() });
+                  setUserData({ uid: doc.id, ...doc.data() });
 
                   // bad practice
                   const encoded = jwt.sign(doc.data(), "secretOrPublicKey");
@@ -58,13 +59,8 @@ export function FirebaseProvider({ children }) {
   return (
     <FirebaseContext.Provider
       value={{
-        loadingAuthState,
-        authenticated:
-          authData !== null
-            ? true
-            : loadingAuthState === true
-            ? "await"
-            : false,
+        // loadingAuthState,
+        authenticated: authData !== null ? true : false,
         // authData,
         // setAuthData,
         userData,

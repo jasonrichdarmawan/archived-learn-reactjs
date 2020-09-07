@@ -81,8 +81,9 @@ function RegisterTemplate() {
             profileUrl: profileUrl,
           })
           .then(() => {
-            let db = firebase.firestore();
-            db.collection("users")
+            firebase
+              .firestore()
+              .collection("users")
               .doc(res.user.uid)
               .set({
                 access: 1,
