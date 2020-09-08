@@ -28,7 +28,7 @@ const data = [
   {
     title: {
       b: "",
-      text: "Express, Firebase, Firestore, Storage, Cloud Functions, ReactJS",
+      text: "Express, Firebase, Firestore, Storage, Cloud Functions, ReactJS ",
       subtext: "(Source Code)",
     },
     content: [
