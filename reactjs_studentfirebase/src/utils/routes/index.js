@@ -10,6 +10,7 @@ import {
 } from "pages";
 
 function routesConfig({ authenticated, userData, setUserData }) {
+  console.log('authenticated', authenticated);
   return [
     {
       key: "ROOT",

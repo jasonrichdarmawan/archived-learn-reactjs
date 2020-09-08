@@ -7,6 +7,8 @@ export function NavbarOrganism({ userData, routes }) {
   const handleLogout = () => {
     localStorage.removeItem("userData");
     firebase.auth().signOut();
+    // TODO: temporary solution
+    window.location.reload(true);
   };
   return (
     <Navbar bg="light" expand="lg">
