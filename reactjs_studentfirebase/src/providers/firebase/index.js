@@ -12,7 +12,6 @@ export function FirebaseProvider({ children }) {
   React.useEffect(() => {
     firebase.auth().onAuthStateChanged((authData) => {
       setAuthData(authData);
-      console.log('authData', authData, 'userData', userData);
       // setLoadingAuthState(false);
       if (authData !== null && !localStorage.getItem("userData")) {
         firebase
@@ -61,7 +60,6 @@ export function FirebaseProvider({ children }) {
       value={{
         // loadingAuthState,
         authenticated: authData !== "await" ? userData !== "await" && true : "await",
-        // authenticated: authData !== null ? userData !== null ? true : "await" : "await",
         // authData,
         // setAuthData,
         userData,
