@@ -14,10 +14,10 @@ function EditTemplate({ users }) {
   const user =
     id && Array.isArray(users) && users.find((user) => user.uid === id);
   const [inputs, setInputs] = React.useState({
-    profileUrl: user.profileUrl,
-    displayName: user.displayName,
-    quotes: user.quotes,
-    githubUrl: user.githubUrl,
+    profileUrl: id ? user.profileUrl : "",
+    displayName: id ? user.displayName: "",
+    quotes: id ? user.quotes : "",
+    githubUrl: id ? user.githubUrl : "",
   });
 
   const [res, setRes] = React.useState();
