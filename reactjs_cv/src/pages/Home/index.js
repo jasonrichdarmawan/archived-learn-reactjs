@@ -27,7 +27,7 @@ const data = [
   },
   {
     title: {
-      b: "Day 112:",
+      b: "",
       text: "Express, Firebase, Firestore, Storage, Cloud Functions, ReactJS",
       subtext: "(Source Code)",
     },
@@ -109,9 +109,10 @@ const data = [
       {
         bold: "Day 135:",
         text: "Student's Database using Firebase and React Context",
-        ahreF: "https://github.com/kidfrom/bc_g2_learn_reactjs/tree/reactjs_studentfirebase/reactjs_studentfirebase",
-        ahrefText: "(Source Code)"
-      }
+        ahreF:
+          "https://github.com/kidfrom/bc_g2_learn_reactjs/tree/reactjs_studentfirebase/reactjs_studentfirebase",
+        ahrefText: "(Source Code)",
+      },
     ],
   },
 ];
@@ -126,7 +127,8 @@ const contentJSX = (data) => {
               <Accordion.Toggle as={Card.Header} eventKey={"" + i}>
                 {typeof cur.title === "object" ? (
                   <React.Fragment>
-                    <b>{cur.title.b}</b> {cur.title.text}{" "}
+                    <b>{cur.title.b}</b>
+                    {cur.title.text}
                     <b>{cur.title.subtext}</b>
                   </React.Fragment>
                 ) : (
