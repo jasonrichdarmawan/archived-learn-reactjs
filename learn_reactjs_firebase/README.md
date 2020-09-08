@@ -29,15 +29,15 @@ userData = {
 
 ### Features
 
-- [ ] Public Routes
-  - [ ] Login System
-  - [ ] Home `list all of students' profile`
-- [ ] Admin Routes
-  - [ ] Home `user's profile`, can edit.
-  - [ ] Register new student's
-  - [ ] Edit student's profile
-- [ ] Student Routes
-  - [ ] Home `user's profile`, can edit.
+- [x] Public Routes
+  - [x] Login System
+  - [ ] Home `list all of students' profile`, `cancelled, only authenticated users can access the db`
+- [x] Admin Routes
+  - [x] Home `user's profile`, can edit.
+  - [ ] Register new student's, `cancelled, student can self-register from the public routes`
+  - [x] Edit student's profile
+- [x] Student Routes
+  - [x] Home `user's profile`, can edit.
 
 ### Requirements
 
