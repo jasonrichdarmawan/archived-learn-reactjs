@@ -41,5 +41,5 @@ userData = {
 
 ### Requirements
 
-- [ ] Only use LocalStorage in 1 class / 1 function. `cancelled`
-- [ ] Pass data only with state & props.
+- [x] Only use LocalStorage in 1 class / 1 function.
+- [x] Pass data only with state & props.
