@@ -104,8 +104,14 @@ const data = [
         text: "Refactor HRS using React Redux instead of React Context",
         ahref:
           "https://github.com/kidfrom/bc_g2_learn_reactjs/tree/reactjs_hrsredux/reactjs_hrsredux",
-        ahrefText: "Source Code",
+        ahrefText: "(Source Code)",
       },
+      {
+        bold: "Day 135:",
+        text: "Student's Database using Firebase and React Context",
+        ahreF: "https://github.com/kidfrom/bc_g2_learn_reactjs/tree/reactjs_studentfirebase/reactjs_studentfirebase",
+        ahrefText: "(Source Code)"
+      }
     ],
   },
 ];
