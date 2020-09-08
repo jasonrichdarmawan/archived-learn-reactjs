@@ -1,7 +1,13 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import RenderRoutes from "./RenderRoutes";
-import { LoginPage, RegisterPage, DashboardPage, ListPage } from "pages";
+import {
+  LoginPage,
+  RegisterPage,
+  DashboardPage,
+  ListPage,
+  EditPage,
+} from "pages";
 
 function routesConfig({ authenticated, userData, setUserData }) {
   return [
@@ -74,6 +80,56 @@ function routesConfig({ authenticated, userData, setUserData }) {
             );
           },
         },
+        {
+          key: "EDIT_ROOT",
+          path: "/app/edit",
+          exact: false,
+          component: (props) => {
+            if (userData.access === 0) return <RenderRoutes {...props} />;
+            else if (userData.access > 0) return <Redirect to="/app" />;
+            else return "Loading";
+          },
+          routes: [
+            {
+              key: "Edit",
+              path: "/app/edit",
+              exact: true,
+              display: 0,
+              component: () => {
+                return (
+                  <EditPage
+                    routes={routesConfig({ authenticated })}
+                    userData={userData}
+                  />
+                );
+              },
+            },
+            {
+              key: "EDIT_ID",
+              path: "/app/edit/:id",
+              exact: true,
+              component: () => {
+                return (
+                  <EditPage
+                    routes={routesConfig({ authenticated })}
+                    userData={userData}
+                  />
+                );
+              },
+            },
+          ],
+        },
+        // {
+        //   key: "Edit",
+        //   path: "/app/edit/:id?",
+        //   exact: true,
+        //   display: 0,
+        //   component: () => {
+        //     if (userData.access === 0) return <EditPage />;
+        //     else if (userData.access > 0) return <Redirect to="/app" />;
+        //     else return "Loading";
+        //   },
+        // },
       ],
     },
   ];

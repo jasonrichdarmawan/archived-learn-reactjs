@@ -48,11 +48,6 @@ function ListTemplate({ users }) {
 export function ListPage({ userData, routes }) {
   const [users, setUsers] = React.useState();
 
-  // async function FetchUsers() {
-  //   const snapshot = await firebase.firestore().collection("users").get();
-  //   return snapshot.docs.map((doc) => doc.data());
-  // }
-
   React.useEffect(() => {
     firebase
       .firestore()
