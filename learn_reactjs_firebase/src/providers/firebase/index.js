@@ -6,14 +6,14 @@ export const FirebaseContext = React.createContext();
 
 export function FirebaseProvider({ children }) {
   // const [loadingAuthState, setLoadingAuthState] = useState(true);
-  const [authData, setAuthData] = React.useState(null);
-  const [userData, setUserData] = React.useState(null);
+  const [authData, setAuthData] = React.useState("await");
+  const [userData, setUserData] = React.useState("await");
 
   React.useEffect(() => {
     firebase.auth().onAuthStateChanged((authData) => {
       setAuthData(authData);
       // setLoadingAuthState(false);
-      if (authData !== null && !localStorage.getItem("userData")) {
+      if (authData !== "await" && !localStorage.getItem("userData")) {
         firebase
           .firestore()
           .collection("users")
@@ -59,7 +59,7 @@ export function FirebaseProvider({ children }) {
     <FirebaseContext.Provider
       value={{
         // loadingAuthState,
-        authenticated: authData !== null && userData !== null ? true : false,
+        authenticated: authData !== "await" ? userData !== "await" && true : "await",
         // authData,
         // setAuthData,
         userData,
