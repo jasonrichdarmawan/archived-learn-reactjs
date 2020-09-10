@@ -74,4 +74,4 @@ The core product is limited to the specified `routes` and `data schema`.
 
 ### Data Schema
 
-... todo
+![Data Schema](https://app.lucidchart.com/publicSegments/view/9caaa293-25a7-4885-82fd-457ebfdab838/image.png)
