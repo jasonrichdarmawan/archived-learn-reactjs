@@ -37,6 +37,8 @@ The core product is limited to the specified `routes` and `data schema`.
 
           - [ ] Update Sales Order
 
+            - [ ] Create Purchase Order shipment `/app/inventory/delivery/create`
+
             - [ ] CRUD Invoices
               - [ ] Create Invoices `/app/invoices/create`
               - [ ] Read Invoices `/app/invoices/:id`
@@ -65,6 +67,8 @@ The core product is limited to the specified `routes` and `data schema`.
 
           - [ ] Update Purchase Order
 
+            - [ ] Create Purchase Order Receipt `/app/inventory/receipt/create`
+
             - [ ] CRUD Bills
               - [ ] Create Bills `/app/bills/create`
               - [ ] Read Bills `/app/bills/:id`
@@ -74,4 +78,4 @@ The core product is limited to the specified `routes` and `data schema`.
 
 ### Data Schema
 
-![Data Schema](https://app.lucidchart.com/publicSegments/view/9caaa293-25a7-4885-82fd-457ebfdab838/image.png)
+![Data Schema](https://app.lucidchart.com/publicSegments/view/2eed6fc7-bff3-4ee8-be46-e08d80a18144/image.jpeg)
