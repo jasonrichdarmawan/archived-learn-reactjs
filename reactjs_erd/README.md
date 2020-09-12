@@ -6,9 +6,9 @@ The core product is limited to the specified `routes` and `data schema`.
 
 ### Routes
 
-- [ ] Public Routes
+- [x] Public Routes
 
-  - [ ] Login Systems `/login`
+  - [x] Login Systems `/login`
 
 - [ ] Protected Routes
 
