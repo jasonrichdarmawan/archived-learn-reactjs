@@ -1,6 +1,11 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import { AlertFormButton } from "components/AlertFormButton";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectAuthState,
+  signInWithEmailAndPassword,
+} from "features/AuthState/AuthStateSlice";
 
 export function Login() {
   const formArrObj = [
@@ -29,20 +34,23 @@ export function Login() {
   const { email, password } = inputs;
   const [validated, setValidated] = React.useState();
   const [isLoading, setLoading] = React.useState();
-  const [response, setResponse] = React.useState();
-  const [error, setError] = React.useState();
+  const dispatch = useDispatch();
+  const authState = useSelector(selectAuthState);
+  const error = authState.error && authState.error.message;
   function handleSubmit(event) {
-    event.preventDefault();
     event.stopPropagation();
-
+    event.preventDefault();
     setValidated(true);
 
     const form = event.currentTarget;
     if (form.checkValidity() === true) {
       setLoading(true);
-      // TODO
+
+      dispatch(signInWithEmailAndPassword(email, password));
     }
   }
+
+  // console.log('Login()', authState)
 
   return (
     <div className="min-vh-100 d-flex align-items-center">
@@ -52,7 +60,6 @@ export function Login() {
           handleChange={handleChange}
           validated={validated}
           isLoading={isLoading}
-          response={response}
           error={error}
           handleSubmit={handleSubmit}
         />

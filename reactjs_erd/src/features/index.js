@@ -1,2 +1,2 @@
-export { Dashboard } from "./dashboard";
-export { Login } from "./login"
+export { Dashboard } from "./Dashboard";
+export { Login } from "./Login"

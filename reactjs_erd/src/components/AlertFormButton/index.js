@@ -7,7 +7,6 @@ export function AlertFormButton({
   handleChange,
   validated,
   isLoading,
-  response,
   error,
   handleSubmit,
 }) {
@@ -34,15 +33,9 @@ export function AlertFormButton({
           block
           size="sm"
           disabled={isLoading}
-          variant={
-            response === true
-              ? "success"
-              : response === false
-              ? "warning"
-              : "primary"
-          }
+          variant={error ? "warning" : "primary"}
         >
-          {isLoading ? <Loading /> : "Login"}
+          {isLoading ? <Loading /> : "Submit"}
         </Button>
       </Form>
     </>

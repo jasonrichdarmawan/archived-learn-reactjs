@@ -1,8 +1,12 @@
 import React from "react";
-import { routes, RenderRoutes } from "./routes";
+import { Routes, RenderRoutes } from "./routes";
+import { selectAuthState } from "features/AuthState/AuthStateSlice";
+import { useSelector } from "react-redux";
 
 function App() {
-  return <RenderRoutes routes={routes} />;
+  const authState = useSelector(selectAuthState);
+  // console.log("App()", authState);
+  return <RenderRoutes routes={Routes({ authState: authState })} />;
 }
 
 export default App;
