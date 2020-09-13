@@ -28,14 +28,17 @@ export const fetchAuthState = () => (dispatch) => {
           .httpsCallable("jwtVerify");
         jwtVerify(localStorage.getItem("authState"))
           .then(({ data: decoded }) => {
-            console.log('fetchAuthState()', decoded);
+            console.log("fetchAuthState()", decoded);
             dispatch(signIn(decoded));
           })
           .catch((error) => {
-            console.error('fetchAuthState()', error);
+            console.error("fetchAuthState()", error);
             dispatch(
-              signOut({ error: { message: "user's document is not signed properly." } })
+              signOut({
+                error: { message: "user's document is not signed properly." },
+              })
             );
+            localStorage.removeItem("authState");
           });
       } else if (!localStorage.getItem("authState")) {
         firebase

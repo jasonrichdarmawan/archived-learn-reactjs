@@ -28,7 +28,8 @@ export function Routes({ authState }) {
       path: "/app",
       component: (props) => {
         if (authState.isAuthorized === true) return <RenderRoutes {...props} />;
-        else if (authState.isAuthorized === false) return <Redirect to="/login" />;
+        else if (authState.isAuthorized === false)
+          return <Redirect to="/login" />;
         else {
           dispatch(fetchAuthState());
           return <Loading />;
@@ -39,7 +40,13 @@ export function Routes({ authState }) {
           key: "Dashboard",
           path: "/app",
           exact: true,
-          component: Dashboard,
+          component: () => {
+            if (authState.document) {
+              return <Dashboard />;
+            } else {
+              return <Loading />;
+            }
+          },
         },
       ],
     },
