@@ -27,10 +27,15 @@ export const fetchAuthState = () => (dispatch) => {
           .functions("asia-southeast2")
           .httpsCallable("jwtVerify");
         jwtVerify(localStorage.getItem("authState"))
-          .then(({ data: decoded }) => dispatch(signIn(decoded)))
+          .then(({ data: decoded }) => {
+            console.log('fetchAuthState()', decoded);
+            dispatch(signIn(decoded));
+          })
           .catch((error) => {
-            console.log(error);
-            dispatch(signOut({ error: { ...error } }));
+            console.error('fetchAuthState()', error);
+            dispatch(
+              signOut({ error: { message: "user's document is not signed properly." } })
+            );
           });
       } else if (!localStorage.getItem("authState")) {
         firebase
@@ -77,7 +82,6 @@ export const fetchAuthState = () => (dispatch) => {
           });
       }
     } else if (!user) {
-      console.log("hit");
       dispatch(signOut());
     }
   });

@@ -22,9 +22,52 @@ exports.createUser = functions
   });
 
 const jwt = require("jsonwebtoken");
+const { decode } = require("firebase-functions/lib/providers/https");
 exports.jwtSign = functions.region("asia-southeast2").https.onCall((data) => {
   return jwt.sign(data, functions.config().public.key);
 });
-exports.jwtVerify = functions.region("asia-southeast2").https.onCall((data) => {
-  return jwt.verify(data, functions.config().public.key);
-});
+const _ = require("lodash");
+exports.jwtVerify = functions
+  .region("asia-southeast2")
+  .https.onCall((data, context) => {
+    if (!context.auth) {
+      throw new functions.https.HttpsError(
+        "failed-precondition",
+        "The function must be called " + "while authenticated."
+      );
+    }
+    const uid = context.auth.uid;
+
+    let decoded;
+    try {
+      decoded = jwt.verify(data, functions.config().public.key);
+    } catch (err) {
+      throw new functions.https.HttpsError(
+        "permission-denied",
+        "user's document is not signed properly."
+      );
+    }
+
+    return admin
+      .firestore()
+      .collection("user")
+      .doc(uid)
+      .get()
+      .then((doc) => {
+        if (!doc.exists) {
+          throw new functions.https.HttpsError(
+            "not-found",
+            "user's document is not found."
+          );
+        } else if (!_.isEqual(doc.data(), decoded.document)) {
+          throw new functions.https.HttpsError(
+            "unauthenticated",
+            "user's document is not signed properly"
+          );
+        }
+        return decoded;
+      })
+      .catch((error) => {
+        throw new functions.https.HttpsError(error);
+      });
+  });
