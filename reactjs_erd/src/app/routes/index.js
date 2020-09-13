@@ -1,4 +1,5 @@
 import { Loading } from "components";
+
 import {
   Login,
   Dashboard,
@@ -7,9 +8,13 @@ import {
   Inventory,
   Purchase,
 } from "features";
+
 import { fetchAuthState } from "features/AuthState/AuthStateSlice";
+
 import React from "react";
+
 import { useDispatch } from "react-redux";
+
 import { Redirect, Route, Switch } from "react-router-dom";
 
 export function Routes(props = {}) {

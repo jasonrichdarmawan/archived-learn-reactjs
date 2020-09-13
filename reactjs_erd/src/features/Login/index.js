@@ -1,7 +1,11 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+
+import Container from "react-bootstrap/Container";
+
 import { AlertFormButton } from "components/AlertFormButton";
+
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   selectAuthState,
   signInWithEmailAndPassword,

@@ -1,7 +1,5 @@
 import firebase from "firebase/app";
 import "firebase/auth";
-
-// TODO
 import "firebase/firestore";
 import "firebase/storage";
 import "firebase/functions";

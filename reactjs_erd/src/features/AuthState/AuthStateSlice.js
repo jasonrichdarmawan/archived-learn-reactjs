@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 import { firebase } from "api/firebase";
 
 const authStateSlice = createSlice({
