@@ -16,11 +16,11 @@ The core product is limited to the specified `routes` and `data schema`.
 
     - [ ] Employee
 
-      - [ ] List Employee `/app/employee`
+      - [ ] List Employee `/app/employee/:req(list)`
 
       - [ ] CRUD Employee
-        - [ ] Create Employee `/app/employee/create`
-        - [ ] Read Employee `/app/employee/:id`
+        - [ ] Add Employee `/app/employee/:req(add)`
+        - [ ] View Employee `/app/employee/view/:id`
           - [ ] Update Employee
           - [ ] Delete Employee
 

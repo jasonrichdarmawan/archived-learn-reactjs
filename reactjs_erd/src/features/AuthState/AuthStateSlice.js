@@ -6,11 +6,11 @@ const authStateSlice = createSlice({
   initialState: { isAuthorized: "" },
   reducers: {
     signIn: (state, action) => {
-      // TODO
       return { isAuthorized: true, ...action.payload };
     },
     signOut: (state, action) => {
-      // TODO
+      localStorage.removeItem("authState");
+      firebase.auth().signOut();
       return { isAuthorized: false, ...action.payload };
     },
   },
@@ -28,7 +28,7 @@ export const fetchAuthState = () => (dispatch) => {
           .httpsCallable("jwtVerify");
         jwtVerify(localStorage.getItem("authState"))
           .then(({ data: decoded }) => {
-            console.log("fetchAuthState()", decoded);
+            // console.log("fetchAuthState()", decoded);
             dispatch(signIn(decoded));
           })
           .catch((error) => {
