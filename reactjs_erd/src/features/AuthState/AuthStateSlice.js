@@ -29,10 +29,10 @@ export const fetchAuthState = () => (dispatch) => {
           .httpsCallable("jwtVerify");
         jwtVerify(localStorage.getItem("authState"))
           .then(({ data: decoded }) => {
-            console.log(
-              "fetchAuthState() jwtVerify -> response: decoded",
-              decoded
-            );
+            // console.log(
+            //   "fetchAuthState() jwtVerify -> response: decoded",
+            //   decoded
+            // );
             dispatch(signIn(decoded));
           })
           .catch((error) => {

@@ -12,7 +12,14 @@ const admin = require("firebase-admin");
 admin.initializeApp();
 exports.createUser = functions
   .region("asia-southeast2")
-  .https.onCall((data) => {
+  .https.onCall((data, context) => {
+    if (!context.auth) {
+      throw new functions.https.HttpsError(
+        "failed-precondition",
+        "The function must be called " + "while authenticated."
+      );
+    }
+
     return admin
       .auth()
       .createUser(data)
@@ -21,11 +28,45 @@ exports.createUser = functions
       });
   });
 
+exports.fetchFirestore = functions
+  .region("asia-southeast2")
+  .https.onCall((data, context) => {
+    // TODO: admin only.
+    if (!context.auth) {
+      throw new functions.https.HttpsError(
+        "failed-precondition",
+        "The function must be called " + "while authenticated."
+      );
+    }
+
+    return admin
+      .firestore()
+      .collection(data)
+      .get()
+      .then((querySnapshot) => {
+        let array = [];
+        querySnapshot.forEach((doc) => {
+          array.push({ user_id: doc.id, data: doc.data() });
+        });
+
+        return array;
+      });
+  });
+
 const jwt = require("jsonwebtoken");
-const { decode } = require("firebase-functions/lib/providers/https");
-exports.jwtSign = functions.region("asia-southeast2").https.onCall((data) => {
-  return jwt.sign(data, functions.config().public.key);
-});
+exports.jwtSign = functions
+  .region("asia-southeast2")
+  .https.onCall((data, context) => {
+    if (!context.auth) {
+      throw new functions.https.HttpsError(
+        "failed-precondition",
+        "The function must be called " + "while authenticated."
+      );
+    }
+
+    return jwt.sign(data, functions.config().public.key);
+  });
+
 const _ = require("lodash");
 exports.jwtVerify = functions
   .region("asia-southeast2")
