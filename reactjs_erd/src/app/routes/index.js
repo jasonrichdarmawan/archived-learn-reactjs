@@ -24,7 +24,7 @@ export function Routes(props = {}) {
       exact: true,
       display: false,
       component: () => {
-        if (authState.isAuthorized === true)
+        if (authState.isAuthorized === true && authState.document)
           return <Redirect to="/app/dashboard" />;
         else if (authState.isAuthorized === false) return <Login />;
         else {
@@ -38,7 +38,7 @@ export function Routes(props = {}) {
       path: "/app/dashboard",
       exact: true,
       display: true,
-      component: (props) => {
+      component: () => {
         if (authState.isAuthorized === true && authState.document.access_rights)
           return <Dashboard />;
         else if (authState.isAuthorized === false)
