@@ -7,7 +7,7 @@ import { TopNavbar } from "components/TopNavbar";
 
 export function Dashboard() {
   const authState = useSelector(selectAuthState);
-  // console.log("Dashboard()", authState);
+  console.log("Dashboard() authState", authState);
   return (
     <div className="min-vh-100 d-flex flex-column">
       <TopNavbar authState={authState} />

@@ -28,7 +28,10 @@ export const fetchAuthState = () => (dispatch) => {
           .httpsCallable("jwtVerify");
         jwtVerify(localStorage.getItem("authState"))
           .then(({ data: decoded }) => {
-            // console.log("fetchAuthState()", decoded);
+            console.log(
+              "fetchAuthState() jwtVerify -> response: decoded",
+              decoded
+            );
             dispatch(signIn(decoded));
           })
           .catch((error) => {
@@ -58,9 +61,13 @@ export const fetchAuthState = () => (dispatch) => {
                 isAuthorized: true,
                 document: { ...doc.data() },
               })
-                .then(({ data: encoded }) =>
-                  localStorage.setItem("authState", encoded)
-                )
+                .then(({ data: encoded }) => {
+                  console.log(
+                    "fetchAuthState() jwtSign -> response: encoded",
+                    encoded
+                  );
+                  localStorage.setItem("authState", encoded);
+                })
                 .catch((error) => dispatch(signOut({ error: { ...error } })));
             } else if (!doc.exists) {
               dispatch(

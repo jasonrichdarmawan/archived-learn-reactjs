@@ -12,7 +12,7 @@ The core product is limited to the specified `routes` and `data schema`.
 
 - [ ] Protected Routes
 
-  - [ ] Admin Dashboard `/app`
+  - [ ] Admin Dashboard `/app/dashboard`
 
     - [ ] Employee
 
@@ -20,28 +20,28 @@ The core product is limited to the specified `routes` and `data schema`.
 
       - [ ] CRUD Employee
         - [ ] Add Employee `/app/employee/:req(add)`
-        - [ ] View Employee `/app/employee/view/:id`
+        - [ ] View Employee `/app/employee/:req(view)/:id`
           - [ ] Update Employee
           - [ ] Delete Employee
 
-  - [ ] Salesperson Dashboard `/app`
+  - [ ] Salesperson Dashboard `/app/dashboard`
 
     - [ ] Sales
 
-      - [ ] List Sales Order `/app/sales`
+      - [ ] List Sales Order `/app/sales/:submodule(sales_orders)/:req(list)`
 
       - [ ] CRUD Sales Order
 
-        - [ ] Create Sales Order `/app/sales/create`
-        - [ ] Read Sales Order `/app/sales/:id`
+        - [ ] Create Sales Order `/app/sales/:submodule(sales_orders)/:req(add)`
+        - [ ] Read Sales Order `/app/sales/:submodule(sales_orders)/:req(view)/:id`
 
           - [ ] Update Sales Order
 
-            - [ ] Create Purchase Order shipment `/app/inventory/delivery/create`
+            - [ ] Create Sales Order shipment `/app/inventory/:submodule(delivery_orders)/:req(add)`
 
             - [ ] CRUD Invoices
-              - [ ] Create Invoices `/app/invoices/create`
-              - [ ] Read Invoices `/app/invoices/:id`
+              - [ ] Create Invoices `/app/sales/:submodule(invoices)/:req(add)`
+              - [ ] Read Invoices `/app/sales/:submodule(invoices)/:req(view)/:id`
                 - [ ] Update Invoice
                   - [ ] Register Payment
                   - [ ] Register Refund
@@ -50,28 +50,28 @@ The core product is limited to the specified `routes` and `data schema`.
 
     - [ ] Inventory
 
-      - [ ] List Inventory `/app/inventory`
+      - [ ] List Inventory `/app/inventory/:submodule(products)/:req(list)`
 
       - [ ] CRUD Inventory
-        - [ ] Create Inventory `/app/inventory/create`
-        - [ ] Read Inventory `/app/inventory/:id`
+        - [ ] Create Inventory `/app/inventory/:submodule(products)/:req(add)`
+        - [ ] Read Inventory `/app/inventory/:submodule(products)/:req(view)/:id`
 
     - [ ] Purchase
 
-      - [ ] List Purchase Order `/app/purchase`
+      - [ ] List Purchase Order `/app/purchase/:submodule(purchase_orders)/:req(list)`
 
       - [ ] CRUD Purchase Order
 
-        - [ ] Create Purchase Order `/app/purchase/create`
-        - [ ] Read Purchase Order `/app/purchase/:id`
+        - [ ] Create Purchase Order `/app/purchase/:submodule(purchase_orders)/:req(add)`
+        - [ ] Read Purchase Order `/app/purchase/:submodule(purchase_orders)/:req(view)/:id`
 
           - [ ] Update Purchase Order
 
-            - [ ] Create Purchase Order Receipt `/app/inventory/receipt/create`
+            - [ ] Create Purchase Order Receipt `/app/inventory/:submodule(receipts)/:req(add)`
 
             - [ ] CRUD Bills
-              - [ ] Create Bills `/app/bills/create`
-              - [ ] Read Bills `/app/bills/:id`
+              - [ ] Create Bills `/app/purchase/:submodule(bills)/:req(add)`
+              - [ ] Read Bills `/app/purchase/:submodule(bills)/:req(view)/:id`
               - [ ] Update Bills
                 - [ ] Register Payment
                 - [ ] Register Refund
