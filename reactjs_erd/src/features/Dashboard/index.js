@@ -11,6 +11,11 @@ export function Dashboard() {
   return (
     <div className="min-vh-100 d-flex flex-column">
       <TopNavbar authState={authState} />
+      <div className="d-flex flex-fill align-items-center">
+        <div className="container w-auto">
+          <p>Hello, {authState.document.name}</p>
+        </div>
+      </div>
     </div>
   );
 }
