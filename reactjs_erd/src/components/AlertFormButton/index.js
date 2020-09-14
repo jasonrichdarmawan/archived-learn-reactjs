@@ -8,9 +8,11 @@ import { Loading } from "components/Loading";
 
 export function AlertFormButton({
   formArrObj,
+  extraSelect,
   handleChange,
   validated,
   isLoading,
+  res,
   error,
   handleSubmit,
 }) {
@@ -32,14 +34,29 @@ export function AlertFormButton({
           </Form.Group>
         ))}
 
+        {extraSelect &&
+          extraSelect.map((select, i) => (
+            <Form.Group key={select.controlId + i} controlId={select.controlId}>
+              <Form.Label>{select.label}</Form.Label>
+              <Form.Control as="select" custom onChange={handleChange}>
+                <option></option>
+                {select.options.map((option, i) => (
+                  <option key={option.label + i} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </Form.Control>
+            </Form.Group>
+          ))}
+
         <Button
           type="submit"
           block
           size="sm"
           disabled={isLoading}
-          variant={error ? "warning" : "primary"}
+          variant={error ? "warning" : res === true ? "success" : "primary"}
         >
-          {isLoading ? <Loading /> : "Submit"}
+          {isLoading ? <Loading /> : res === true ? "Success" : "Submit"}
         </Button>
       </Form>
     </>

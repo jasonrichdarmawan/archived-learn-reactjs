@@ -2,53 +2,38 @@ import React from "react";
 
 import { useParams } from "react-router-dom";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import { selectAuthState } from "features/AuthState/AuthStateSlice";
 
 import { TopNavbar } from "components/TopNavbar";
-import { ResponsiveTable } from "components/ResponsiveTable";
 
-import { selectEmployee, fetchUsersAsync } from "./EmployeeSlice";
+import { ListEmployee } from "./ListEmployee";
+import { AddEmployee } from "./AddEmployee";
 
 export function Employee() {
   const { req, id } = useParams();
-  // console.log("Employee()", "req", req, "id", id);
+  console.log("Employee()", "req", req, "id", id);
 
   const authState = useSelector(selectAuthState);
-
-  const columns = React.useMemo(
-    () => [
-      {
-        Header: "Name",
-        accessor: "name",
-      },
-      {
-        Header: "Email",
-        accessor: "email",
-      },
-      {
-        Header: "Phone Number",
-        accessor: "phone",
-      },
-    ],
-    []
-  );
-
-  const data = useSelector(selectEmployee);
-  // console.log("Employee() data", data);
-
-  const dispatch = useDispatch();
-  React.useEffect(() => {
-    if (req === "list") dispatch(fetchUsersAsync());
-  }, []);
 
   let content = <></>;
   if (req === "list")
     content = (
       <>
-        <h5>List Employee</h5>
-        <ResponsiveTable columns={columns} data={data} />
+        <ListEmployee />
+      </>
+    );
+  else if (req === "add")
+    content = (
+      <>
+        <AddEmployee />
+      </>
+    );
+  else if (req === "view")
+    content = (
+      <>
+        <h5>TODO: View Employee</h5>
       </>
     );
 
