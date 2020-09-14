@@ -61,6 +61,7 @@ export function Routes(props = {}) {
       component: (props) => {
         if (
           authState.isAuthorized === true &&
+          authState.document.access_rights.administration !== null &&
           authState.document.access_rights.administration >= 0
         )
           return <RenderRoutes {...props} />;
@@ -107,7 +108,11 @@ export function Routes(props = {}) {
       path: "/app/sales",
       display: "sales",
       component: (props) => {
-        if (authState.isAuthorized === true && authState.document.access_rights.sales >= 0)
+        if (
+          authState.isAuthorized === true &&
+          authState.document.access_rights.sales !== null &&
+          authState.document.access_rights.sales >= 0
+        )
           return <RenderRoutes {...props} />;
         else if (
           authState.isAuthorized === true &&
@@ -175,6 +180,7 @@ export function Routes(props = {}) {
       component: (props) => {
         if (
           authState.isAuthorized === true &&
+          authState.document.access_rights.inventory !== null &&
           authState.document.access_rights.inventory >= 0
         )
           return <RenderRoutes {...props} />;
@@ -265,7 +271,11 @@ export function Routes(props = {}) {
       path: "/app/purchase",
       display: "purchase",
       component: (props) => {
-        if (authState.isAuthorized === true && authState.document.access_rights.purchase >= 0)
+        if (
+          authState.isAuthorized === true &&
+          authState.document.access_rights.purchase !== null &&
+          authState.document.access_rights.purchase >= 0
+        )
           return <RenderRoutes {...props} />;
         else if (
           authState.isAuthorized === true &&

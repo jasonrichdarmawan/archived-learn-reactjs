@@ -33,15 +33,19 @@ function generateTopNav({ authState, routes, options }) {
   return (
     <>
       {routes.map((route) =>
+        // TODO: refactor this otherwise this will be in r/programminghorror
         route.routes ? (
           has(authState.document.access_rights, route.display) ? (
-            <NavDropdown key={route.key} title={route.key} id={route.key}>
-              {generateTopNav({
-                authState,
-                routes: route.routes,
-                options: "dropdown",
-              })}
-            </NavDropdown>
+            authState.document.access_rights[route.display] ===
+            null ? undefined : (
+              <NavDropdown key={route.key} title={route.key} id={route.key}>
+                {generateTopNav({
+                  authState,
+                  routes: route.routes,
+                  options: "dropdown",
+                })}
+              </NavDropdown>
+            )
           ) : undefined
         ) : route.display === true ? (
           singleRoute(route, options)
@@ -49,7 +53,10 @@ function generateTopNav({ authState, routes, options }) {
             authState.document.access_rights,
             route.display
           ) ? (
-          (console.log("has()", route.display), singleRoute(route, options))
+          authState.document.access_rights[route.display] ===
+          null ? undefined : (
+            (console.log("has()", route.display), singleRoute(route, options))
+          )
         ) : (
           isMatch(authState.document.access_rights, route.display) &&
           (console.log("isMatch()", route.display), singleRoute(route, options))
