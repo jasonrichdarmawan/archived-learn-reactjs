@@ -2,6 +2,34 @@ const functions = require("firebase-functions");
 
 const admin = require("firebase-admin");
 admin.initializeApp();
+
+function createDocument({ user, data }) {
+  console.log("createDocument(), user.uid", user.uid, typeof user.uid);
+  admin
+    .firestore()
+    .collection("user")
+    .doc(user.uid)
+    .set({
+      access_rights: {
+        administration: data.administration,
+        purchase: data.purchase,
+        inventory: data.inventory,
+        sales: data.sales,
+      },
+      name: data.displayName,
+      email: data.email,
+      street: data.street,
+      city: data.city,
+      zip: data.zip,
+      phone: data.phone,
+    })
+    .then(console.log("createDocument() DONE"))
+    .catch(() => {
+      console.log("createDocument() catch()");
+      return createDocument({ user, data });
+    });
+}
+
 exports.createUser = functions
   .region("asia-southeast2")
   .https.onCall((data, context) => {
@@ -13,31 +41,41 @@ exports.createUser = functions
     }
 
     // question: how to combine promises?
+    // return admin
+    //   .auth()
+    //   .createUser(data)
+    //   .then((user) => {
+    //     return admin
+    //       .firestore()
+    //       .collection("user")
+    //       .doc(user.uid)
+    //       .set({
+    //         access_rights: {
+    //           administration: data.administration,
+    //           purchase: data.purchase,
+    //           inventory: data.inventory,
+    //           sales: data.sales,
+    //         },
+    //         name: data.displayName,
+    //         email: data.email,
+    //         street: data.street,
+    //         city: data.city,
+    //         zip: data.zip,
+    //         phone: data.phone,
+    //       })
+    //       .catch((error) => {
+    //         throw new functions.https.HttpsError(error.code, error.message);
+    //       });
+    //   })
+    //   .catch((error) => {
+    //     throw new functions.https.HttpsError(error.code, error.message);
+    //   });
+
     return admin
       .auth()
       .createUser(data)
-      .then((user) => {
-        return admin
-          .firestore()
-          .collection("user")
-          .doc(user.uid)
-          .set({
-            access_rights: {
-              administration: data.administration,
-              purchase: data.purchase,
-              inventory: data.inventory,
-              sales: data.sales,
-            },
-            name: data.displayName,
-            email: data.email,
-            street: data.street,
-            city: data.city,
-            zip: data.zip,
-            phone: data.phone,
-          })
-          .catch((error) => {
-            throw new functions.https.HttpsError(error.code, error.message);
-          });
+      .then((response) => {
+        return createDocument({ user: response, data });
       })
       .catch((error) => {
         throw new functions.https.HttpsError(error.code, error.message);
