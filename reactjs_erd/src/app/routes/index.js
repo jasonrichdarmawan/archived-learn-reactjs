@@ -17,8 +17,8 @@ import { useDispatch } from "react-redux";
 
 import { Redirect, Route, Switch } from "react-router-dom";
 
-export function Routes(props = {}) {
-  const { authState } = props;
+export function Routes(defaultProps = {}) {
+  const { authState } = defaultProps;
   // console.log("Routes()", authState);
   const dispatch = useDispatch();
 

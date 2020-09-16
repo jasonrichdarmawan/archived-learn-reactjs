@@ -29,10 +29,10 @@ export function ListEmployee() {
   console.log("Employee() data", data);
 
   const dispatch = useDispatch();
-  React.useEffect(() => {
+  if (Array.isArray(data) && data.length === 0) {
     dispatch(fetchUsersAsync());
-  }, []);
-
+  }
+  
   return (
     <>
       <h5>List Employee</h5>

@@ -18,7 +18,7 @@ import isMatch from "lodash/isMatch";
 
 function generateTopNav({ authState, routes, options }) {
   // console.log("generateTopNav()", authState);
-  function singleRoute(route, options) {
+  function singleRoute(route) {
     return (
       <Link
         key={route.key}
@@ -32,12 +32,13 @@ function generateTopNav({ authState, routes, options }) {
 
   return (
     <>
-      {routes.map((route) =>
-        // TODO: refactor this otherwise this will be in r/programminghorror
-        route.routes ? (
-          has(authState.document.access_rights, route.display) ? (
-            authState.document.access_rights[route.display] ===
-            null ? undefined : (
+      {routes.map((route) => {
+        if (route.routes) {
+          if (
+            has(authState.document.access_rights, route.display) &&
+            authState.document.access_rights[route.display] !== null
+          ) {
+            return (
               <NavDropdown key={route.key} title={route.key} id={route.key}>
                 {generateTopNav({
                   authState,
@@ -45,23 +46,19 @@ function generateTopNav({ authState, routes, options }) {
                   options: "dropdown",
                 })}
               </NavDropdown>
-            )
-          ) : undefined
-        ) : route.display === true ? (
-          singleRoute(route, options)
-        ) : route.display === false ? undefined : has(
-            authState.document.access_rights,
-            route.display
-          ) ? (
-          authState.document.access_rights[route.display] ===
-          null ? undefined : (
-            (console.log("has()", route.display), singleRoute(route, options))
-          )
-        ) : (
-          isMatch(authState.document.access_rights, route.display) &&
-          (console.log("isMatch()", route.display), singleRoute(route, options))
-        )
-      )}
+            );
+          }
+        } else if (
+          route.display === true ||
+          (has(authState.document.access_rights, route.display) &&
+            authState.document.access_rights[route.display] !== null) ||
+          (isMatch(authState.document.access_rights, route.display) &&
+            route.display !== false)
+        ) {
+          return singleRoute(route);
+        }
+        return undefined;
+      })}
     </>
   );
 }
