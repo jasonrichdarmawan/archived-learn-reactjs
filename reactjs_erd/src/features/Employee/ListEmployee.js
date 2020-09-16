@@ -31,8 +31,9 @@ export function ListEmployee() {
   const dispatch = useDispatch();
   if (Array.isArray(data) && data.length === 0) {
     dispatch(fetchUsersAsync());
+    return null;
   }
-  
+
   return (
     <>
       <h5>List Employee</h5>

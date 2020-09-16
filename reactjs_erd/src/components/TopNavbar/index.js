@@ -57,7 +57,7 @@ function generateTopNav({ authState, routes, options }) {
         ) {
           return singleRoute(route);
         }
-        return undefined;
+        return null;
       })}
     </>
   );
