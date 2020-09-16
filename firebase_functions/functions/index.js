@@ -70,10 +70,13 @@ exports.fetchFirestore = functions
       .then((querySnapshot) => {
         let array = [];
         querySnapshot.forEach((doc) => {
-          array.push({ user_id: doc.id, data: doc.data() });
+          array.push({ id: doc.id, data: doc.data() });
         });
 
         return array;
+      })
+      .catch((error) => {
+        throw new functions.https.HttpsError(error.code, error.message);
       });
   });
 
