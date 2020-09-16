@@ -26,7 +26,7 @@ export function ListEmployee() {
   );
 
   const data = useSelector(selectEmployee);
-  console.log("Employee() data", data);
+  console.log("ListEmployee() data", data);
 
   const dispatch = useDispatch();
   if (Array.isArray(data) && data.length === 0) {

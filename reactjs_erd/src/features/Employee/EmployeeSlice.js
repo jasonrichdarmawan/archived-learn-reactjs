@@ -6,9 +6,7 @@ const employeeSlice = createSlice({
   name: "employee",
   initialState: [],
   reducers: {
-    fetchUsers: (state, action) => {
-      return [...action.payload];
-    },
+    fetchUsers: (state, action) => [...action.payload],
   },
 });
 
