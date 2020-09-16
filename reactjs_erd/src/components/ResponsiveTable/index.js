@@ -9,16 +9,18 @@ export function ResponsiveTable({ columns, data }) {
       <thead>
         <tr>
           {columns.map((column, i) => (
-            <th key={column.accessor + i}>{column.Header}</th>
+            <th key={"th" + column.accessor + i}>{column.Header}</th>
           ))}
         </tr>
       </thead>
       <tbody>
-        {data.map((user) => (
-          <tr key={user.id}>
-            <td>{user.data.name}</td>
-            <td>{user.data.email}</td>
-            <td>{user.data.phone}</td>
+        {data.map((item) => (
+          <tr key={item.id}>
+            {columns.map((col, index) => (
+              <td key={"td" + col.accessor + index}>
+                {item.data[col.accessor]}
+              </td>
+            ))}
           </tr>
         ))}
       </tbody>
