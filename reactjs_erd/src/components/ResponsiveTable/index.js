@@ -15,7 +15,7 @@ export function ResponsiveTable({ columns, data }) {
       </thead>
       <tbody>
         {data.map((user) => (
-          <tr key={user.user_id}>
+          <tr key={user.id}>
             <td>{user.data.name}</td>
             <td>{user.data.email}</td>
             <td>{user.data.phone}</td>
