@@ -224,7 +224,7 @@ export function Routes(defaultProps = {}) {
           key: "Delivery Orders",
           path: "/app/inventory/:submodule(delivery_orders)/:req(list)",
           exact: true,
-          navpath: "/app/inventory/delivery_oders/list",
+          navpath: "/app/inventory/delivery_orders/list",
           display: true,
           component: () => <Inventory />,
         },
