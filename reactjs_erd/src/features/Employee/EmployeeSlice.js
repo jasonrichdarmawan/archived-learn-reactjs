@@ -20,11 +20,9 @@ export const fetchUsersAsync = () => (dispatch) => {
     .app()
     .functions("asia-southeast2")
     .httpsCallable("fetchFirestore");
-  fetchFirestore("user").then(({ data }) => {
+  fetchFirestore({ collection: "user" }).then(({ data }) => {
     // console.log("employeeSlice(), fetchFirestore(), data", data);
-    if (data.length > 0) {
-      dispatch(fetchUsers(data));
-    }
+    dispatch(fetchUsers(data));
   });
 };
 

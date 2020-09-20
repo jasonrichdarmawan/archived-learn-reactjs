@@ -62,17 +62,32 @@ exports.fetchFirestore = functions
       );
     }
 
+    if (!data.id) {
+      return admin
+        .firestore()
+        .collection(data.collection)
+        .get()
+        .then((querySnapshot) => {
+          let array = [];
+          querySnapshot.forEach((doc) => {
+            array.push({ id: doc.id, data: doc.data() });
+          });
+
+          return array;
+        })
+        .catch((error) => {
+          throw new functions.https.HttpsError(error.code, error.message);
+        });
+    }
+
     return admin
       .firestore()
-      .collection(data)
+      .collection(data.collection)
+      .doc(data.id)
       .get()
-      .then((querySnapshot) => {
-        let array = [];
-        querySnapshot.forEach((doc) => {
-          array.push({ id: doc.id, data: doc.data() });
-        });
-
-        return array;
+      .then((doc) => {
+        if (doc.exists) return [{ id: doc.id, data: doc.data() }];
+        else return [];
       })
       .catch((error) => {
         throw new functions.https.HttpsError(error.code, error.message);
