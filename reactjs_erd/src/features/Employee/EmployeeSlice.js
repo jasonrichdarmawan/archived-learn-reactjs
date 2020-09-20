@@ -4,9 +4,12 @@ import { firebase } from "api/firebase";
 
 const employeeSlice = createSlice({
   name: "employee",
-  initialState: [],
+  initialState: { isLoading: true, data: [] },
   reducers: {
-    fetchUsers: (state, action) => [...action.payload],
+    fetchUsers: (state, action) => ({
+      isLoading: false,
+      data: [...action.payload],
+    }),
   },
 });
 

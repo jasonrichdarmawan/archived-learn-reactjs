@@ -26,7 +26,7 @@ export function ListEmployee() {
     []
   );
 
-  const data = useSelector(selectEmployee);
+  const { isLoading, data } = useSelector(selectEmployee);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
@@ -35,7 +35,7 @@ export function ListEmployee() {
     }
   }, [data]);
 
-  if (Array.isArray(data) && data.length === 0) {
+  if (isLoading) {
     return <Loading />;
   }
 
