@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ResponsiveTable } from "components/ResponsiveTable";
 
 import { selectEmployee, fetchUsersAsync } from "./EmployeeSlice";
+import { Loading } from "components";
 
 export function ListEmployee() {
   const columns = React.useMemo(
@@ -26,12 +27,16 @@ export function ListEmployee() {
   );
 
   const data = useSelector(selectEmployee);
-  console.log("ListEmployee() data", data);
-
   const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    if (Array.isArray(data) && data.length === 0) {
+      dispatch(fetchUsersAsync());
+    }
+  }, [data]);
+
   if (Array.isArray(data) && data.length === 0) {
-    dispatch(fetchUsersAsync());
-    return null;
+    return <Loading />;
   }
 
   return (

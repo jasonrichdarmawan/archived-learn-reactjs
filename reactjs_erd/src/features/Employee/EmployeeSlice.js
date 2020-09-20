@@ -19,7 +19,9 @@ export const fetchUsersAsync = () => (dispatch) => {
     .httpsCallable("fetchFirestore");
   fetchFirestore("user").then(({ data }) => {
     // console.log("employeeSlice(), fetchFirestore(), data", data);
-    dispatch(fetchUsers(data));
+    if (data.length > 0) {
+      dispatch(fetchUsers(data));
+    }
   });
 };
 
