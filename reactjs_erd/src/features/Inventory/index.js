@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { selectAuthState } from "features/AuthState/AuthStateSlice";
 
 import { TopNavbar } from "components/TopNavbar";
+import ListProducts from "./ListProducts";
 
 export function Inventory() {
   const { submodule, req, id } = useParams();
@@ -14,7 +15,7 @@ export function Inventory() {
 
   let content = <></>;
   if (submodule === "products") {
-    if (req === "list") content = <h5>TODO: List Products</h5>;
+    if (req === "list") content = <ListProducts />;
     else if (req === "view" && id !== undefined)
       content = <h5>TODO: View Product</h5>;
     else if (req === "add") content = <h5>TODO: Add Product</h5>;
