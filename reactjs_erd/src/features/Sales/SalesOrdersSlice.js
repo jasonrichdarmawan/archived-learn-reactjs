@@ -25,7 +25,7 @@ export const fetchSalesOrdersAsync = () => (dispatch) => {
     .then(function (querySnapshot) {
       return Promise.all(
         querySnapshot.docs.map(function (doc) {
-          let data = doc.data();
+          const data = doc.data();
 
           return Promise.all([data.customer.get(), data.user.get()])
             .then(function (docs) {

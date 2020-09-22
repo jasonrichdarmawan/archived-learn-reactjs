@@ -43,8 +43,6 @@ export const fetchProductsAsync = () => (dispatch) => {
             });
         })
       );
-
-      //   return results;
     })
     .then((results) => dispatch(fetchProducts(results)));
 };
