@@ -8,7 +8,7 @@ function KanbanItem({ photoURL, product_name, price, qty }) {
   return (
     <div className={styles.kanban_item}>
       <div className={styles.kanban_image}>
-        <img src={photoURL} className={styles.image_64_contain} />
+        <img src={photoURL} className={styles.image_64_contain} alt="" />
       </div>
       <div className={styles.kanban_details}>
         <div>{product_name}</div>

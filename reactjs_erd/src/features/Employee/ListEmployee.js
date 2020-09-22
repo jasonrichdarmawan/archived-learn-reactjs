@@ -33,7 +33,7 @@ export function ListEmployee() {
     if (Array.isArray(data) && data.length === 0) {
       dispatch(fetchUsersAsync());
     }
-  }, [data]);
+  });
 
   if (isLoading) {
     return <Loading />;

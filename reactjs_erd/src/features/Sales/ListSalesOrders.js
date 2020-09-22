@@ -51,7 +51,7 @@ export default function ListSalesOrders() {
     if (Array.isArray(data) && data.length === 0 && isLoading) {
       dispatch(fetchSalesOrdersAsync());
     }
-  }, [data]);
+  });
   
   if (isLoading) {
     return <Loading />;

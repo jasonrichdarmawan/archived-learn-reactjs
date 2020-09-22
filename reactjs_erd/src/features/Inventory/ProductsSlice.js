@@ -24,7 +24,6 @@ export const fetchProductsAsync = () => (dispatch) => {
       return Promise.all(
         querySnapshot.docs.map(function (doc) {
           const data = doc.data();
-          console.log(data.currency.get().then((doc) => doc.data()));
           return data.currency
             .get()
             .then(function (doc) {
