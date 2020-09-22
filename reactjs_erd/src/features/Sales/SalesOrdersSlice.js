@@ -28,11 +28,8 @@ export const fetchSalesOrdersAsync = () => (dispatch) => {
           let data = doc.data();
 
           return Promise.all([data.customer.get(), data.user.get()])
-            .then(function (doc) {
-              return [
-                doc[0].exists ? doc[0].data().name : "",
-                doc[1].exists ? doc[1].data().name : "",
-              ];
+            .then(function (docs) {
+              return docs.map((doc) => (doc.exists ? doc.data().name : ""));
             })
             .then(function ([customer_name, user_name]) {
               return {
