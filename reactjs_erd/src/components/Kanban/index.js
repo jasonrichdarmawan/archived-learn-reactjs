@@ -4,7 +4,7 @@
 import React from "react";
 import styles from "./index.module.css";
 
-function KanbanItem({ photoURL, product_name, price }) {
+function KanbanItem({ photoURL, product_name, price, qty }) {
   return (
     <div className={styles.kanban_item}>
       <div className={styles.kanban_image}>
@@ -13,6 +13,7 @@ function KanbanItem({ photoURL, product_name, price }) {
       <div className={styles.kanban_details}>
         <div>{product_name}</div>
         <div>Price: {price}</div>
+        {qty && <div>Stock: {qty}</div>}
       </div>
     </div>
   );
@@ -33,10 +34,11 @@ export default function Kanban({ data }) {
   return (
     <div className={styles.kanban}>
       {data.map((item) => (
-        <KanbanItem
-          photoURL={item.photoURL}
-          product_name={item.product_name}
-          price={item.price}
+        <KanbanItem key={item.id}
+          photoURL={item.data.photoURL}
+          product_name={item.data.product_name}
+          price={item.data.price}
+          qty={item.data.qty}
         />
       ))}
       <KanbanGhost />
