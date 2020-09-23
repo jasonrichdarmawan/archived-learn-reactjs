@@ -3,6 +3,8 @@ import Kanban from "components/Kanban";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductsAsync, selectProducts } from "./ProductsSlice";
 import { Loading } from "components";
+import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export default function ListProducts() {
   // Product_name
@@ -18,66 +20,18 @@ export default function ListProducts() {
       dispatch(fetchProductsAsync());
   });
 
-  console.log(data)
+  console.log(data);
 
   if (isLoading) return <Loading />;
-
-  // const data = [
-  //   {
-  //     id: "1",
-  //     data: {
-  //       photoURL:
-  //         "https://tempatkerja.com/web/image?model=product.template&field=image_128&id=10&unique=",
-  //       product_name: "AES",
-  //       price: "Rp5.000",
-  //       qty: "5",
-  //     },
-  //   },
-  //   {
-  //     id: "2",
-  //     data: {
-  //       photoURL:
-  //         "https://tempatkerja.com/web/image?model=product.template&field=image_128&id=10&unique=",
-  //       product_name: "AES",
-  //       price: "Rp5.000",
-  //       qty: "5",
-  //     },
-  //   },
-  //   {
-  //     id: "3",
-  //     data: {
-  //       photoURL:
-  //         "https://tempatkerja.com/web/image?model=product.template&field=image_128&id=10&unique=",
-  //       product_name: "AES",
-  //       price: "Rp5.000",
-  //       qty: "5",
-  //     },
-  //   },
-  //   {
-  //     id: "4",
-  //     data: {
-  //       photoURL:
-  //         "https://tempatkerja.com/web/image?model=product.template&field=image_128&id=10&unique=",
-  //       product_name: "AES",
-  //       price: "Rp5.000",
-  //       qty: "5",
-  //     },
-  //   },
-  //   {
-  //     id: "5",
-  //     data: {
-  //       photoURL:
-  //         "https://tempatkerja.com/web/image?model=product.template&field=image_128&id=10&unique=",
-  //       product_name: "AES",
-  //       price: "Rp5.000",
-  //       qty: "5",
-  //     },
-  //   },
-  // ];
 
   return (
     <>
       <h5>TODO: List Products</h5>
+      <Link to="/app/inventory/products/add">
+        <Button variant="primary" size="sm">
+          Create
+        </Button>
+      </Link>
       <Kanban data={data} />
     </>
   );

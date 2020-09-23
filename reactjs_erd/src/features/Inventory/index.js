@@ -8,6 +8,7 @@ import { selectAuthState } from "features/AuthState/AuthStateSlice";
 
 import { TopNavbar } from "components/TopNavbar";
 import ListProducts from "./ListProducts";
+import AddProduct from "./AddProduct";
 
 export function Inventory() {
   const { submodule, req, id } = useParams();
@@ -18,7 +19,7 @@ export function Inventory() {
     if (req === "list") content = <ListProducts />;
     else if (req === "view" && id !== undefined)
       content = <h5>TODO: View Product</h5>;
-    else if (req === "add") content = <h5>TODO: Add Product</h5>;
+    else if (req === "add") content = <AddProduct />;
   } else if (submodule === "delivery_orders") {
     if (req === "list") content = <h5>TODO: List Delivery Orders</h5>;
     else if (req === "view" && id !== undefined)
