@@ -5,110 +5,141 @@ import { AlertFormButton } from "components/AlertFormButton";
 import { firebase } from "api/firebase";
 
 export function AddEmployee() {
-  const formArrObj = [
+  const data = [
     {
-      controlId: "name",
-      type: "text",
-      placeholder: "Enter name",
-      feedback: "Please provide a valid name.",
+      type: "form",
+      data: {
+        controlId: "name",
+        type: "text",
+        placeholder: "Enter name",
+        feedback: "Please provide a valid name.",
+      },
     },
     {
-      controlId: "email",
-      type: "email",
-      placeholder: "Enter email",
-      feedback: "Please provide a valid email.",
+      type: "form",
+      data: {
+        controlId: "email",
+        type: "email",
+        placeholder: "Enter email",
+        feedback: "Please provide a valid email.",
+      },
     },
     {
-      controlId: "phone",
-      type: "text",
-      placeholder: "Enter phone number",
-      feedback: "Please provide a valid phone number.",
+      type: "form",
+      data: {
+        controlId: "phone",
+        type: "text",
+        placeholder: "Enter phone number",
+        feedback: "Please provide a valid phone number.",
+      },
     },
     {
-      controlId: "password",
-      type: "password",
-      placeholder: "Enter password",
-      feedback: "Please provide a valid password.",
+      type: "form",
+      data: {
+        controlId: "password",
+        type: "password",
+        placeholder: "Enter password",
+        feedback: "Please provide a valid password.",
+      },
     },
     {
-      controlId: "street",
-      type: "text",
-      placeholder: "Enter street",
-      feedback: "Please provide a valid street.",
+      type: "form",
+      data: {
+        controlId: "street",
+        type: "text",
+        placeholder: "Enter street",
+        feedback: "Please provide a valid street.",
+      },
     },
     {
-      controlId: "city",
-      type: "text",
-      placeholder: "Enter city",
-      feedback: "Please provide a valid city.",
+      type: "form",
+      data: {
+        controlId: "city",
+        type: "text",
+        placeholder: "Enter city",
+        feedback: "Please provide a valid city.",
+      },
     },
     {
-      controlId: "zip",
-      type: "text",
-      placeholder: "Enter zip",
-      feedback: "Please provide a valid zip.",
-    },
-  ];
-  const extraSelect = [
-    {
-      controlId: "purchase",
-      label: "Access Rights: Purchase",
-      options: [
-        {
-          label: "Administrator",
-          value: 0,
-        },
-        {
-          label: "User",
-          value: 1,
-        },
-      ],
+      type: "form",
+      data: {
+        controlId: "zip",
+        type: "text",
+        placeholder: "Enter zip",
+        feedback: "Please provide a valid zip.",
+      },
     },
     {
-      controlId: "inventory",
-      label: "Access Rights: Inventory",
-      options: [
-        {
-          label: "Administrator",
-          value: 0,
-        },
-        {
-          label: "User",
-          value: 1,
-        },
-      ],
+      type: "select",
+      data: {
+        controlId: "purchase",
+        label: "Access Rights: Purchase",
+        options: [
+          {
+            label: "Administrator",
+            value: 0,
+          },
+          {
+            label: "User",
+            value: 1,
+          },
+        ],
+      },
     },
     {
-      controlId: "sales",
-      label: "Access Rights: Sales",
-      options: [
-        {
-          label: "Administrator",
-          value: 0,
-        },
-        {
-          label: "User: Read, Update All Documents",
-          value: 1,
-        },
-        {
-          label: "User: Read, Update Own Documents",
-          value: 2,
-        },
-      ],
+      type: "select",
+      data: {
+        controlId: "inventory",
+        label: "Access Rights: Inventory",
+        options: [
+          {
+            label: "Administrator",
+            value: 0,
+          },
+          {
+            label: "User",
+            value: 1,
+          },
+        ],
+      },
     },
     {
-      controlId: "administration",
-      label: "Access Rights: Administration",
-      options: [
-        {
-          label: "Administrator",
-          value: 0,
-        },
-        {
-          label: "Access Rights",
-          value: 1,
-        },
-      ],
+      type: "select",
+      data: {
+        controlId: "sales",
+        label: "Access Rights: Sales",
+        options: [
+          {
+            label: "Administrator",
+            value: 0,
+          },
+          {
+            label: "User: Read, Update All Documents",
+            value: 1,
+          },
+          {
+            label: "User: Read, Update Own Documents",
+            value: 2,
+          },
+        ],
+      },
+    },
+    {
+      type: "select",
+      data: {
+        controlId: "administration",
+        label: "Access Rights: Administration",
+        options: [
+          {
+            label: "Administrator",
+            value: 0,
+          },
+          {
+            label: "Access Rights",
+            value: 1,
+          },
+        ],
+      },
     },
   ];
   const [inputs, setInputs] = React.useState({
@@ -202,8 +233,7 @@ export function AddEmployee() {
       <h5>Add Employee</h5>
       <div className="container w-auto mt-3">
         <AlertFormButton
-          formArrObj={formArrObj}
-          extraSelect={extraSelect}
+          data={data}
           handleChange={handleChange}
           validated={validated}
           isLoading={isLoading}
