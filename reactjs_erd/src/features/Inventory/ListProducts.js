@@ -20,8 +20,6 @@ export default function ListProducts() {
       dispatch(fetchProductsAsync());
   });
 
-  console.log(data);
-
   if (isLoading) return <Loading />;
 
   return (

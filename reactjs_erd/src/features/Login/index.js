@@ -12,18 +12,24 @@ import {
 } from "features/AuthState/AuthStateSlice";
 
 export function Login() {
-  const formArrObj = [
+  const data = [
     {
-      controlId: "email",
-      type: "email",
-      placeholder: "Enter email",
-      feedback: "Please provide a valid email.",
+      type: "form",
+      data: {
+        controlId: "email",
+        type: "email",
+        placeholder: "Enter email",
+        feedback: "Please provide a valid email.",
+      },
     },
     {
-      controlId: "password",
-      type: "password",
-      placeholder: "Enter password",
-      feedback: "Please provide a valid password.",
+      type: "form",
+      data: {
+        controlId: "password",
+        type: "password",
+        placeholder: "Enter password",
+        feedback: "Please provide a valid password.",
+      },
     },
   ];
   const [inputs, setInputs] = React.useState({
@@ -60,7 +66,7 @@ export function Login() {
     <div className="min-vh-100 d-flex align-items-center">
       <Container className="w-auto text-center">
         <AlertFormButton
-          formArrObj={formArrObj}
+          data={data}
           handleChange={handleChange}
           validated={validated}
           isLoading={isLoading}
