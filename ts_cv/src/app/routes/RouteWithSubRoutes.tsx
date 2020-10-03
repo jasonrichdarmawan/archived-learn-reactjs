@@ -3,6 +3,7 @@ import { Route } from "react-router-dom";
 import { RouteConfigProps } from "./config";
 
 export const RouteWithSubRoutes = (route: RouteConfigProps) => {
+  console.log("RouteWithSubRoutes route: ", route);
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Route path={route.path}>
