@@ -1,5 +1,5 @@
 import React from "react";
-import { Accordion, Button, Card, ListGroup, Nav } from "react-bootstrap";
+import { Accordion, Button, Card, ListGroup } from "react-bootstrap";
 import { Item, Items } from "./ProjectsData";
 
 const RenderItems: React.FC<{items: Item[]}> = ({ items }) => {

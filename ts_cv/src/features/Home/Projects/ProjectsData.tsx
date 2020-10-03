@@ -20,13 +20,13 @@ export const Items: Item[] = [
   },
   {
     TextLeft: "Day 86",
-    TextCenter: "JavaScript:",
+    TextCenter: "JavaScript",
     TextRight: "Calculator",
     href: "https://github.com/kidfrom/calculator_js",
   },
   {
     TextLeft: "Day 103",
-    TextCenter: "JavaScript:",
+    TextCenter: "JavaScript",
     TextRight: "Sudoku",
     href: "https://github.com/kidfrom/sudoku_js",
   },

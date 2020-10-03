@@ -1,4 +1,5 @@
 {
+  "homepage": "http://kidfrom.github.io/bc_g2_learn_reactjs",
   "name": "ts_cv",
   "version": "0.1.0",
   "private": true,
@@ -19,11 +20,16 @@
     "react-scripts": "3.4.3",
     "typescript": "~4.0.3"
   },
+  "devDependencies": {
+    "gh-pages": "^3.1.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"

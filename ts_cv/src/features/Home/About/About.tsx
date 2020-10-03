@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Container } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 import { Item, Items } from "./AboutData";
 
 const RenderItems: React.FC<{ items: Item[] }> = ({ items }) => {
