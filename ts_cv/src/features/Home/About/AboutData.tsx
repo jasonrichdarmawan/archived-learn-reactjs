@@ -1,5 +1,6 @@
 import React from "react";
 
+import Col from "react-bootstrap/Col";
 export interface Item {
   TextHeading: string;
   Content: JSX.Element;
@@ -114,3 +115,16 @@ export const Items: Item[] = [
     ),
   },
 ];
+
+export const RenderItems: React.FC = () => {
+  return (
+    <>
+      {Items.map((item, index) => (
+        <Col sm={6} key={item.TextHeading + index} className="px-3">
+          <h5 className="text-center mb-3">{item.TextHeading}</h5>
+          {item.Content}
+        </Col>
+      ))}
+    </>
+  );
+};

@@ -1,7 +1,10 @@
 import { RouteConfigProps } from "app/routes/config";
 import { RenderRoutes } from "app/routes/RenderRoutes";
 import React from "react";
-import { Nav, Navbar } from "react-bootstrap";
+
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar"
+
 import { Link } from "react-router-dom";
 
 const Home: React.FC<{routes: RouteConfigProps[]}> = ({ routes }) => {

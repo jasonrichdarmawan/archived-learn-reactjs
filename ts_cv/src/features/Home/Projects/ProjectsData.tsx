@@ -1,3 +1,7 @@
+import React from "react";
+
+import ListGroup from "react-bootstrap/ListGroup";
+
 export interface Item {
   TextLeft: string;
   TextCenter: string;
@@ -160,6 +164,25 @@ export const Items: Item[] = [
     TextLeft: "Day 161",
     TextCenter: "TypeScript:",
     TextRight: "Curriculum Vitae",
-    href: "https://github.com/kidfrom/bc_g2_learn_reactjs/tree/newcv/ts_cv"
-  }
+    href: "https://github.com/kidfrom/bc_g2_learn_reactjs/tree/newcv/ts_cv",
+  },
 ];
+
+export const RenderItems: React.FC = () => {
+  return (
+    <ListGroup variant="flush">
+      <p className="p-3 mb-0 border-bottom">
+        Day 0 beginning on April 26th, 2020, the day I discovered GitHub:
+      </p>
+      {Items.map((item, index) => (
+        <ListGroup.Item key={item.TextLeft + index}>
+          <a href={item.href}>
+            <p className="mx-3 my-0">
+              {item.TextLeft} <b>{item.TextCenter}</b> {item.TextRight}
+            </p>
+          </a>
+        </ListGroup.Item>
+      ))}
+    </ListGroup>
+  );
+};

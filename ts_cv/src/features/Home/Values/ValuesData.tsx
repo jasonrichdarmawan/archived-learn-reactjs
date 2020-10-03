@@ -1,3 +1,8 @@
+import React from "react";
+
+import Card from "react-bootstrap/Card";
+import Col from "react-bootstrap/Col";
+
 export interface Item {
   Title: string;
   Subtitle: string;
@@ -25,3 +30,20 @@ export const Items: Item[] = [
       "https://github.com/kidfrom/sudoku_js/blob/master/dump/white_paper.MD",
   },
 ];
+
+export const RenderItems: React.FC = () => (
+  <>
+    {Items.map((item, index) => (
+      <Col sm={6} key={item.Text + index} className="my-3">
+        <Card>
+          <Card.Body>
+            <Card.Title>{item.Title}</Card.Title>
+            <Card.Subtitle>{item.Subtitle}</Card.Subtitle>
+            <Card.Text>{item.Text}</Card.Text>
+            <a href={item.href}>{item.TextHref}</a>
+          </Card.Body>
+        </Card>
+      </Col>
+    ))}
+  </>
+);

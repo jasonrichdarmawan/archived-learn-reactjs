@@ -1,5 +1,9 @@
 import React from "react";
-import { Button, Container, Form } from "react-bootstrap";
+
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+
+import Form from "react-bootstrap/Form";
 
 export const Contact: React.FC = () => {
   const target: string = "628118751555";

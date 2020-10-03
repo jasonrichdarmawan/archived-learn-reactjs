@@ -1,22 +1,10 @@
 import React from "react";
-import { Accordion, Button, Card, ListGroup } from "react-bootstrap";
-import { Item, Items } from "./ProjectsData";
 
-const RenderItems: React.FC<{items: Item[]}> = ({ items }) => {
-  return (
-    <>
-      {items.map((item, index) => (
-        <ListGroup.Item key={item.TextLeft + index}>
-          <a href={item.href}>
-            <p className="mx-3 my-0">
-              {item.TextLeft} <b>{item.TextCenter}</b> {item.TextRight}
-            </p>
-          </a>
-        </ListGroup.Item>
-      ))}
-    </>
-  );
-};
+import Accordion from "react-bootstrap/Accordion";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+
+import { RenderItems } from "./ProjectsData";
 
 export const Projects: React.FC = () => {
   return (
@@ -28,12 +16,7 @@ export const Projects: React.FC = () => {
           </Accordion.Toggle>
         </Card.Header>
         <Accordion.Collapse eventKey="0">
-          <ListGroup variant="flush">
-            <p className="p-3 mb-0 border-bottom">
-              Day 0 beginning on April 26th, 2020, the day I discovered GitHub:
-            </p>
-            <RenderItems items={Items} />
-          </ListGroup>
+          <RenderItems />
         </Accordion.Collapse>
       </Card>
     </Accordion>
