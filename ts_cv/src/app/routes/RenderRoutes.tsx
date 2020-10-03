@@ -7,7 +7,7 @@ export const RenderRoutes: React.FC<{ routes: RouteConfigProps[] }> = ({ routes 
   return (
     <Switch>
       {routes.map((route) => (
-        <RouteWithSubRoutes {...route} key={route.path} />
+        <RouteWithSubRoutes {...route} key={route.key} />
       ))}
     </Switch>
   );
