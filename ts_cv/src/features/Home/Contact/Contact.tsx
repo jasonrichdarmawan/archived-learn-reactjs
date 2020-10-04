@@ -24,7 +24,7 @@ export const Contact: React.FC = () => {
     stopPropagation: () => void;
   }) => {
     window.open(
-      `https://wa.me/${target}5?text=My%20name%20is%20${encode(
+      `https://wa.me/${target}?text=My%20name%20is%20${encode(
         firstName
       )}.%20${encode(message)}`
     );
