@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0906b3b83eebbd744a5d2d023d1aa86e",
+    "revision": "b52a455a387dfc7278532dcc6498e62d",
     "url": "/bc_g2_learn_reactjs/index.html"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/bc_g2_learn_reactjs/static/js/0.76668add.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "19fb86da7351d9fb7c52",
-    "url": "/bc_g2_learn_reactjs/static/js/10.049386a9.chunk.js"
+    "revision": "3c909cc201aed39273de",
+    "url": "/bc_g2_learn_reactjs/static/js/10.a752906c.chunk.js"
   },
   {
     "revision": "38cd40c71091acda2cb5",
@@ -68,7 +68,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/bc_g2_learn_reactjs/static/js/main.009cff53.chunk.js"
   },
   {
-    "revision": "17373b38d9741c4ebbdd",
-    "url": "/bc_g2_learn_reactjs/static/js/runtime-main.2e2d51b7.js"
+    "revision": "66912ea44e3cc3fd0919",
+    "url": "/bc_g2_learn_reactjs/static/js/runtime-main.73375bdb.js"
   }
 ]);
