@@ -161,10 +161,64 @@ export const Items: Item[] = [
     href: "https://github.com/kidfrom/gojek_clone",
   },
   {
+    TextLeft: "Day 155",
+    TextCenter: "Unified Modeling Language:",
+    TextRight: "Java",
+    href: "https://github.com/kidfrom/g2_java/tree/main/Day_1",
+  },
+  {
+    TextLeft: "Day 156",
+    TextCenter: "Encapsulation => Getters and Setters",
+    TextRight: "Java:",
+    href: "https://github.com/kidfrom/g2_java/tree/main/Day_2",
+  },
+  {
+    TextLeft: "Day 157",
+    TextCenter: "Control Flow:",
+    TextRight: "Java",
+    href: "https://github.com/kidfrom/g2_java/tree/main/Day_3",
+  },
+  {
+    TextLeft: "Day 158",
+    TextCenter: "Stack and Heap Memory",
+    TextRight: "Java",
+    href: "https://github.com/kidfrom/g2_java/tree/main/Day_4",
+  },
+  {
+    TextLeft: "Day 159",
+    TextCenter: "Review Day 155 - 158",
+    TextRight: "Java",
+    href: "https://github.com/kidfrom/g2_java/tree/main/Day_5"
+  },
+  {
     TextLeft: "Day 161",
     TextCenter: "TypeScript:",
     TextRight: "Curriculum Vitae",
     href: "https://github.com/kidfrom/bc_g2_learn_reactjs/tree/newcv/ts_cv",
+  },
+  {
+    TextLeft: "Day 162",
+    TextCenter: "Bubble Sort, Binary Search Algorithm",
+    TextRight: "Java",
+    href: "https://github.com/kidfrom/g2_java/tree/main/Day_6"
+  },
+  {
+    TextLeft: "Day 163",
+    TextCenter: "Extends & Implements",
+    TextRight: "Java",
+    href: "https://github.com/kidfrom/g2_java/tree/main/Day_7"
+  },
+  {
+    TextLeft: "Day 164",
+    TextCenter: "Regex & Exception Handling",
+    TextRight: "Java",
+    href: "https://github.com/kidfrom/g2_java/tree/main/Day_8"
+  },
+  {
+    TextLeft: "Day 165",
+    TextCenter: "Normal Threads & ThreadPool",
+    TextRight: "Java",
+    href: "https://github.com/kidfrom/g2_java/tree/main/Day_9",
   },
 ];
 
