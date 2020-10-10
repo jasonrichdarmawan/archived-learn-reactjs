@@ -220,6 +220,12 @@ export const Items: Item[] = [
     TextRight: "Java",
     href: "https://github.com/kidfrom/g2_java/tree/main/Day_9",
   },
+  {
+    TextLeft: "Day 166",
+    TextCenter: "Review Day 161 - 165",
+    TextRight: "Java",
+    href: "https://github.com/kidfrom/g2_java/tree/main/Day_10"
+  }
 ];
 
 export const RenderItems: React.FC = () => {

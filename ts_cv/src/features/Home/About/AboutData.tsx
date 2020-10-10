@@ -11,10 +11,8 @@ export const Items: Item[] = [
     TextHeading: "Personal Details",
     Content: (
       <p className="text-justify">
-        I am a 20 years old student with experience in corporate bookkeeping and
-        financial budgeting. I’m seeking a position as a Software Engineer.{" "}
-        <b>My focus is JavaScript, TypeScript (React) and Java (Spring).</b> I'm also
-        seeking an experience in IT management within 2 years.
+        I’m seeking a position as a Software Engineer.{" "}
+        <b>My focus is JavaScript, TypeScript (React) and Java (Spring).</b>
       </p>
     ),
   },
