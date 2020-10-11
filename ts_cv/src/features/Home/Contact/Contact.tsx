@@ -56,7 +56,7 @@ export const Contact: React.FC = () => {
             onChange={handleChange}
           />
         </Form.Group>
-        <Button variant="primary" type="submit" block>
+        <Button variant="success" type="submit" block>
           Send to WhatsApp
         </Button>
       </Form>

@@ -76,7 +76,7 @@ export const Items: Item[] = [
     ),
   },
   {
-    TextHeading: "Working Experience",
+    TextHeading: "Volunteer Experience",
     Content: (
       <>
         <p className="font-weight-bold my-0">Sales and Quality Control Staff</p>
