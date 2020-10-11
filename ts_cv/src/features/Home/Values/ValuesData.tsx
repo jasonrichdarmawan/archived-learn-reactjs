@@ -16,7 +16,7 @@ export const Items: Item[] = [
     Title: "Documentation",
     Subtitle: "Learn from the mistakes.",
     Text:
-      "In my early days of coding. I wanted to have my own @jason.com email without paying premium. I built the mail server. After a month, I use the documents to maintain the mail server.",
+      "I wanted to have my own @jason.com email without paying premium. I dediced to built the mail server with Zimbra. After a month, I use the notes that I wrote to maintain the mail server.",
     TextHref: "Day 24th of coding",
     href: "https://github.com/kidfrom/docs/blob/master/EMAIL.md",
   },

@@ -17,48 +17,6 @@ export const Items: Item[] = [
     ),
   },
   {
-    TextHeading: "Professional Summary",
-    Content: (
-      <>
-        <p className="font-weight-bold my-0">Account Manager</p>
-        <p className="font-italic my-0">
-          Tempat Kerja Indonesia, Incorporated | 2020 - present
-        </p>
-        <ul>
-          <li>Prepared the incorporation's legal document.</li>
-          <li>Built relationship with the suppliers in China.</li>
-          <li>Identified potential partner in Indonesia.</li>
-        </ul>
-        <p className="font-weight-bold my-0">
-          Business Process Improvement Intern
-        </p>
-        <p className="font-italic my-0">
-          Step Point Indonesia, Incorporated | Jan 2018 - Mar 2018
-        </p>
-        <ul>
-          <li>
-            Examined the office politics situations in the HR and Operation
-            dept.
-          </li>
-          <li>Examined the workload of the Admin dept.</li>
-          <li>
-            Prepared the findings report and recommended the preliminary action.
-          </li>
-        </ul>
-      </>
-    ),
-  },
-  {
-    TextHeading: "Skills/Interest",
-    Content: (
-      <ul>
-        <li>Reading fantasy books.</li>
-        <li>Traveling and culinary.</li>
-        <li>Know-how to deploy ERP software.</li>
-      </ul>
-    ),
-  },
-  {
     TextHeading: "Education",
     Content: (
       <>
