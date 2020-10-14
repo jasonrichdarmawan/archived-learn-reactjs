@@ -168,8 +168,8 @@ export const Items: Item[] = [
   },
   {
     TextLeft: "Day 156",
-    TextCenter: "Encapsulation => Getters and Setters",
-    TextRight: "Java:",
+    TextCenter: "Encapsulation => Getters and Setters:",
+    TextRight: "Java",
     href: "https://github.com/kidfrom/g2_java/tree/main/Day_2",
   },
   {
@@ -180,13 +180,13 @@ export const Items: Item[] = [
   },
   {
     TextLeft: "Day 158",
-    TextCenter: "Stack and Heap Memory",
+    TextCenter: "Stack and Heap Memory:",
     TextRight: "Java",
     href: "https://github.com/kidfrom/g2_java/tree/main/Day_4",
   },
   {
     TextLeft: "Day 159",
-    TextCenter: "Review Day 155 - 158",
+    TextCenter: "Review Day 155 - 158:",
     TextRight: "Java",
     href: "https://github.com/kidfrom/g2_java/tree/main/Day_5"
   },
@@ -198,33 +198,51 @@ export const Items: Item[] = [
   },
   {
     TextLeft: "Day 162",
-    TextCenter: "Bubble Sort, Binary Search Algorithm",
+    TextCenter: "Bubble Sort, Binary Search Algorithm:",
     TextRight: "Java",
     href: "https://github.com/kidfrom/g2_java/tree/main/Day_6"
   },
   {
     TextLeft: "Day 163",
-    TextCenter: "Extends & Implements",
+    TextCenter: "Extends & Implements:",
     TextRight: "Java",
     href: "https://github.com/kidfrom/g2_java/tree/main/Day_7"
   },
   {
     TextLeft: "Day 164",
-    TextCenter: "Regex & Exception Handling",
+    TextCenter: "Regex & Exception Handling:",
     TextRight: "Java",
     href: "https://github.com/kidfrom/g2_java/tree/main/Day_8"
   },
   {
     TextLeft: "Day 165",
-    TextCenter: "Normal Threads & ThreadPool",
+    TextCenter: "Normal Threads & ThreadPool:",
     TextRight: "Java",
     href: "https://github.com/kidfrom/g2_java/tree/main/Day_9",
   },
   {
     TextLeft: "Day 166",
-    TextCenter: "Review Day 161 - 165",
+    TextCenter: "Review Day 161 - 165:",
     TextRight: "Java",
     href: "https://github.com/kidfrom/g2_java/tree/main/Day_10"
+  },
+  {
+    TextLeft: "Day 169",
+    TextCenter: "Socket",
+    TextRight: "Java",
+    href: "https://github.com/kidfrom/g2_java/tree/main/Day_11"
+  },
+  {
+    TextLeft: "Day 170",
+    TextCenter: "JSON",
+    TextRight: "Java",
+    href: "https://github.com/kidfrom/g2_java/tree/main/Day_12"
+  },
+  {
+    TextLeft: "Day 171",
+    TextCenter: "JDBC",
+    TextRight: "Java",
+    href: "https://github.com/kidfrom/g2_java/tree/main/Day_13"
   }
 ];
 

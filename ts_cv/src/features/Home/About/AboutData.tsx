@@ -10,10 +10,20 @@ export const Items: Item[] = [
   {
     TextHeading: "Personal Details",
     Content: (
-      <p className="text-justify">
-        I’m seeking a position as a Software Engineer.{" "}
-        <b>My focus is JavaScript, TypeScript (React) and Java (Spring).</b>
-      </p>
+      <>
+        <p className="text-justify">
+          I’m seeking a position as a Software Engineer.{" "}
+          <b>My focus is JavaScript, TypeScript (React) and Java (Spring).</b>{" "}
+          My education background is Business Management. I am aiming to excel
+          in the IT industry, starting as a Software Engineer.
+        </p>
+        <p className="text-justify">
+          Please visit https://bit.ly/cvjason for my CV for position as a
+          Software Engineer. Other professional experiences unrelated to the
+          position which I am aiming for, can be found here on my LinkedIn
+          https://linkedin.com/in/jasononggo
+        </p>
+      </>
     ),
   },
   {
@@ -65,7 +75,7 @@ export const Items: Item[] = [
     TextHeading: "Reach Me At",
     Content: (
       <>
-        <p className="mb-0">Mobile: Mobile: +62 811 8751 555</p>
+        <p className="mb-0">Mobile: +62 811 8751 555</p>
         <p className="mb-0">Email: jason.onggo@tempatkerja.com</p>
       </>
     ),
