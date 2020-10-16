@@ -4,8 +4,8 @@
     "static/js/0.76668add.chunk.js.map": "/bc_g2_learn_reactjs/static/js/0.76668add.chunk.js.map",
     "main.js": "/bc_g2_learn_reactjs/static/js/main.009cff53.chunk.js",
     "main.js.map": "/bc_g2_learn_reactjs/static/js/main.009cff53.chunk.js.map",
-    "runtime-main.js": "/bc_g2_learn_reactjs/static/js/runtime-main.bc5672fa.js",
-    "runtime-main.js.map": "/bc_g2_learn_reactjs/static/js/runtime-main.bc5672fa.js.map",
+    "runtime-main.js": "/bc_g2_learn_reactjs/static/js/runtime-main.8c77709f.js",
+    "runtime-main.js.map": "/bc_g2_learn_reactjs/static/js/runtime-main.8c77709f.js.map",
     "static/js/3.e8f4754e.chunk.js": "/bc_g2_learn_reactjs/static/js/3.e8f4754e.chunk.js",
     "static/js/3.e8f4754e.chunk.js.map": "/bc_g2_learn_reactjs/static/js/3.e8f4754e.chunk.js.map",
     "static/js/4.7c06967f.chunk.js": "/bc_g2_learn_reactjs/static/js/4.7c06967f.chunk.js",
@@ -18,12 +18,12 @@
     "static/js/7.4f9cffba.chunk.js.map": "/bc_g2_learn_reactjs/static/js/7.4f9cffba.chunk.js.map",
     "static/js/8.a1f696e1.chunk.js": "/bc_g2_learn_reactjs/static/js/8.a1f696e1.chunk.js",
     "static/js/8.a1f696e1.chunk.js.map": "/bc_g2_learn_reactjs/static/js/8.a1f696e1.chunk.js.map",
-    "static/js/9.d27045f7.chunk.js": "/bc_g2_learn_reactjs/static/js/9.d27045f7.chunk.js",
-    "static/js/9.d27045f7.chunk.js.map": "/bc_g2_learn_reactjs/static/js/9.d27045f7.chunk.js.map",
+    "static/js/9.3ffd9c14.chunk.js": "/bc_g2_learn_reactjs/static/js/9.3ffd9c14.chunk.js",
+    "static/js/9.3ffd9c14.chunk.js.map": "/bc_g2_learn_reactjs/static/js/9.3ffd9c14.chunk.js.map",
     "static/js/10.42308edf.chunk.js": "/bc_g2_learn_reactjs/static/js/10.42308edf.chunk.js",
     "static/js/10.42308edf.chunk.js.map": "/bc_g2_learn_reactjs/static/js/10.42308edf.chunk.js.map",
     "index.html": "/bc_g2_learn_reactjs/index.html",
-    "precache-manifest.025ab280e824932bd942db3546b07bec.js": "/bc_g2_learn_reactjs/precache-manifest.025ab280e824932bd942db3546b07bec.js",
+    "precache-manifest.d438ad2711519e001a224936fc02d737.js": "/bc_g2_learn_reactjs/precache-manifest.d438ad2711519e001a224936fc02d737.js",
     "service-worker.js": "/bc_g2_learn_reactjs/service-worker.js",
     "static/js/0.76668add.chunk.js.LICENSE.txt": "/bc_g2_learn_reactjs/static/js/0.76668add.chunk.js.LICENSE.txt",
     "static/js/3.e8f4754e.chunk.js.LICENSE.txt": "/bc_g2_learn_reactjs/static/js/3.e8f4754e.chunk.js.LICENSE.txt",
@@ -33,7 +33,7 @@
     "static/js/7.4f9cffba.chunk.js.LICENSE.txt": "/bc_g2_learn_reactjs/static/js/7.4f9cffba.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.bc5672fa.js",
+    "static/js/runtime-main.8c77709f.js",
     "static/js/3.e8f4754e.chunk.js",
     "static/js/main.009cff53.chunk.js"
   ]
