@@ -188,7 +188,7 @@ export const Items: Item[] = [
     TextLeft: "Day 159",
     TextCenter: "Review Day 155 - 158:",
     TextRight: "Java",
-    href: "https://github.com/kidfrom/g2_java/tree/main/Day_5"
+    href: "https://github.com/kidfrom/g2_java/tree/main/Day_5",
   },
   {
     TextLeft: "Day 161",
@@ -200,19 +200,19 @@ export const Items: Item[] = [
     TextLeft: "Day 162",
     TextCenter: "Bubble Sort, Binary Search Algorithm:",
     TextRight: "Java",
-    href: "https://github.com/kidfrom/g2_java/tree/main/Day_6"
+    href: "https://github.com/kidfrom/g2_java/tree/main/Day_6",
   },
   {
     TextLeft: "Day 163",
     TextCenter: "Extends & Implements:",
     TextRight: "Java",
-    href: "https://github.com/kidfrom/g2_java/tree/main/Day_7"
+    href: "https://github.com/kidfrom/g2_java/tree/main/Day_7",
   },
   {
     TextLeft: "Day 164",
     TextCenter: "Regex & Exception Handling:",
     TextRight: "Java",
-    href: "https://github.com/kidfrom/g2_java/tree/main/Day_8"
+    href: "https://github.com/kidfrom/g2_java/tree/main/Day_8",
   },
   {
     TextLeft: "Day 165",
@@ -224,32 +224,112 @@ export const Items: Item[] = [
     TextLeft: "Day 166",
     TextCenter: "Review Day 161 - 165:",
     TextRight: "Java",
-    href: "https://github.com/kidfrom/g2_java/tree/main/Day_10"
+    href: "https://github.com/kidfrom/g2_java/tree/main/Day_10",
   },
   {
     TextLeft: "Day 169",
-    TextCenter: "Socket",
+    TextCenter: "Socket:",
     TextRight: "Java",
-    href: "https://github.com/kidfrom/g2_java/tree/main/Day_11"
+    href: "https://github.com/kidfrom/g2_java/tree/main/Day_11",
   },
   {
     TextLeft: "Day 170",
-    TextCenter: "JSON",
+    TextCenter: "JSON:",
     TextRight: "Java",
-    href: "https://github.com/kidfrom/g2_java/tree/main/Day_12"
+    href: "https://github.com/kidfrom/g2_java/tree/main/Day_12",
   },
   {
     TextLeft: "Day 171",
-    TextCenter: "JDBC",
+    TextCenter: "JDBC:",
     TextRight: "Java",
-    href: "https://github.com/kidfrom/g2_java/tree/main/Day_13"
-  }
+    href: "https://github.com/kidfrom/g2_java/tree/main/Day_13",
+  },
+  {
+    TextLeft: "Day 172",
+    TextCenter: "FTP:",
+    TextRight: "Java",
+    href: "https://github.com/kidfrom/g2_java/tree/main/Day_14",
+  },
+  {
+    TextLeft: "Day 173",
+    TextCenter: "Review Day 169 - 172 Object Oriented:",
+    TextRight: "Java",
+    href: "https://github.com/kidfrom/g2_java/tree/main/Day_15",
+  },
+  {
+    TextLeft: "Day 175",
+    TextCenter: "@RestController Spring Boot:",
+    TextRight: "Java",
+    href: "https://github.com/kidfrom/g2_java/tree/main/Day_18",
+  },
+  {
+    TextLeft: "Day 177",
+    TextCenter: "Builder Pattern Design:",
+    TextRight: "Java",
+    href: "https://github.com/kidfrom/g2_java/tree/main/Day_19",
+  },
+  {
+    TextLeft: "Day 178",
+    TextCenter: "Review Day 173 - 177:",
+    TextRight: "Java",
+    href: "https://github.com/kidfrom/g2_java/tree/main/Day_20",
+  },
+  {
+    TextLeft: "Day 181",
+    TextCenter: "JdbcTemplate:",
+    TextRight: "Java",
+    href: "https://github.com/kidfrom/g2_java/tree/main/Day_21",
+  },
+  {
+    TextLeft: "Day 182:",
+    TextCenter: "MyBatis:",
+    TextRight: "Java",
+    href: "https://github.com/kidfrom/g2_java/tree/main/Day_22",
+  },
+  {
+    TextLeft: "Day 183",
+    TextCenter: "RabbitMQ:",
+    TextRight: "Java",
+    href: "https://github.com/kidfrom/g2_java/tree/main/Day_23",
+  },
+  {
+    TextLeft: "Day 184",
+    TextCenter: "Redis:",
+    TextRight: "Java",
+    href: "https://github.com/kidfrom/g2_java/tree/main/Day_24",
+  },
+  {
+    TextLeft: "Day 185",
+    TextCenter: "Completable Future to multi threading the endpoint",
+    TextRight: "Java",
+    href: "https://github.com/kidfrom/g2_java/tree/main/Day_25",
+  },
 ];
 
 export const RenderItems: React.FC = () => {
   return (
     <ListGroup variant="flush">
       <p className="p-3 mb-0 border-bottom">
+        <b>Ongoing progress:</b>
+        <a href="https://github.com/kidfrom/g2_java/tree/main/Bank_Account">
+          <p className="mx-3 my-0">
+            <br />
+            Day 189 <b>Internet Banking Project</b> Java (Spring) and TypeScript
+            (ReactJS)
+          </p>
+        </a>
+        <p className="mx-3 my-0">
+          Presentation:{" "}
+          <a href="https://lnkd.in/gGJ36Pz">https://lnkd.in/gGJ36Pz</a>
+        </p>
+        <p className="mx-3 my-0">
+          API Documentation:{" "}
+          <a href="https://lnkd.in/gFYxHAs">https://lnkd.in/gFYxHAs</a>
+        </p>
+        <p className="mx-3 my-0">
+          To Do: <a href="https://lnkd.in/gHKUnrZ">https://lnkd.in/gHKUnrZ</a>
+        </p>
+        <br />
         Day 0 beginning on April 26th, 2020, the day I discovered GitHub:
       </p>
       {Items.map((item, index) => (
