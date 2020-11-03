@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b889d8939bcb7c47a7ca9d5ec3759cab",
+    "revision": "73431b857de1ea4536dc116468ff48fd",
     "url": "/bc_g2_learn_reactjs/index.html"
   },
   {
@@ -60,15 +60,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/bc_g2_learn_reactjs/static/js/8.a1f696e1.chunk.js"
   },
   {
-    "revision": "79cc3d3fe3db097861d9",
-    "url": "/bc_g2_learn_reactjs/static/js/9.3ffd9c14.chunk.js"
+    "revision": "535c67669b7e15fccdc2",
+    "url": "/bc_g2_learn_reactjs/static/js/9.e48f0716.chunk.js"
   },
   {
     "revision": "641113e546ee000b978d",
     "url": "/bc_g2_learn_reactjs/static/js/main.009cff53.chunk.js"
   },
   {
-    "revision": "d6e2924786f20f969aa5",
-    "url": "/bc_g2_learn_reactjs/static/js/runtime-main.8c77709f.js"
+    "revision": "82e15a8adfdf4f171b90",
+    "url": "/bc_g2_learn_reactjs/static/js/runtime-main.84c0e3fe.js"
   }
 ]);
